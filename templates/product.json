@@ -1,0 +1,164 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "yotpo_product_reviews_star_rating_wrQUAp": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{ product }}"
+          }
+        },
+        "caption": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "yotpo_loyalty_rewards_product_points_module_app_block_GaNq76": {
+          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description_Frjwea": {
+          "type": "description",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "yotpo_product_reviews_star_rating_wrQUAp",
+        "caption",
+        "price",
+        "yotpo_loyalty_rewards_product_points_module_app_block_GaNq76",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description_Frjwea"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "description_FA7PM6": {
+      "type": "description",
+      "disabled": true,
+      "name": "Product Description",
+      "settings": {
+        "show_description": true,
+        "read_more_text": "Read more",
+        "read_less_text": "Read less"
+      }
+    },
+    "specifications_table_CybfTG": {
+      "type": "specifications-table",
+      "name": "Specifications Table",
+      "settings": {}
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "1755834995e9fb698e": {
+      "type": "apps",
+      "blocks": {
+        "yotpo_product_reviews_promoted_products_hRbUzh": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/promoted_products/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "yotpo_product_reviews_vugc_media_gallery_dRy84P": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/vugc_media_gallery/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}",
+            "widget_instance_id": "441278"
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_promoted_products_hRbUzh",
+        "yotpo_product_reviews_vugc_media_gallery_dRy84P"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "description_FA7PM6",
+    "specifications_table_CybfTG",
+    "related-products",
+    "1755834995e9fb698e"
+  ]
+}

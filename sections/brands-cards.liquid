@@ -1,0 +1,202 @@
+{% comment %}
+  Brand Cards Section
+  Displays a grid of brand logo cards with customizable images, titles, and links
+{% endcomment %}
+
+<div class="brand-cards-section">
+  <div class="brand-cards-container">
+    {% if section.settings.heading != blank %}
+      <h2 class="section-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="brand-cards-grid">
+      {% for block in section.blocks %}
+        {% if block.settings.image != blank or block.settings.title != blank %}
+          <a href="{{ block.settings.link }}" class="brand-card" {{ block.shopify_attributes }}>
+            <div class="brand-card-inner">
+              {% if block.settings.image != blank %}
+                <div class="brand-card-image">
+                  <img
+                    src="{{ block.settings.image | image_url: width: 410 }}"
+                    srcset="{{ block.settings.image | image_url: width: 205 }} 1x, {{ block.settings.image | image_url: width: 410 }} 2x"
+                    alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                    width="205"
+                    height="48"
+                    loading="lazy"
+                  >
+                </div>
+              {% endif %}
+
+              {% if block.settings.title != blank %}
+                <p class="brand-card-title">{{ block.settings.title }}</p>
+              {% endif %}
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .brand-cards-section {
+    padding: 50px 0;
+    width: 100%;
+  }
+
+  .brand-cards-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .brand-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+
+  .brand-card {
+    display: block;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    border-color: #d0d0d0;
+  }
+
+  .brand-card-inner {
+    width: 100%;
+  }
+
+  .brand-card-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    height: 48px;
+    overflow: hidden;
+  }
+
+  .brand-card-image img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .brand-card-title {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 989px) {
+    .brand-cards-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .brand-card {
+      padding: 20px 15px;
+      min-height: 120px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .brand-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .brand-card {
+      padding: 15px 10px;
+      min-height: 100px;
+    }
+
+    .section-heading {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Brand Cards",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Our Brands"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand_card",
+      "name": "Brand Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Brand Logo",
+          "info": "Recommended size: 205px x 48px"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Brand Name",
+          "default": "Brand Name"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 400,
+  "presets": [
+    {
+      "name": "Brand Cards",
+      "blocks": [
+        {
+          "type": "brand_card"
+        },
+        {
+          "type": "brand_card"
+        },
+        {
+          "type": "brand_card"
+        },
+        {
+          "type": "brand_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

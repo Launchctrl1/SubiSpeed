@@ -1,0 +1,68 @@
+{% assign specifications = product.metafields.custom.specifications_table.value %}
+
+<style>
+  .specifications-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 1px solid #d3d3d3;
+    border-radius: 64px;
+    width: 100%;
+    max-width: 824px;
+  }
+
+  th {
+    width: 50%;
+  }
+
+  .specifications-table th,
+  .specifications-table td {
+    font-size: 1.3rem;
+    padding: 3px;
+    text-align: left;
+    border: none;
+  }
+
+  .specifications-table thead tr {
+    background-color: #f8f8f8;
+  }
+
+  .specifications-table tbody tr:nth-child(even) {
+    background-color: #f8f8f8;
+  }
+
+  .specifications-table tbody tr:nth-child(odd) {
+    background-color: white;
+  }
+</style>
+
+<section class="page-width">
+  <table class="specifications-table">
+    <thead>
+      <tr>
+        <th>Specification</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for spec in specifications %}
+        <tr>
+          <td>{{ spec.key }}</td>
+          <td>{{ spec.value }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+{% schema %}
+{
+  "name": "Specifications Table",
+  "tag": "section",
+  "class": "section",
+  "presets": [
+    {
+      "name": "Specifications Table"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,193 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .statistics-section-{{ section.id }} {
+    padding: 0;
+  }
+
+  .statistics-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .stat-item-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .stat-title-{{ section.id }} {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: rgba(var(--color-foreground), 0.7);
+    margin: 0 0 0.8rem 0;
+    line-height: 1.4;
+  }
+
+  .stat-value-{{ section.id }} {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 989px) {
+    .statistics-grid-{{ section.id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 2rem;
+    }
+
+    .stat-value-{{ section.id }} {
+      font-size: 2.8rem;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .statistics-grid-{{ section.id }} {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .stat-item-{{ section.id }} {
+      text-align: center;
+    }
+
+    .stat-title-{{ section.id }} {
+      font-size: 1.3rem;
+    }
+
+    .stat-value-{{ section.id }} {
+      font-size: 2.6rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="statistics-section-{{ section.id }}">
+      <ul class="statistics-grid-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          <li class="stat-item-{{ section.id }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <p class="stat-title-{{ section.id }}">{{ block.settings.title }}</p>
+            {%- endif -%}
+            {%- if block.settings.value != blank -%}
+              <p class="stat-value-{{ section.id }}">{{ block.settings.value }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Statistics",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "statistic",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "We were founded in"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "2003"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Statistics",
+      "blocks": [
+        {
+          "type": "statistic",
+          "settings": {
+            "title": "We were founded in",
+            "value": "2003"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "title": "Team members",
+            "value": "300+"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "title": "Amazing customers",
+            "value": "50K+"
+          }
+        },
+        {
+          "type": "statistic",
+          "settings": {
+            "title": "Car parts",
+            "value": "100K+"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

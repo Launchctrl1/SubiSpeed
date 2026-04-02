@@ -1,0 +1,307 @@
+<style>
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    overflow: hidden;
+    aspect-ratio: auto;
+  }
+
+  .carousel-slide {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slide.active {
+    display: block;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .carousel-button-wrapper {
+    position: absolute;
+    z-index: 10;
+  }
+
+  .carousel-button-wrapper.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .carousel-button-wrapper.top-left {
+    top: 10%;
+    left: 10%;
+  }
+
+  .carousel-button-wrapper.top-right {
+    top: 10%;
+    right: 10%;
+  }
+
+  .carousel-button-wrapper.bottom-left {
+    bottom: 10%;
+    left: 10%;
+  }
+
+  .carousel-button-wrapper.bottom-right {
+    bottom: 10%;
+    right: 10%;
+  }
+
+  .carousel-cta-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .carousel-cta-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 20;
+    transition: background 0.3s;
+  }
+
+  .carousel-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .carousel-nav.prev {
+    left: 20px;
+  }
+
+  .carousel-nav.next {
+    right: 20px;
+  }
+
+  .carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 20;
+  }
+
+  .carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .carousel-indicator.active {
+    background: white;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-cta-button {
+      padding: 12px 24px;
+      font-size: 16px;
+    }
+
+    .carousel-nav {
+      padding: 10px 15px;
+      font-size: 20px;
+    }
+
+    .carousel-button-wrapper.top-left,
+    .carousel-button-wrapper.bottom-left {
+      left: 5%;
+    }
+
+    .carousel-button-wrapper.top-right,
+    .carousel-button-wrapper.bottom-right {
+      right: 5%;
+    }
+  }
+</style>
+
+<div class="carousel-container" id="carousel-{{ section.id }}">
+  {% for block in section.blocks %}
+    <div class="carousel-slide {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}">
+      {% if block.settings.image %}
+        <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image.alt | escape }}">
+      {% else %}
+        <div style="width: 100%; height: 100%; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+          <p style="color: #999;">Add an image</p>
+        </div>
+      {% endif %}
+
+      {% if block.settings.show_button %}
+        <div class="carousel-button-wrapper {{ block.settings.button_position }}">
+          <button class="carousel-cta-button" style="background-color: {{ block.settings.button_color }};">
+            {{ block.settings.button_text }}
+          </button>
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <button class="carousel-nav prev" onclick="moveSlide{{ section.id }}(-1)">‹</button>
+  <button class="carousel-nav next" onclick="moveSlide{{ section.id }}(1)">›</button>
+
+  <div class="carousel-indicators">
+    {% for block in section.blocks %}
+      <button
+        class="carousel-indicator {% if forloop.first %}active{% endif %}"
+        onclick="goToSlide{{ section.id }}({{ forloop.index0 }})"
+      ></button>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    let currentSlide{{ section.id }} = 0;
+    const slides{{ section.id }} = document.querySelectorAll('#carousel-{{ section.id }} .carousel-slide');
+    const indicators{{ section.id }} = document.querySelectorAll('#carousel-{{ section.id }} .carousel-indicator');
+    const totalSlides{{ section.id }} = slides{{ section.id }}.length;
+
+    window.showSlide{{ section.id }} = function(n) {
+      if (totalSlides{{ section.id }} === 0) return;
+
+      slides{{ section.id }}[currentSlide{{ section.id }}].classList.remove('active');
+      indicators{{ section.id }}[currentSlide{{ section.id }}].classList.remove('active');
+
+      currentSlide{{ section.id }} = (n + totalSlides{{ section.id }}) % totalSlides{{ section.id }};
+
+      slides{{ section.id }}[currentSlide{{ section.id }}].classList.add('active');
+      indicators{{ section.id }}[currentSlide{{ section.id }}].classList.add('active');
+    }
+
+    window.moveSlide{{ section.id }} = function(direction) {
+      showSlide{{ section.id }}(currentSlide{{ section.id }} + direction);
+    }
+
+    window.goToSlide{{ section.id }} = function(n) {
+      showSlide{{ section.id }}(n);
+    }
+
+    // Auto-advance carousel every 5 seconds
+    setInterval(() => {
+      if (totalSlides{{ section.id }} > 0) {
+        moveSlide{{ section.id }}(1);
+      }
+    }, 5000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Image Carousel",
+  "tag": "section",
+  "class": "carousel-section",
+  "max_blocks": 5,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "label": "Show Button",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button Color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "button_position",
+          "label": "Button Position",
+          "options": [
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "top-left",
+              "label": "Top Left"
+            },
+            {
+              "value": "top-right",
+              "label": "Top Right"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Bottom Left"
+            },
+            {
+              "value": "bottom-center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Bottom Right"
+            }
+          ],
+          "default": "center"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Carousel",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

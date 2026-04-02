@@ -1,0 +1,393 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1763627927e48fd713": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f00818c_RfaTdL": {
+          "type": "ai_gen_block_f00818c",
+          "settings": {
+            "slide_1_image": "shopify://shop_images/ss-banner-fall-season-of-speed.jpg",
+            "slide_1_mobile_image": "shopify://shop_images/ss---season-of-speed---mobile-banner.jpg",
+            "slide_1_show_button": true,
+            "slide_1_button_text": "",
+            "slide_1_button_link": "https://www.rallysportdirect.com/blogs/news/rallysport-directs-guide-to-2025-black-friday-deals",
+            "slide_2_show_button": true,
+            "slide_2_button_text": "Shop All Whiteline",
+            "slide_2_button_link": "https://www.rallysportdirect.com/brand/whiteline",
+            "slide_3_show_button": true,
+            "slide_3_button_text": "Shop FactionFab!",
+            "slide_3_button_link": "https://www.rallysportdirect.com/brand/super-pro",
+            "slide_4_show_button": true,
+            "slide_4_button_text": "Shop Cobb!",
+            "slide_4_button_link": "https://www.rallysportdirect.com/brand/cobb-tuning",
+            "slide_5_show_button": false,
+            "slide_5_button_text": "Shop now",
+            "slide_5_button_link": "",
+            "button_position": "bottom_center",
+            "button_color": "#f7a01d",
+            "button_text_color": "#000000",
+            "button_hover_color": "#f7a01d",
+            "show_arrows": false,
+            "arrow_color": "#f7a01d",
+            "arrow_icon_color": "#121212",
+            "arrow_hover_color": "#f3f3f3",
+            "dot_color": "#ffffff",
+            "show_dots": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f00818c_RfaTdL"
+      ],
+      "settings": {}
+    },
+    "featured_collections_UwYTiM": {
+      "type": "featured-collections",
+      "blocks": {
+        "showcase_item_wXVpeP": {
+          "type": "showcase_item",
+          "settings": {
+            "collection": "",
+            "custom_url": "/search?q=FL+Spec+coilovers&options%5Bprefix%5D=last",
+            "custom_image": "shopify://shop_images/factionfab-coilovers-ftspeed-614x306.jpg",
+            "title": "FactionFab Coilovers",
+            "subtitle": "On sale for Cyber Week",
+            "button_text": "Shop Now"
+          }
+        },
+        "showcase_item_VArtEJ": {
+          "type": "showcase_item",
+          "settings": {
+            "collection": "",
+            "custom_url": "/search?q=factionfab&page=1&inventory=in-stock",
+            "custom_image": "shopify://shop_images/OLM_Blue_CR_4_869x652_1c8718d4-d2f7-4cfb-befb-79eceaee1338.jpg",
+            "title": "OLM Tailights",
+            "subtitle": "",
+            "button_text": "Shop Now"
+          }
+        },
+        "showcase_item_EA3CKL": {
+          "type": "showcase_item",
+          "settings": {
+            "collection": "",
+            "custom_url": "/search?q=iag+performance&page=1&inventory=in-stock",
+            "custom_image": "shopify://shop_images/olm-rear-brake-lights-homepage-banners-614x306-subispeed_1.jpg",
+            "title": "OLM 4th Brake Lights",
+            "subtitle": "We have a TON of different options",
+            "button_text": "Shop Now"
+          }
+        },
+        "showcase_item_9bYCwU": {
+          "type": "showcase_item",
+          "settings": {
+            "collection": "",
+            "custom_url": "https://www.rallysportdirect.com/search?q=olm+taillights",
+            "custom_image": "shopify://shop_images/resizecom_oft3-pic-scaled.jpg",
+            "title": "OLM Tailights",
+            "subtitle": "Featuring discounts of 15% off for Cyber Week!",
+            "button_text": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "showcase_item_wXVpeP",
+        "showcase_item_VArtEJ",
+        "showcase_item_EA3CKL",
+        "showcase_item_9bYCwU"
+      ],
+      "name": "Collection Showcase",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "color_scheme": ""
+      }
+    },
+    "featured_productsv2_dbFqgz": {
+      "type": "featured-productsv2",
+      "name": "New Product Carousel",
+      "settings": {
+        "h": "Best Sellers",
+        "ha": "left",
+        "col": "brake-kits",
+        "pts": 20,
+        "bc": "#000000"
+      }
+    },
+    "brands_showcase_Nhbd3D": {
+      "type": "brands-showcase",
+      "blocks": {
+        "brand_3HKGbm": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/invidia.png",
+            "brand_name": "Brand 1",
+            "brand_link": ""
+          }
+        },
+        "brand_qYNBFf": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/olm.png",
+            "brand_name": "Brand 2",
+            "brand_link": ""
+          }
+        },
+        "brand_4c9Rmc": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/subispeed.png",
+            "brand_name": "Brand 3",
+            "brand_link": ""
+          }
+        },
+        "brand_FPXwQX": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/tomei.png",
+            "brand_name": "Brand 4",
+            "brand_link": ""
+          }
+        },
+        "brand_rH9xDh": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/grimmspeed.png",
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_V74F7t": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/factionfab.png",
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_ENixki": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/perrin.png",
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_LzCG8W": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/awe-tuning.png",
+            "brand_name": "",
+            "brand_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "brand_3HKGbm",
+        "brand_qYNBFf",
+        "brand_4c9Rmc",
+        "brand_FPXwQX",
+        "brand_rH9xDh",
+        "brand_V74F7t",
+        "brand_ENixki",
+        "brand_LzCG8W"
+      ],
+      "name": "Brand Showcase",
+      "settings": {
+        "heading": "Shop our Best Brands",
+        "description": ""
+      }
+    },
+    "shop_by_categories_efE7JY": {
+      "type": "shop-by-categories",
+      "blocks": {
+        "category_cmMqEg": {
+          "type": "category",
+          "settings": {
+            "collection": "engine"
+          }
+        },
+        "category_mBaFDf": {
+          "type": "category",
+          "settings": {
+            "collection": "suspension"
+          }
+        },
+        "category_9Nyx33": {
+          "type": "category",
+          "settings": {
+            "collection": "brakes"
+          }
+        },
+        "category_t8Tp3j": {
+          "type": "category",
+          "settings": {
+            "collection": "drivetrain"
+          }
+        },
+        "category_AzwPLU": {
+          "type": "category",
+          "settings": {
+            "collection": "interior"
+          }
+        },
+        "category_dpAgdi": {
+          "type": "category",
+          "settings": {
+            "collection": "exterior"
+          }
+        },
+        "category_a6gwUD": {
+          "type": "category",
+          "settings": {
+            "collection": "lifestyle"
+          }
+        },
+        "category_kNJKDK": {
+          "type": "category",
+          "settings": {
+            "collection": "wheels-and-tires"
+          }
+        },
+        "category_ErhUfD": {
+          "type": "category",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_cmMqEg",
+        "category_mBaFDf",
+        "category_9Nyx33",
+        "category_t8Tp3j",
+        "category_AzwPLU",
+        "category_dpAgdi",
+        "category_a6gwUD",
+        "category_kNJKDK",
+        "category_ErhUfD"
+      ],
+      "disabled": true,
+      "name": "Auto Parts Categories",
+      "settings": {
+        "section_title": "Shop by Category",
+        "background_color": "#f8f8f8",
+        "title_color": "#333333",
+        "category_title_color": "#333333",
+        "subcategory_color": "#292929",
+        "accent_color": "#007bff",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "image_banner_q4XMVt": {
+      "type": "image-banner",
+      "disabled": true,
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "brands_by_year_tVJAry": {
+      "type": "brands-by-year",
+      "blocks": {
+        "model_card_EbGQMt": {
+          "type": "model_card",
+          "settings": {
+            "image": "shopify://shop_images/website-resizing-ymm-306x306-subispeed-15-21-wrx.jpg",
+            "title": "",
+            "subtitle": "",
+            "menu": "2015-2021-subaru-wrx"
+          }
+        },
+        "model_card_4ddFTV": {
+          "type": "model_card",
+          "settings": {
+            "image": "shopify://shop_images/website-resizing-ymm-306x306-subispeed-15-21-sti.jpg",
+            "title": "",
+            "subtitle": "",
+            "menu": "2015-2021-subaru-wrx-sti"
+          }
+        },
+        "model_card_eTThPp": {
+          "type": "model_card",
+          "settings": {
+            "image": "shopify://shop_images/website-resizing-ymm-306x306-subispeed-22-24-wrx.jpg",
+            "title": "",
+            "subtitle": "",
+            "menu": "2022-2024-subaru-wrx"
+          }
+        },
+        "model_card_yUbqtx": {
+          "type": "model_card",
+          "settings": {
+            "image": "shopify://shop_images/website-resizing-ymm-306x306-subispeed-04-14-sti.jpg",
+            "title": "",
+            "subtitle": "",
+            "menu": "2004-2014-subaru-wrx-sti"
+          }
+        }
+      },
+      "block_order": [
+        "model_card_EbGQMt",
+        "model_card_4ddFTV",
+        "model_card_eTThPp",
+        "model_card_yUbqtx"
+      ],
+      "name": "Model Showcase",
+      "settings": {
+        "heading": "Our Models",
+        "background_color": "#ffffff",
+        "heading_color": "#333333",
+        "link_color": "#333333",
+        "link_hover_color": "#0066cc"
+      }
+    },
+    "featured_blog_wnRWTM": {
+      "type": "featured-blog",
+      "name": "t:sections.featured-blog.presets.name",
+      "settings": {
+        "blog": "news",
+        "post_limit": 4,
+        "heading": "Blog posts",
+        "heading_size": "h1",
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "1763627927e48fd713",
+    "featured_collections_UwYTiM",
+    "featured_productsv2_dbFqgz",
+    "brands_showcase_Nhbd3D",
+    "shop_by_categories_efE7JY",
+    "image_banner_q4XMVt",
+    "brands_by_year_tVJAry",
+    "featured_blog_wnRWTM"
+  ]
+}

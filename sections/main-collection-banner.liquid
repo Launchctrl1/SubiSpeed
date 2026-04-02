@@ -1,0 +1,172 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  @media screen and (max-width: 749px) {
+    .collection-hero--with-image .collection-hero__inner {
+      padding-bottom: calc({{settings.media_shadow_vertical_offset | at_least: 0}}px + 2rem);
+    }
+  }
+
+  .collection-description {
+    position: relative;
+  }
+
+  .collection-description.truncated {
+    max-height: 7.6em; /* Approximately 3 lines */
+    overflow: hidden;
+  }
+
+  .collection-description.truncated::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 1.2em;
+    background: linear-gradient(to right, transparent, var(--gradient-background));
+  }
+
+  .read-more-btn {
+    width: 87px;
+    height: 28px;
+    background: none;
+    border: none;
+    color: rgb(var(--color-foreground));
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    margin-top: 0.5rem;
+    font-family: inherit;
+    position: absolute;
+    transform: translateX(50%);
+    right: 50%;
+    border-radius: 999px;
+    border: 1px solid rgb(229, 231, 235);
+  }
+
+  .read-more-btn:hover {
+    opacity: 0.7;
+  }
+
+  .collection__tags {
+    padding-top: 2rem;
+  }
+{%- endstyle -%}
+
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
+  <div class="collection__tags page-width" style="white-space: nowrap;">
+    {%- assign level_1_collection = collection.metafields.custom.level_1.value -%}
+    {%- assign level_2_collection = collection.metafields.custom.level_2.value -%}
+    <div class="breadcrumbs">
+      <a href="/collections" class="full-unstyled-link">Collections</a> /
+      {%- if level_1_collection != blank -%}
+        <a href="{{ level_1_collection.url }}" class="full-unstyled-link">{{ level_1_collection.title }}</a> /
+      {%- endif -%}
+      {%- if level_2_collection != blank -%}
+        <a href="{{ level_2_collection.url }}" class="full-unstyled-link">{{ level_2_collection.title }}</a> /
+      {%- endif -%}
+      <a href="{{ collection.url }}" class="full-unstyled-link">{{ collection.title }}</a>
+    </div>
+  </div>
+
+  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <div class="collection-hero__text-wrapper">
+      <h1 class="collection-hero__title">
+        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+        {{- collection.title | escape -}}
+      </h1>
+
+      {%- if section.settings.show_collection_description and collection.description != blank -%}
+        <div class="collection-description truncated" id="collection-description">
+          {{ collection.description }}
+        </div>
+        {%- assign description_length = collection.description | strip_html | size -%}
+        {%- if description_length > 150 -%}
+          <button class="read-more-btn" id="read-more-btn" onclick="toggleDescription()">
+            {{ section.settings.read_more_text | default: 'Read more' }}
+          </button>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_collection_image and collection.image -%}
+      <div class="collection-hero__image-container media gradient">
+        <img
+          srcset="
+            {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if collection.image.width >= 535 -%}{{ collection.image | image_url: width: 535 }} 535w,{%- endif -%}
+            {%- if collection.image.width >= 750 -%}{{ collection.image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if collection.image.width >= 1070 -%}{{ collection.image | image_url: width: 1070 }} 1070w,{%- endif -%}
+            {%- if collection.image.width >= 1500 -%}{{ collection.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ collection.image | image_url }} {{ collection.image.width }}w
+          "
+          src="{{ collection.image | image_url: width: 750 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+          alt="{{ collection.image.alt | escape }}"
+          width="{{ collection.image.width }}"
+          height="{{ collection.image.height }}"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  function toggleDescription() {
+    const description = document.getElementById('collection-description');
+    const button = document.getElementById('read-more-btn');
+
+    if (description.classList.contains('truncated')) {
+      description.classList.remove('truncated');
+      button.textContent = '{{ section.settings.read_less_text | default: "Read less" }}';
+    } else {
+      description.classList.add('truncated');
+      button.textContent = '{{ section.settings.read_more_text | default: "Read more" }}';
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-banner.name",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-collection-banner.settings.paragraph.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "default": true,
+      "label": "t:sections.main-collection-banner.settings.show_collection_description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "default": false,
+      "label": "t:sections.main-collection-banner.settings.show_collection_image.label"
+    },
+    {
+      "type": "text",
+      "id": "read_more_text",
+      "default": "Read more",
+      "label": "Read More Button Text"
+    },
+    {
+      "type": "text",
+      "id": "read_less_text",
+      "default": "Read less",
+      "label": "Read Less Button Text"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,133 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "rich_text_RAFg3N": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_tmfRbR": {
+          "type": "heading",
+          "settings": {
+            "heading": "If you are looking for gearheads that are as passionate about your car as you are, you have come to the right place.",
+            "heading_size": "h1"
+          }
+        },
+        "text_g3DAVK": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>RallySportDirect.com</strong> was established in 2003 as a small operation that quickly grew into an established, global business with a dedicated sales staff and rapidly-growing inventory selection. We have come a long way in the past several years, but our goals are as clear now as they were from day one. </p><p>We at RallySportDirect.com strive to provide the best performance products, the most bang for your hard-earned buck, and the most positive consumer experience in the industry. Whether you are looking for something as simple as a replacement air filter or planning to create a full-scale Time Attack Team, we have the products and resources to get you out of the shop and onto the track.</p>"
+          }
+        },
+        "heading_PPqkPB": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>We’re here to help you find the right parts</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_nJexQp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>With our knowledgeable sales staff, vast product selection, and large inventory of in-stock, hard-to-find products, we aim to be the best online retailer in the Sport Compact Performance Market. We know how much you depend on the parts we sell, and we use them on a daily basis in order to provide you with accurate product details and real-time feedback gathered on and off the race track.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_tmfRbR",
+        "text_g3DAVK",
+        "heading_PPqkPB",
+        "text_nJexQp"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "statistics_dWgAi9": {
+      "type": "statistics",
+      "blocks": {
+        "statistic_nef8VP": {
+          "type": "statistic",
+          "settings": {
+            "title": "We were founded in",
+            "value": "2003"
+          }
+        },
+        "statistic_ngTQFY": {
+          "type": "statistic",
+          "settings": {
+            "title": "Team members",
+            "value": "300+"
+          }
+        },
+        "statistic_mdnpLV": {
+          "type": "statistic",
+          "settings": {
+            "title": "Amazing customers",
+            "value": "50K+"
+          }
+        },
+        "statistic_KdmTeh": {
+          "type": "statistic",
+          "settings": {
+            "title": "Car parts",
+            "value": "100K+"
+          }
+        }
+      },
+      "block_order": [
+        "statistic_nef8VP",
+        "statistic_ngTQFY",
+        "statistic_mdnpLV",
+        "statistic_KdmTeh"
+      ],
+      "name": "Statistics",
+      "settings": {
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "video_tmm3BG": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "enable_video_looping": false,
+        "video_url": "https://www.youtube.com/watch?v=GOCqWW3HYzY",
+        "cover_image": "shopify://shop_images/sddefault.jpg",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_RAFg3N",
+    "statistics_dWgAi9",
+    "video_tmm3BG"
+  ]
+}

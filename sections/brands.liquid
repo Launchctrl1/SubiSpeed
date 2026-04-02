@@ -1,0 +1,252 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .brands-section-{{ section.id }} {
+    padding: 0;
+  }
+
+  .brands-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .brand-card-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    color: inherit;
+  }
+
+  .brand-card-{{ section.id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: #333;
+    text-decoration: none;
+  }
+
+  .brand-card-image-{{ section.id }} {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .brand-card-image-{{ section.id }} img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .brand-card-title-{{ section.id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    text-transform: capitalize;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .brands-grid-{{ section.id }} {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .brands-grid-{{ section.id }} {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .brand-card-{{ section.id }} {
+      padding: 16px;
+    }
+
+    .brand-card-image-{{ section.id }} {
+      height: 80px;
+    }
+
+    .brand-card-title-{{ section.id }} {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .brands-grid-{{ section.id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- if section.settings.title != blank -%}
+      <h2 class="title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {{ section.settings.title }}
+      </h2>
+    {%- endif -%}
+
+    <div class="brands-section-{{ section.id }}">
+      <ul class="brands-grid-{{ section.id }}" id="brands-grid-{{ section.id }}">
+        <!-- Brand cards will be populated via JavaScript -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const sectionId = '{{ section.id }}';
+    const brandsJsonUrl = '{{ "brands.json" | asset_url }}';
+    const container = document.getElementById('brands-grid-' + sectionId);
+
+    if (!container) return;
+
+    fetch(brandsJsonUrl)
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        // Clear any existing content
+        container.innerHTML = '';
+
+        // Loop through each brand in the JSON
+        Object.keys(data).forEach(function (brandKey) {
+          const brand = data[brandKey];
+
+          // Create card element
+          const card = document.createElement('a');
+          card.href = brand.link || '#';
+          card.className = 'brand-card-' + sectionId;
+
+          // Create image container
+          const imageDiv = document.createElement('div');
+          imageDiv.className = 'brand-card-image-' + sectionId;
+
+          const img = document.createElement('img');
+          img.src = brand.image || '';
+          img.alt = brandKey;
+          img.loading = 'lazy';
+
+          imageDiv.appendChild(img);
+
+          // Create title
+          const title = document.createElement('h3');
+          title.className = 'brand-card-title-' + sectionId;
+          title.textContent = brandKey;
+
+          // Append elements to card
+          card.appendChild(imageDiv);
+          card.appendChild(title);
+
+          // Append card to container
+          container.appendChild(card);
+        });
+      })
+      .catch(function (error) {
+        console.error('Error loading brands:', error);
+        container.innerHTML =
+          '<li style="grid-column: 1 / -1; text-align: center; padding: 20px;">Unable to load brands. Please try again later.</li>';
+      });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Brands",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Our Brands"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brands"
+    }
+  ]
+}
+{% endschema %}

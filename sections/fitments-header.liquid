@@ -1,0 +1,1024 @@
+{%- liquid
+  assign social_links = false
+  assign localization_forms = false
+
+  if settings.social_twitter_link != blank or settings.social_facebook_link != blank or settings.social_pinterest_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_vimeo_link != blank or settings.social_tiktok_link != blank or settings.social_tumblr_link != blank or settings.social_snapchat_link != blank
+    assign social_links = true
+  endif
+
+  if localization.available_countries.size > 1 and section.settings.enable_country_selector or section.settings.enable_language_selector and localization.available_languages.size > 1
+    assign localization_forms = true
+  endif
+-%}
+
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link
+  rel="stylesheet"
+  href="{{ 'component-cart-notification.css' | asset_url }}"
+  media="print"
+  onload="this.media='all'"
+>
+
+{%- if settings.predictive_search_enabled -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
+{%- if section.settings.menu_type_desktop == 'mega' -%}
+  <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
+<style>
+  header-drawer {
+    justify-self: start;
+    margin-left: -1.2rem;
+  }
+
+  {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
+    .scrolled-past-header .header__heading-logo-wrapper {
+      width: 75%;
+    }
+  {%- endif -%}
+
+  {%- if section.settings.menu_type_desktop != "drawer" -%}
+    @media screen and (min-width: 990px) {
+      header-drawer {
+        display: none;
+      }
+    }
+  {%- endif -%}
+
+  .menu-drawer-container {
+    display: flex;
+  }
+
+  .list-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .list-menu--inline {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  summary.list-menu__item {
+    padding-right: 2.7rem;
+  }
+
+  .list-menu__item {
+    display: flex;
+    align-items: center;
+    line-height: calc(1 + 0.3 / var(--font-body-scale));
+  }
+
+  .list-menu__item--link {
+    text-decoration: none;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    line-height: calc(1 + 0.8 / var(--font-body-scale));
+  }
+
+  @media screen and (min-width: 750px) {
+    .list-menu__item--link {
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+    }
+  }
+
+  /* Header inline menu */
+  .header__inline-menu {
+    position: fixed !important;
+    top: 102px;
+    left: 0;
+    width: 100vw !important;
+    box-sizing: border-box;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 0px;
+    gap: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+  }
+
+  .header__inline-menu > ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    padding-left: var(--first-menu-item-offset, 0);
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .header__inline-menu > ul {
+      max-width: 100%;
+    }
+  }
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .header__inline-menu > ul {
+      max-width: 700px;
+    }
+  }
+  @media screen and (min-width: 990px) {
+    .header__inline-menu > ul {
+      max-width: 1200px;
+    }
+  }
+
+  /* Submenu (segundo nivel) */
+  .header__submenu {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap;
+    position: fixed !important;
+    {% comment %} top: calc(var(--header-height) + 43px); {% endcomment %}
+    left: 0;
+    width: 100vw !important;
+    box-sizing: border-box;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 10px;
+    gap: 10px;
+    background: #f8f8f8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 998;
+  }
+
+  .header__submenu__content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-left: var(--first-menu-item-offset, 0);
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  /* Items de segundo nivel */
+  .header__submenu > .header__submenu__content > li {
+    flex: 0 0 auto;
+    margin-right: 5px;
+    min-width: 60px;
+    max-width: 120px;
+    height: 30px;
+  }
+
+  .header__submenu .header__menu-item {
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    background: transparent;
+    font-size: 12px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .header__submenu .childlink-trigger.active {
+    background-color: rgb(17, 94, 176);
+    color: #fff;
+  }
+
+  /* Tercer nivel - subsección fija */
+  .header__third-submenu {
+    position: fixed;
+    top: 200px; /* debajo del segundo nivel */
+    left: 0;
+    width: 100vw;
+    background: #ffffff;
+    display: none;
+    padding: 10px;
+    z-index: 997;
+  }
+
+  .header__third-submenu .third-submenu-wrapper {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  .header__third-submenu .third-submenu-sidebar {
+    flex: 0 0 15%;
+    padding: 20px 20px 20px 0;
+    box-sizing: border-box;
+  }
+
+  .header__third-submenu .third-submenu-sidebar img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .header__third-submenu .third-submenu-main {
+    flex: 1;
+    padding-left: 10px;
+    min-width: 0;
+  }
+
+  .header__third-submenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .header__third-submenu .third-submenu-content {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    list-style: none !important;
+    padding: 20px 0;
+  }
+
+  .header__third-submenu .third-submenu-content.active {
+    display: grid;
+  }
+
+  .header__third-submenu .third-submenu-content li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none !important;
+  }
+
+  .header__third-submenu .third-submenu-content li img {
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+  }
+
+  .header__third-submenu .third-submenu-content li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .header__third-submenu .third-submenu-content li a:hover {
+    text-decoration: underline;
+  }
+
+  .header__third-submenu .third-submenu-content li a:hover {
+    color: #000;
+  }
+</style>
+
+{%- style -%}
+  /* header.header.header--middle-left.header--mobile-center.page-width.header--has-menu.header--has-social.header--has-account {
+    padding: 0px;
+  } */
+  .header {
+    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
+  }
+  .section-header {
+    position: sticky;
+    /* margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px; */
+  }
+  @media screen and (min-width: 750px) {
+    /* .section-header { margin-bottom: {{ section.settings.margin_bottom }}px; } */
+  }
+  @media screen and (min-width: 990px) {
+    .header {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  for block in section.blocks
+    if block.type == '@app'
+      assign has_app_block = true
+    endif
+  endfor
+-%}
+
+{% liquid
+  assign header_tag = 'div'
+
+  if section.settings.sticky_header_type != 'none'
+    assign header_tag = 'sticky-header'
+  endif
+%}
+
+<{{ header_tag }}
+  {% if header_tag == 'sticky-header' %}
+    data-sticky-type="{{ section.settings.sticky_header_type }}"
+  {% endif %}
+  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+>
+  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}{% if section.settings.show_search_bar %} header--has-search-bar{% endif %}">
+    {%- liquid
+      if section.settings.menu != blank
+        render 'header-drawer'
+      endif
+
+      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
+        render 'header-search', input_id: 'Search-In-Modal-1'
+      endif
+    -%}
+
+    <nav class="header__inline-menu">
+      <ul class="list-menu list-menu--inline" role="list">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'link_list' -%}
+              {%- assign link = block.settings.menu -%}
+              <header-menu>
+                <details id="Details-HeaderMenu-{{ forloop.index }}">
+                  <summary
+                    id="HeaderMenu-{{ link.handle }}"
+                    class="header__menu-item list-menu__item link focus-inset"
+                  >
+                    <img
+                      src="{{ block.settings.image | image_url: width: 50, height: 50, crop: 'center' }}"
+                      alt="{{ block.settings.heading }}"
+                      style="max-width: 50px; max-height: 50px; margin-right: 10px;"
+                      width="50"
+                      height="50"
+                    >
+                    <span
+                      {%- if link.child_active %}
+                        class="header__active-menu-item"
+                      {% endif %}
+                    >
+                      {{- link.title | escape -}}
+                    </span>
+                    {{- 'icon-caret.svg' | inline_asset_content -}}
+                  </summary>
+                  <ul
+                    id="HeaderMenu-MenuList-{{ forloop.index }}"
+                    class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
+                    role="list"
+                    tabindex="-1"
+                  >
+                    <div
+                      class="header__submenu__content"
+                      {% if forloop.index >= 3 %}
+                        style="margin: 0 auto;"
+                      {% endif %}
+                    >
+                      {%- for childlink in link.links -%}
+                        <li>
+                          {%- if childlink.links == blank -%}
+                            <a
+                              id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                              href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ childlink.url }}"
+                              class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"
+                              {% if childlink.current %}
+                                aria-current="page"
+                              {% endif %}
+                            >
+                              {{ childlink.title | escape }}
+                            </a>
+                          {%- else -%}
+                            <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
+                              <summary
+                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                                class="header__menu-item link link--text list-menu__item focus-inset caption-large childlink-trigger"
+                                data-handle="{{ childlink.handle }}"
+                                role="button"
+                              >
+                                <span>{{ childlink.title | escape }}</span>
+                                {{- 'icon-caret.svg' | inline_asset_content -}}
+                              </summary>
+                              <ul
+                                id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}"
+                                class="header__submenu list-menu motion-reduce"
+                              >
+                                {%- for grandchildlink in childlink.links -%}
+                                  <li>
+                                    <a
+                                      id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                      href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ grandchildlink.url }}"
+                                      class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"
+                                      {% if grandchildlink.current %}
+                                        aria-current="page"
+                                      {% endif %}
+                                    >
+                                      {{ grandchildlink.title | escape }}
+                                    </a>
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            </details>
+                          {%- endif -%}
+                        </li>
+                      {%- endfor -%}
+                    </div>
+                  </ul>
+                </details>
+              </header-menu>
+
+              {%- comment -%} Nueva subsección dinámica para tercer nivel (por cada menú de bloque) {%- endcomment -%}
+              <div class="header__third-submenu" data-block-index="{{ forloop.index }}">
+                <div class="third-submenu-wrapper page-width">
+                  <div class="third-submenu-sidebar">
+                    {%- if block.settings.sidebar_image -%}
+                      <img
+                        src="{{ block.settings.sidebar_image | image_url: width: 300, height: 400, crop: 'center' }}"
+                        alt="{{ block.settings.heading | escape }} sidebar"
+                        loading="lazy"
+                      >
+                    {%- endif -%}
+                  </div>
+                  <div class="third-submenu-main">
+                    {%- for childlink in link.links -%}
+                      {%- if childlink.links != blank -%}
+                        <ul class="third-submenu-content" data-parent="{{ childlink.handle }}">
+                          {%- for grandchildlink in childlink.links -%}
+                            {%- assign image_key = 'third_image_' | append: forloop.index -%}
+                            <li>
+                              <img
+                                src="{{ section.settings[image_key] | image_url: width: 54, height: 54, crop: 'center' }}"
+                                alt="{{ grandchildlink.title | escape }}"
+                                loading="lazy"
+                              >
+                              <a
+                                href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ grandchildlink.url }}"
+                                class="header__menu-item list-menu__item link focus-inset caption-large"
+                                {% if grandchildlink.current %}
+                                  aria-current="page"
+                                {% endif %}
+                              >
+                                {{ grandchildlink.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </header>
+</{{ header_tag }}>
+
+{%- if settings.cart_type == 'notification' -%}
+  {%- render 'cart-notification',
+    color_scheme: section.settings.color_scheme,
+    desktop_menu_type: section.settings.menu_type_desktop
+  -%}
+{%- endif -%}
+
+{% javascript %}
+  class StickyHeader extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.header = document.querySelector('.section-header');
+      this.headerIsAlwaysSticky =
+        this.getAttribute('data-sticky-type') === 'always' ||
+        this.getAttribute('data-sticky-type') === 'reduce-logo-size';
+      this.headerBounds = {};
+
+      this.setHeaderHeight();
+
+      window.matchMedia('(max-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
+
+      if (this.headerIsAlwaysSticky) {
+        this.header.classList.add('shopify-section-header-sticky');
+      }
+
+      this.currentScrollTop = 0;
+      this.preventReveal = false;
+      this.predictiveSearch = this.querySelector('predictive-search');
+
+      this.onScrollHandler = this.onScroll.bind(this);
+      this.hideHeaderOnScrollUp = () => (this.preventReveal = true);
+
+      this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
+      window.addEventListener('scroll', this.onScrollHandler, false);
+
+      this.createObserver();
+    }
+
+    setHeaderHeight() {
+      document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
+    }
+
+    disconnectedCallback() {
+      this.removeEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
+      window.removeEventListener('scroll', this.onScrollHandler);
+    }
+
+    createObserver() {
+      let observer = new IntersectionObserver((entries, observer) => {
+        this.headerBounds = entries[0].intersectionRect;
+        observer.disconnect();
+      });
+
+      observer.observe(this.header);
+    }
+
+    onScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (this.predictiveSearch && this.predictiveSearch.isOpen) return;
+
+      if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+        this.header.classList.add('scrolled-past-header');
+        if (this.preventHide) return;
+        requestAnimationFrame(this.hide.bind(this));
+      } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+        this.header.classList.add('scrolled-past-header');
+        if (!this.preventReveal) {
+          requestAnimationFrame(this.reveal.bind(this));
+        } else {
+          window.clearTimeout(this.isScrolling);
+
+          this.isScrolling = setTimeout(() => {
+            this.preventReveal = false;
+          }, 66);
+
+          requestAnimationFrame(this.hide.bind(this));
+        }
+      } else if (scrollTop <= this.headerBounds.top) {
+        this.header.classList.remove('scrolled-past-header');
+        requestAnimationFrame(this.reset.bind(this));
+      }
+
+      this.currentScrollTop = scrollTop;
+    }
+
+    hide() {
+      if (this.headerIsAlwaysSticky) return;
+      this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
+      this.closeMenuDisclosure();
+      this.closeSearchModal();
+    }
+
+    reveal() {
+      if (this.headerIsAlwaysSticky) return;
+      this.header.classList.add('shopify-section-header-sticky', 'animate');
+      this.header.classList.remove('shopify-section-header-hidden');
+    }
+
+    reset() {
+      if (this.headerIsAlwaysSticky) return;
+      this.header.classList.remove('shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate');
+    }
+
+    closeMenuDisclosure() {
+      this.disclosures = this.disclosures || this.header.querySelectorAll('header-menu');
+      this.disclosures.forEach((disclosure) => disclosure.close());
+    }
+
+    closeSearchModal() {
+      this.searchModal = this.searchModal || this.header.querySelector('details-modal');
+      this.searchModal.close(false);
+    }
+  }
+
+  customElements.define('sticky-header', StickyHeader);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionamos todos los triggers (segundo nivel) con data-handle
+    const triggers = document.querySelectorAll('.childlink-trigger');
+    // Para cada bloque de header (por si tienes varios bloques/menus) hay un contenedor .header__third-submenu
+    const thirdSubmenus = document.querySelectorAll('.header__third-submenu');
+
+    // Función util para ocultar todos los third-submenu y desactivar todos los grupos y highlights
+    function hideAllThird() {
+      thirdSubmenus.forEach((container) => {
+        container.style.display = 'none';
+        const groups = container.querySelectorAll('.third-submenu-content');
+        groups.forEach((g) => g.classList.remove('active'));
+      });
+      // Remove active class from all triggers
+      triggers.forEach((t) => t.classList.remove('active'));
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('mouseenter', () => {
+        const handle = trigger.getAttribute('data-handle');
+
+        // Traverse up to the top-level details to get the block index from its ID
+        let topLevelDetails = trigger.closest('ul.header__submenu').parentElement;
+        let blockIndex = null;
+        if (topLevelDetails && topLevelDetails.id && topLevelDetails.id.startsWith('Details-HeaderMenu-')) {
+          const match = topLevelDetails.id.match(/Details-HeaderMenu-(\d+)/);
+          if (match) {
+            blockIndex = match[1];
+          }
+        }
+
+        // Query the matching third-submenu by data-block-index
+        let thirdContainer = null;
+        if (blockIndex) {
+          thirdContainer = document.querySelector(`.header__third-submenu[data-block-index="${blockIndex}"]`);
+        }
+
+        // Fallback only if still null (edge case for single-block or malformed IDs)
+        if (!thirdContainer) {
+          thirdContainer = document.querySelector('.header__third-submenu');
+        }
+
+        if (!thirdContainer) return;
+
+        // Ocultamos los otros contenedores
+        hideAllThird();
+
+        thirdContainer.style.display = 'block';
+        const groups = thirdContainer.querySelectorAll('.third-submenu-content');
+        groups.forEach((group) => {
+          group.classList.toggle('active', group.getAttribute('data-parent') === handle);
+        });
+        // Highlight the current trigger
+        trigger.classList.add('active');
+      });
+
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const handle = trigger.getAttribute('data-handle');
+
+        // Same traversal logic as above (duplicate for click handler)
+        let topLevelDetails = trigger.closest('ul.header__submenu').parentElement;
+        let blockIndex = null;
+        if (topLevelDetails && topLevelDetails.id && topLevelDetails.id.startsWith('Details-HeaderMenu-')) {
+          const match = topLevelDetails.id.match(/Details-HeaderMenu-(\d+)/);
+          if (match) {
+            blockIndex = match[1];
+          }
+        }
+
+        let thirdContainer = null;
+        if (blockIndex) {
+          thirdContainer = document.querySelector(`.header__third-submenu[data-block-index="${blockIndex}"]`);
+        }
+        if (!thirdContainer) {
+          thirdContainer = document.querySelector('.header__third-submenu');
+        }
+        if (!thirdContainer) return;
+
+        hideAllThird();
+        thirdContainer.style.display = 'block';
+        const groups = thirdContainer.querySelectorAll('.third-submenu-content');
+        groups.forEach((group) => {
+          group.classList.toggle('active', group.getAttribute('data-parent') === handle);
+        });
+        // Highlight the current trigger
+        trigger.classList.add('active');
+      });
+    });
+
+    // Ocultar subsección al salir del área (por bloque)
+    thirdSubmenus.forEach((container) => {
+      container.addEventListener('mouseleave', () => {
+        container.style.display = 'none';
+        const groups = container.querySelectorAll('.third-submenu-content');
+        groups.forEach((g) => g.classList.remove('active'));
+        // Remove active from triggers (though hideAllThird would handle globally, but per-container for precision)
+        triggers.forEach((t) => t.classList.remove('active'));
+      });
+    });
+
+    // Si el usuario hace mouseleave del submenu (segundo nivel) y no está sobre third-submenu, ocultar
+    const submenus = document.querySelectorAll('.header__submenu');
+    submenus.forEach((sub) => {
+      sub.addEventListener('mouseleave', (e) => {
+        // wait a short moment to allow mouseenter on third-submenu if user moved there
+        setTimeout(() => {
+          // si ningún third-submenu tiene :hover, ocultamos todos
+          let anyHover = false;
+          thirdSubmenus.forEach((c) => {
+            if (c.matches(':hover')) anyHover = true;
+          });
+          if (!anyHover) hideAllThird();
+        }, 150);
+      });
+    });
+  });
+{% endjavascript %}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if settings.logo %}
+      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ request.origin | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.fitments-header.name",
+  "class": "section-fitments-header",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "t:sections.footer.blocks.link_list.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "t:sections.footer.blocks.link_list.settings.heading.default",
+          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "sidebar_image",
+          "label": "Third level sidebar image"
+        }
+      ],
+      "limit": 8
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_apps_prefix",
+      "label": "Use apps prefix",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:sections.header.settings.logo_position.options__2.label"
+        },
+        {
+          "value": "top-center",
+          "label": "t:sections.header.settings.logo_position.options__3.label"
+        },
+        {
+          "value": "middle-left",
+          "label": "t:sections.header.settings.logo_position.options__1.label"
+        },
+        {
+          "value": "middle-center",
+          "label": "t:sections.header.settings.logo_position.options__4.label"
+        }
+      ],
+      "default": "middle-left",
+      "label": "t:sections.header.settings.logo_position.label",
+      "info": "t:sections.header.settings.logo_help.content"
+    },
+    {
+      "type": "select",
+      "id": "mobile_logo_position",
+      "options": [
+        {
+          "value": "center",
+          "label": "t:sections.header.settings.mobile_logo_position.options__1.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.mobile_logo_position.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.header.settings.mobile_logo_position.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search_bar",
+      "label": "t:sections.header.settings.show_search_bar.label",
+      "default": false
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    },
+    {
+      "type": "select",
+      "id": "menu_type_desktop",
+      "options": [
+        {
+          "value": "dropdown",
+          "label": "t:sections.header.settings.menu_type_desktop.options__1.label"
+        },
+        {
+          "value": "mega",
+          "label": "t:sections.header.settings.menu_type_desktop.options__2.label"
+        },
+        {
+          "value": "drawer",
+          "label": "t:sections.header.settings.menu_type_desktop.options__3.label"
+        }
+      ],
+      "default": "dropdown",
+      "label": "t:sections.header.settings.menu_type_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "sticky_header_type",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.header.settings.sticky_header_type.options__1.label"
+        },
+        {
+          "value": "on-scroll-up",
+          "label": "t:sections.header.settings.sticky_header_type.options__2.label"
+        },
+        {
+          "value": "always",
+          "label": "t:sections.header.settings.sticky_header_type.options__3.label"
+        },
+        {
+          "value": "reduce-logo-size",
+          "label": "t:sections.header.settings.sticky_header_type.options__4.label"
+        }
+      ],
+      "default": "on-scroll-up",
+      "label": "t:sections.header.settings.sticky_header_type.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_line_separator",
+      "default": true,
+      "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__1.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "menu_color_scheme",
+      "label": "t:sections.header.settings.menu_color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Third level images"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_1",
+      "label": "Third level image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_2",
+      "label": "Third level image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_3",
+      "label": "Third level image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_4",
+      "label": "Third level image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_5",
+      "label": "Third level image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_6",
+      "label": "Third level image 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_7",
+      "label": "Third level image 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_8",
+      "label": "Third level image 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_9",
+      "label": "Third level image 9"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__utilities.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_country_selector.label",
+      "info": "t:sections.header.settings.enable_country_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_language_selector.label",
+      "info": "t:sections.header.settings.enable_language_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_customer_avatar",
+      "default": true,
+      "label": "t:sections.header.settings.enable_customer_avatar.label",
+      "info": "t:sections.header.settings.enable_customer_avatar.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.header.settings.margin_bottom.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
+    }
+  ]
+}
+{% endschema %}

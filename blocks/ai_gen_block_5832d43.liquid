@@ -1,0 +1,303 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-collection-cards-{{ ai_gen_id }} {
+    padding: 40px 20px;
+  }
+
+  .ai-collection-cards__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-collection-card-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-collection-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+  }
+
+  .ai-collection-card__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    margin-bottom: 12px;
+  }
+
+  .ai-collection-card__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-collection-card__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-collection-card__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-collection-card__title-{{ ai_gen_id }} {
+    background-color: {{ block.settings.title_background_color }};
+    color: {{ block.settings.title_text_color }};
+    padding: 12px 16px;
+    text-align: center;
+    font-size: {{ block.settings.title_font_size }}px;
+    font-weight: 500;
+    border-radius: {{ block.settings.title_border_radius }}px;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-collection-cards__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-collection-cards-{{ ai_gen_id }} {
+      padding: 30px 16px;
+    }
+
+    .ai-collection-cards__grid-{{ ai_gen_id }} {
+      gap: 12px;
+    }
+
+    .ai-collection-card__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_font_size | times: 0.9 }}px;
+      padding: 10px 12px;
+    }
+  }
+{% endstyle %}
+
+<div class="page-width">
+  <div class="ai-collection-cards-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+    <div class="ai-collection-cards__grid-{{ ai_gen_id }}">
+      {% for i in (1..4) %}
+        {% liquid
+          assign collection_key = 'collection_' | append: i
+          assign image_key = 'image_' | append: i
+          assign title_key = 'title_' | append: i
+
+          assign collection = block.settings[collection_key]
+          assign custom_image = block.settings[image_key]
+          assign custom_title = block.settings[title_key]
+        %}
+
+        {% if collection != blank %}
+          <a href="{{ collection.url }}" class="ai-collection-card-{{ ai_gen_id }}">
+            <div class="ai-collection-card__image-wrapper-{{ ai_gen_id }}">
+              {% if custom_image != blank %}
+                <img
+                  src="{{ custom_image | image_url: width: 600 }}"
+                  alt="{{ custom_image.alt | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                  class="ai-collection-card__image-{{ ai_gen_id }}"
+                >
+              {% elsif collection.image %}
+                <img
+                  src="{{ collection.image | image_url: width: 600 }}"
+                  alt="{{ collection.image.alt | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                  class="ai-collection-card__image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="ai-collection-card__image-placeholder-{{ ai_gen_id }}">
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            {% if custom_title != blank %}
+              <h3 class="ai-collection-card__title-{{ ai_gen_id }}">{{ custom_title }}</h3>
+            {% else %}
+              <h3 class="ai-collection-card__title-{{ ai_gen_id }}">{{ collection.title }}</h3>
+            {% endif %}
+          </a>
+        {% else %}
+          <div class="ai-collection-card-{{ ai_gen_id }}">
+            <div class="ai-collection-card__image-wrapper-{{ ai_gen_id }}">
+              {% if custom_image != blank %}
+                <img
+                  src="{{ custom_image | image_url: width: 600 }}"
+                  alt="{{ custom_image.alt | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                  class="ai-collection-card__image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="ai-collection-card__image-placeholder-{{ ai_gen_id }}">
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            {% if custom_title != blank %}
+              <h3 class="ai-collection-card__title-{{ ai_gen_id }}">{{ custom_title }}</h3>
+            {% else %}
+              <h3 class="ai-collection-card__title-{{ ai_gen_id }}">Collection {{ i }}</h3>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection cards",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Collection 3"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Collection 4"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "title_4",
+      "label": "Custom title"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "title_background_color",
+      "label": "Title background",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "title_text_color",
+      "label": "Title text",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "title_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Title border radius",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection cards"
+    }
+  ]
+}
+{% endschema %}

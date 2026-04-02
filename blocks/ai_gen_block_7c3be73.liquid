@@ -1,0 +1,355 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-countdown-timer-{{ ai_gen_id }} {
+    padding: 40px 20px;
+    background-color: {{ block.settings.background_color }};
+    text-align: center;
+  }
+
+  .ai-countdown-timer__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 30px;
+    font-weight: 600;
+  }
+
+  .ai-countdown-timer__display-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .ai-countdown-timer__unit-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ai-countdown-timer__number-{{ ai_gen_id }} {
+    font-size: {{ block.settings.number_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.number_color }};
+    background-color: {{ block.settings.number_bg_color }};
+    padding: 15px 20px;
+    border-radius: {{ block.settings.border_radius }}px;
+    min-width: 70px;
+  }
+
+  .ai-countdown-timer__label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_size }}px;
+    color: {{ block.settings.text_color }};
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ai-countdown-timer__message-{{ ai_gen_id }} {
+    font-size: {{ block.settings.message_size }}px;
+    color: {{ block.settings.message_color }};
+    margin-top: 20px;
+    font-weight: 600;
+    display: none;
+  }
+
+  .ai-countdown-timer__message-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-countdown-timer__heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .ai-countdown-timer__number-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.number_size }}px * 0.8);
+      padding: 12px 16px;
+      min-width: 60px;
+    }
+
+    .ai-countdown-timer__display-{{ ai_gen_id }} {
+      gap: 12px;
+    }
+  }
+{% endstyle %}
+
+<countdown-timer-{{ ai_gen_id }}
+  class="ai-countdown-timer-{{ ai_gen_id }}"
+  data-end-date="{{ block.settings.end_date }}"
+  data-end-time="{{ block.settings.end_time }}"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.heading != blank %}
+    <h2 class="ai-countdown-timer__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="ai-countdown-timer__display-{{ ai_gen_id }}">
+    {% if block.settings.show_days %}
+      <div class="ai-countdown-timer__unit-{{ ai_gen_id }}">
+        <div class="ai-countdown-timer__number-{{ ai_gen_id }}" data-unit="days">00</div>
+        <div class="ai-countdown-timer__label-{{ ai_gen_id }}">Days</div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_hours %}
+      <div class="ai-countdown-timer__unit-{{ ai_gen_id }}">
+        <div class="ai-countdown-timer__number-{{ ai_gen_id }}" data-unit="hours">00</div>
+        <div class="ai-countdown-timer__label-{{ ai_gen_id }}">Hours</div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_minutes %}
+      <div class="ai-countdown-timer__unit-{{ ai_gen_id }}">
+        <div class="ai-countdown-timer__number-{{ ai_gen_id }}" data-unit="minutes">00</div>
+        <div class="ai-countdown-timer__label-{{ ai_gen_id }}">Minutes</div>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if block.settings.completion_message != blank %}
+    <div class="ai-countdown-timer__message-{{ ai_gen_id }}">
+      {{ block.settings.completion_message }}
+    </div>
+  {% endif %}
+</countdown-timer-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CountdownTimer{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.endDate = this.dataset.endDate;
+        this.endTime = this.dataset.endTime;
+        this.interval = null;
+      }
+
+      connectedCallback() {
+        if (!this.endDate || !this.endTime) {
+          return;
+        }
+
+        const endDateTime = new Date(this.endDate + 'T' + this.endTime);
+        
+        if (isNaN(endDateTime.getTime())) {
+          return;
+        }
+
+        this.startCountdown(endDateTime);
+      }
+
+      disconnectedCallback() {
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
+      }
+
+      startCountdown(endDateTime) {
+        const updateTimer = () => {
+          const now = new Date().getTime();
+          const distance = endDateTime.getTime() - now;
+
+          if (distance < 0) {
+            this.handleCompletion();
+            return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+          this.updateDisplay('days', days);
+          this.updateDisplay('hours', hours);
+          this.updateDisplay('minutes', minutes);
+        };
+
+        updateTimer();
+        this.interval = setInterval(updateTimer, 1000);
+      }
+
+      updateDisplay(unit, value) {
+        const element = this.querySelector(`[data-unit="${unit}"]`);
+        if (element) {
+          element.textContent = String(value).padStart(2, '0');
+        }
+      }
+
+      handleCompletion() {
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
+
+        const display = this.querySelector('.ai-countdown-timer__display-{{ ai_gen_id }}');
+        const message = this.querySelector('.ai-countdown-timer__message-{{ ai_gen_id }}');
+
+        if (display) {
+          display.style.display = 'none';
+        }
+
+        if (message) {
+          message.classList.add('active');
+        }
+      }
+    }
+
+    customElements.define('countdown-timer-{{ ai_gen_id }}', CountdownTimer{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Countdown timer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Limited Time Offer"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End date",
+      "info": "Format: YYYY-MM-DD (e.g., 2025-12-31)"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "End time",
+      "info": "Format: HH:MM:SS (e.g., 23:59:59)"
+    },
+    {
+      "type": "richtext",
+      "id": "completion_message",
+      "label": "Completion message",
+      "default": "<p>The countdown has ended!</p>",
+      "info": "Message to display when countdown finishes"
+    },
+    {
+      "type": "header",
+      "content": "Display options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_days",
+      "label": "Show days",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hours",
+      "label": "Show hours",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_minutes",
+      "label": "Show minutes",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "number_bg_color",
+      "label": "Number background",
+      "default": "#115eb0"
+    },
+    {
+      "type": "color",
+      "id": "message_color",
+      "label": "Completion message",
+      "default": "#115eb0"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "number_size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Number size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Label size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "message_size",
+      "min": 14,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Completion message size",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Number box corner radius",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown timer"
+    }
+  ]
+}
+{% endschema %}

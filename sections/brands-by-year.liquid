@@ -1,0 +1,378 @@
+{% comment %}
+  Model Showcase Section
+  Displays a grid of model cards with images and navigation menus
+{% endcomment %}
+
+<section class="model-showcase-section" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <div class="section-header">
+        <h2 class="section-heading">{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="model-grid">
+      {% for block in section.blocks %}
+        <div class="model-card" {{ block.shopify_attributes }}>
+          <div class="model-card__inner">
+            <!-- Model Image -->
+            <div class="model-image-container">
+              {% if block.settings.image != blank %}
+                <img
+                  src="{{ block.settings.image | img_url: '600x400' }}"
+                  alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                  class="model-image"
+                  loading="lazy"
+                  width="600"
+                  height="400"
+                >
+              {% else %}
+                <div class="model-image-placeholder">
+                  <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#f8f8f8"/>
+                    <path d="M30 30h40v40H30z" stroke="#ddd" stroke-width="2" fill="none"/>
+                  </svg>
+                </div>
+              {% endif %}
+
+              <!-- Title Overlay -->
+              {% if block.settings.title != blank %}
+                <div class="model-title-overlay">
+                  <h3 class="model-title">{{ block.settings.title }}</h3>
+                  {% if block.settings.subtitle != blank %}
+                    <p class="model-subtitle">{{ block.settings.subtitle }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Navigation Menu -->
+            {% if block.settings.menu != blank and linklists[block.settings.menu].links.size > 0 %}
+              <div class="model-navigation">
+                <nav class="model-nav">
+                  <ul class="model-nav__list">
+                    {% for link in linklists[block.settings.menu].links %}
+                      <li class="model-nav__item">
+                        <a href="{{ link.url }}" class="model-nav__link">
+                          {{ link.title }}
+                          <svg class="model-nav__arrow" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                            <path d="M1 1L6 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                          </svg>
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </nav>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .model-showcase-section {
+    padding: 60px 0;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: {{ section.settings.heading_color | default: '#333333' }};
+    margin: 0;
+  }
+
+  .model-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  .model-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .model-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .model-card__inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .model-image-container {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+  }
+
+  .model-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .model-card:hover .model-image {
+    transform: scale(1.05);
+  }
+
+  .model-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8;
+  }
+
+  .model-title-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 2;
+  }
+
+  .model-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .model-subtitle {
+    font-size: 1rem;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .model-navigation {
+    padding: 10px 20px;
+    background: #f5f5f5;
+    flex-grow: 1;
+  }
+
+  .model-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .model-nav__item:last-child {
+    border-bottom: none;
+  }
+
+  .model-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 0 10px 0;
+    color: {{ section.settings.link_color | default: '#333333' }};
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: color 0.2s ease;
+  }
+
+  .model-nav__link:hover {
+    color: {{ section.settings.link_hover_color | default: '#0066cc' }};
+  }
+
+  .model-nav__arrow {
+    transition: transform 0.2s ease;
+    opacity: 0.6;
+  }
+
+  .model-nav__link:hover .model-nav__arrow {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .model-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .model-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .model-showcase-section {
+      padding: 40px 0;
+    }
+
+    .section-heading {
+      font-size: 2rem;
+    }
+
+    .model-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .model-title {
+      font-size: 1.5rem;
+    }
+
+    .model-navigation {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 15px;
+    }
+
+    .model-title-overlay {
+      left: 15px;
+      right: 15px;
+      top: 15px;
+    }
+
+    .model-title {
+      font-size: 1.3rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Model Showcase",
+  "tag": "section",
+  "class": "section-model-showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Our Models"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link Hover Color",
+      "default": "#0066cc"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "model_card",
+      "name": "Model Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Model Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Model Title",
+          "default": "Model Name"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Model Subtitle (Years)",
+          "default": "2015-2021"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Navigation Menu",
+          "info": "Select a menu to display navigation links below the image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Model Showcase",
+      "blocks": [
+        {
+          "type": "model_card",
+          "settings": {
+            "title": "2015-2021 SUBARU WRX",
+            "subtitle": "2015-2021"
+          }
+        },
+        {
+          "type": "model_card",
+          "settings": {
+            "title": "2015-2021 SUBARU STI",
+            "subtitle": "2015-2021"
+          }
+        },
+        {
+          "type": "model_card",
+          "settings": {
+            "title": "2022-2024 SUBARU WRX",
+            "subtitle": "2022-2024"
+          }
+        },
+        {
+          "type": "model_card",
+          "settings": {
+            "title": "2004-2014 SUBARU STI",
+            "subtitle": "2004-2014"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,436 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "brands_8jkGGd": {
+      "type": "brands",
+      "name": "Brands",
+      "settings": {
+        "title": "Our Brands",
+        "heading_size": "h1",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "brands_cards_4YGEpn": {
+      "type": "brands-cards",
+      "blocks": {
+        "brand_card_nCfyRL": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/3dmaxpider_1.png",
+            "title": "3D Maxpider",
+            "link": "/brand/3d-maxpider"
+          }
+        },
+        "brand_card_tWFztY": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/acl.png",
+            "title": "ACL",
+            "link": "/brand/acl"
+          }
+        },
+        "brand_card_QRDBnG": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/act.png",
+            "title": "ACT",
+            "link": "/brand/act"
+          }
+        },
+        "brand_card_Ekf78m": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/advan.png",
+            "title": "Advan",
+            "link": "/brand/advan"
+          }
+        },
+        "brand_card_CzKwiK": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/aem-electronics.png",
+            "title": "AEM Electronics",
+            "link": "/brand/aem-electronics"
+          }
+        },
+        "brand_card_L8C9Rq": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/aem-induction.png",
+            "title": "AEM Induction",
+            "link": "/brand/aem-induction"
+          }
+        },
+        "brand_card_YJWVLK": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/aeromotive.png",
+            "title": "Aeromotive",
+            "link": "/brand/aeromotive"
+          }
+        },
+        "brand_card_imxApf": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/afe.png",
+            "title": "aFe",
+            "link": "/brand/afe"
+          }
+        },
+        "brand_card_aRzjxQ": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/Agency_Power.png",
+            "title": "Agency Power",
+            "link": "/brand/agency-power"
+          }
+        },
+        "brand_card_ytPQzr": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/air_lift.png",
+            "title": "Air Lift",
+            "link": "/brand/air-lift"
+          }
+        },
+        "brand_card_BBwFTX": {
+          "type": "brand_card",
+          "settings": {
+            "image": "shopify://shop_images/airaid.png",
+            "title": "AIRAID",
+            "link": "/brand/air-aid"
+          }
+        },
+        "brand_card_Cq9Wzq": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Alpha Rex USA",
+            "link": "/brand/alpha-rex-usa"
+          }
+        },
+        "brand_card_tTXwLN": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Alta",
+            "link": ""
+          }
+        },
+        "brand_card_BMCRHk": {
+          "type": "brand_card",
+          "settings": {
+            "title": "AMS",
+            "link": "/brand/ams"
+          }
+        },
+        "brand_card_T3CEyW": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Anderson Composites",
+            "link": "/brand/anderson-composites"
+          }
+        },
+        "brand_card_3zU7D3": {
+          "type": "brand_card",
+          "settings": {
+            "title": "AP Racing",
+            "link": "/brand/ap-racing"
+          }
+        },
+        "brand_card_Wt7Yiq": {
+          "type": "brand_card",
+          "settings": {
+            "title": "APEX",
+            "link": "/brand/apex"
+          }
+        },
+        "brand_card_FCFNWi": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Apexi",
+            "link": "/brand/apexi"
+          }
+        },
+        "brand_card_XAUntp": {
+          "type": "brand_card",
+          "settings": {
+            "title": "APR",
+            "link": "/brand/apr"
+          }
+        },
+        "brand_card_bUwL8y": {
+          "type": "brand_card",
+          "settings": {
+            "title": "ARP",
+            "link": "/brand/arp"
+          }
+        },
+        "brand_card_hXHw4h": {
+          "type": "brand_card",
+          "settings": {
+            "title": "ATI",
+            "link": "/brand/ati"
+          }
+        },
+        "brand_card_JzDjAh": {
+          "type": "brand_card",
+          "settings": {
+            "title": "ATP Turbo",
+            "link": "/brand/atp-turbo"
+          }
+        },
+        "brand_card_PnB8nq": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Autometer",
+            "link": "/brand/autometer"
+          }
+        },
+        "brand_card_XFXdD9": {
+          "type": "brand_card",
+          "settings": {
+            "title": "AutoStyled",
+            "link": "/brand/autostyled"
+          }
+        },
+        "brand_card_VEhGTN": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Autotech",
+            "link": "/brand/Autotech"
+          }
+        },
+        "brand_card_yDimer": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Avest",
+            "link": "/brand/Avest"
+          }
+        },
+        "brand_card_QkweFt": {
+          "type": "brand_card",
+          "settings": {
+            "title": "AWE Tuning",
+            "link": "/brand/awe-tuning"
+          }
+        },
+        "brand_card_jnmLeb": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Baja Designs",
+            "link": "/brand/baja-designs"
+          }
+        },
+        "brand_card_geC97r": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Baxter Performance",
+            "link": "/brand/baxter-performance"
+          }
+        },
+        "brand_card_KEpGT7": {
+          "type": "brand_card",
+          "settings": {
+            "title": "BC Racing",
+            "link": "/brand/bc-racing"
+          }
+        },
+        "brand_card_EiWJan": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Beatrush",
+            "link": "/brand/beatrush"
+          }
+        },
+        "brand_card_6dPkKj": {
+          "type": "brand_card",
+          "settings": {
+            "title": "BilletWorkz",
+            "link": "/brand/billetworkz"
+          }
+        },
+        "brand_card_F4wgDC": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Bilstein",
+            "link": "/brand/bilstein"
+          }
+        },
+        "brand_card_wTqrMG": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Blitz",
+            "link": "/brand/blitz"
+          }
+        },
+        "brand_card_xeqA3B": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Blouch",
+            "link": "/brand/blouch"
+          }
+        },
+        "brand_card_aXzDWE": {
+          "type": "brand_card",
+          "settings": {
+            "title": "BLOX",
+            "link": "/brand/blox"
+          }
+        },
+        "brand_card_cTFxkE": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Boomba Racing",
+            "link": "/brand/boomba-racing"
+          }
+        },
+        "brand_card_N6A9QW": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Borla",
+            "link": "/brand/borla"
+          }
+        },
+        "brand_card_L4YKMB": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Bosch",
+            "link": "/brand/bosch"
+          }
+        },
+        "brand_card_kqMeXU": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Braille Battery",
+            "link": "/braille-battery"
+          }
+        },
+        "brand_card_xCwJwr": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Brembo",
+            "link": "/brand/brembo"
+          }
+        },
+        "brand_card_8WHTCz": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Brian Crower",
+            "link": "/brand/brian-crower"
+          }
+        },
+        "brand_card_Ch49B6": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Bride",
+            "link": "/brand/bride"
+          }
+        },
+        "brand_card_B3Vn3Q": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Buddy Club",
+            "link": "/brand/buddy-club"
+          }
+        },
+        "brand_card_pnJthx": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Carbing",
+            "link": "/brand/carbing"
+          }
+        },
+        "brand_card_aJWmJy": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Carbon Reproductions",
+            "link": "/brand/carbon-reproductions"
+          }
+        },
+        "brand_card_FXaDBA": {
+          "type": "brand_card",
+          "settings": {
+            "title": "Centric",
+            "link": "/brand/centric"
+          }
+        }
+      },
+      "block_order": [
+        "brand_card_nCfyRL",
+        "brand_card_tWFztY",
+        "brand_card_QRDBnG",
+        "brand_card_Ekf78m",
+        "brand_card_CzKwiK",
+        "brand_card_L8C9Rq",
+        "brand_card_YJWVLK",
+        "brand_card_imxApf",
+        "brand_card_aRzjxQ",
+        "brand_card_ytPQzr",
+        "brand_card_BBwFTX",
+        "brand_card_Cq9Wzq",
+        "brand_card_tTXwLN",
+        "brand_card_BMCRHk",
+        "brand_card_T3CEyW",
+        "brand_card_3zU7D3",
+        "brand_card_Wt7Yiq",
+        "brand_card_FCFNWi",
+        "brand_card_XAUntp",
+        "brand_card_bUwL8y",
+        "brand_card_hXHw4h",
+        "brand_card_JzDjAh",
+        "brand_card_PnB8nq",
+        "brand_card_XFXdD9",
+        "brand_card_VEhGTN",
+        "brand_card_yDimer",
+        "brand_card_QkweFt",
+        "brand_card_jnmLeb",
+        "brand_card_geC97r",
+        "brand_card_KEpGT7",
+        "brand_card_EiWJan",
+        "brand_card_6dPkKj",
+        "brand_card_F4wgDC",
+        "brand_card_wTqrMG",
+        "brand_card_xeqA3B",
+        "brand_card_aXzDWE",
+        "brand_card_cTFxkE",
+        "brand_card_N6A9QW",
+        "brand_card_L4YKMB",
+        "brand_card_kqMeXU",
+        "brand_card_xCwJwr",
+        "brand_card_8WHTCz",
+        "brand_card_Ch49B6",
+        "brand_card_B3Vn3Q",
+        "brand_card_pnJthx",
+        "brand_card_aJWmJy",
+        "brand_card_FXaDBA"
+      ],
+      "disabled": true,
+      "name": "Brand Cards",
+      "settings": {
+        "heading": "Our Brands"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "brands_8jkGGd",
+    "brands_cards_4YGEpn"
+  ]
+}

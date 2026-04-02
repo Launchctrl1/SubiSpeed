@@ -1,0 +1,372 @@
+{% comment %}
+  Auto Parts Categories Section
+  Displays product categories in a grid layout with featured images and up to 4 subcategories
+  Subcategories are dynamically pulled from a collection_tree metafield
+{% endcomment %}
+
+<div class="page-width custom-carousel-container" id="section-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.section_title != blank %}
+      <div class="section-header">
+        <h2 class="section-title">{{ section.settings.section_title }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="categories-grid">
+      {% assign collection_tree_value = shop.metafields.collection_tree.collection_tree.value %}
+      {% assign nodes = collection_tree_value.nodes %}
+      {% for block in section.blocks %}
+        {% assign collection = collections[block.settings.collection] %}
+        {% if collection and collection != empty %}
+          <div class="category-card" {{ block.shopify_attributes }}>
+            <div class="category-image">
+              {% if block.settings.featured_image != blank %}
+                <img
+                  src="{{ block.settings.featured_image | img_url: '600x300' }}"
+                  alt="{{ collection.title | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="300"
+                >
+              {% elsif collection.featured_image %}
+                <img
+                  src="{{ collection.featured_image | img_url: '600x300' }}"
+                  alt="{{ collection.title | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="300"
+                >
+              {% else %}
+                <div class="placeholder-image">
+                  {% render 'icon-placeholder' %}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="category-content">
+              <h3 class="category-title">
+                <a href="{{ collection.url }}">{{ collection.title }}</a>
+              </h3>
+
+              {% assign collection_id = collection.id | append: '' %}
+              {% assign subcollections_ids = collection_tree_value.parentChildren[collection_id] %}
+              {% if subcollections_ids %}
+                <div class="subcategories">
+                  {% for id in subcollections_ids limit: 4 %}
+                    {% assign subcollection_id = id | append: '' %}
+                    {% assign subcollection = nodes[subcollection_id] %}
+                    {% if subcollection %}
+                      <a
+                        href="{{ routes.collections_url }}/{{ collection.handle }}/{{ subcollection.h }}"
+                        class="subcategory-link"
+                      >
+                        <span class="subcollection-title">{{ subcollection.t }}</span>
+                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .auto-parts-categories {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+  }
+
+  .section-header {
+    text-align: center;
+  }
+
+  .section-title {
+    text-align: left;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+
+  .category-card {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e5e5e5;
+    margin: 0 auto;
+  }
+
+  .category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .category-image {
+    aspect-ratio: 305 / 150;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .category-card:hover .category-image img {
+    transform: scale(1.05);
+  }
+
+  .placeholder-image {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+  }
+
+  .category-content {
+    padding: 20px;
+  }
+
+  .category-title {
+    margin: 0 0 15px 0;
+    font-size: 1.5rem;
+    font-weight: var(--font-body-weight);
+  }
+
+  .category-title a {
+    color: {{ section.settings.category_title_color }};
+    text-decoration: none;
+    border-bottom: 2px solid {{ section.settings.accent_color }};
+    padding-bottom: 2px;
+  }
+
+  .category-title a:hover {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .subcategories {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .subcategory-link {
+    color: {{ section.settings.subcategory_color }};
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: var(--font-body-weight-bold);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .subcategory-link:hover {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .arrow-icon {
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    flex: 0 0 auto;
+  }
+
+  .subcategory-link:hover .arrow-icon {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  .subcategory-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .categories-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .category-image {
+      height: 150px;
+    }
+
+    .category-content {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .categories-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .container {
+      padding: 0 15px;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+  }
+
+  .section-auto-parts-categories{
+    padding-top: 30px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Auto Parts Categories",
+  "tag": "section",
+  "class": "section-auto-parts-categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "category_title_color",
+      "label": "Category Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "subcategory_color",
+      "label": "Subcategory Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#007bff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_image",
+          "label": "Featured Image",
+          "info": "Optional. If not selected, collection's featured image will be used."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Auto Parts Categories",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,119 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "read_more_text": "Read more",
+        "read_less_text": "Read less",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "collection-tree": {
+      "type": "main-collection-tree",
+      "disabled": true,
+      "settings": {
+        "link_primary_color": "#000000"
+      }
+    },
+    "collection_list_ncAr7b": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_AcMqim": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "headlights"
+          }
+        },
+        "featured_collection_Wtj4Gf": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "interior-lighting"
+          }
+        },
+        "featured_collection_7yxrNR": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "fog-lights"
+          }
+        },
+        "featured_collection_bgFbgY": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "marker-lights"
+          }
+        },
+        "featured_collection_EPyERc": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "auxiliary-lighting"
+          }
+        },
+        "featured_collection_9VDExK": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "tail-lights"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_AcMqim",
+        "featured_collection_Wtj4Gf",
+        "featured_collection_7yxrNR",
+        "featured_collection_bgFbgY",
+        "featured_collection_EPyERc",
+        "featured_collection_9VDExK"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 5,
+        "columns_mobile": "2",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "collection-tree",
+    "collection_list_ncAr7b",
+    "product-grid"
+  ]
+}

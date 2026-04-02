@@ -1,0 +1,339 @@
+{% comment %}
+  Collection Showcase Section
+  Features:
+  - Displays 4 showcase items in a 2x2 grid
+  - Can link to collections, pages, products, or any URL
+  - Custom image upload option for each item
+  - Only buttons are clickable (images are not clickable)
+  - Responsive design
+{% endcomment %}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="overflow-scroll section-{{ section.id }}-padding page-width ">
+  <div class="">
+    <div class="collection-showcase__grid">
+      {%- for block in section.blocks -%}
+        {%- assign collection = collections[block.settings.collection] -%}
+        {%- comment -%} Determine link URL - custom URL takes priority, then collection URL {%- endcomment -%}
+        {%- assign link_url = block.settings.custom_url -%}
+        {%- if link_url == blank and collection != blank -%}
+          {%- assign link_url = collection.url -%}
+        {%- endif -%}
+
+        {%- comment -%} Show block if we have either a collection or custom content {%- endcomment -%}
+        {%- if collection != blank or block.settings.custom_image != blank or block.settings.title != blank -%}
+          <div class="collection-showcase__item" {{ block.shopify_attributes }}>
+            <div class="collection-showcase__content">
+              {%- comment -%} Use custom image if provided, otherwise fallback to collection featured image {%- endcomment -%}
+              {%- assign display_image = block.settings.custom_image | default: collection.featured_image -%}
+
+              {%- if display_image -%}
+                <div class="collection-showcase__image">
+                  {{-
+                    display_image
+                    | image_url: width: 600
+                    | image_tag: loading: 'lazy', alt: display_image.alt
+                    | default: block.settings.title
+                    | default: collection.title
+                  -}}
+                </div>
+              {%- endif -%}
+
+              <div class="collection-showcase__text-overlay">
+                <h3 class="collection-showcase__title">
+                  {{ block.settings.title | default: collection.title }}
+                </h3>
+
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="collection-showcase__subtitle">
+                    {{ block.settings.subtitle }}
+                  </p>
+                {%- endif -%}
+
+                {% comment %} {%- if link_url != blank -%} {% endcomment %}
+                <a href="{{ link_url }}" class="collection-showcase__button button">
+                  {{ block.settings.button_text | default: 'Shop Now' }}
+                </a>
+                {% comment %} {%- endif -%} {% endcomment %}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .collection-showcase {
+    margin: 0;
+  }
+
+  .collection-showcase__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .collection-showcase__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .collection-showcase {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .collection-showcase::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .collection-showcase::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+
+    .collection-showcase::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+    }
+
+    .collection-showcase::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .collection-showcase__grid {
+      gap: 3rem;
+      width: 100%;
+      overflow-x: visible;
+    }
+  }
+
+  .collection-showcase__item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 300px;
+  }
+
+  .collection-showcase__content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .collection-showcase__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .collection-showcase__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .collection-showcase__text-overlay {
+    position: relative;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3), transparent);
+    width: 100%;
+    color: white;
+  }
+
+  .collection-showcase__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+    color: white;
+  }
+  
+  .collection-showcase__subtitle {
+    font-size: 1rem;
+    margin: 0 0 1.5rem 0;
+    opacity: 0.9;
+  }
+
+  .collection-showcase__button {
+    display: inline-block;
+    background-color: rgb(17, 94, 176);
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .collection-showcase__button:hover {
+    background-color: #1565c0;
+    color: white;
+  }
+
+  @media screen and (max-width: 749px) {
+    .collection-showcase__title {
+      font-size: 1.5rem;
+    }
+
+    .collection-showcase__text-overlay {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Showcase",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "showcase_item",
+      "name": "Showcase Item",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Content Source"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Optional: Select a collection to pull default title and image from"
+        },
+        {
+          "type": "header",
+          "content": "Link Destination"
+        },
+        {
+          "type": "url",
+          "id": "custom_url",
+          "label": "Custom link",
+          "info": "Link to any page, product, or URL. If left blank and a collection is selected, will link to the collection."
+        },
+        {
+          "type": "header",
+          "content": "Visual & Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom image",
+          "info": "Upload a custom image. If left blank and a collection is selected, will use the collection's featured image."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "info": "Custom title. If left blank and a collection is selected, will use collection title."
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop Now"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Showcase",
+      "blocks": [
+        {
+          "type": "showcase_item",
+          "settings": {
+            "title": "GrimmSpeed BB500 Turbo",
+            "subtitle": "In Stock NOW",
+            "button_text": "Shop Now"
+          }
+        },
+        {
+          "type": "showcase_item",
+          "settings": {
+            "title": "FactionFab",
+            "subtitle": "Shop All FactionFab Parts",
+            "button_text": "Shop Now"
+          }
+        },
+        {
+          "type": "showcase_item",
+          "settings": {
+            "title": "OLM Evolution Taillights",
+            "subtitle": "Upgrade Them Here!",
+            "button_text": "Shop Now"
+          }
+        },
+        {
+          "type": "showcase_item",
+          "settings": {
+            "title": "IAG Performance",
+            "subtitle": "Shop IAG Performance",
+            "button_text": "Shop Now"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
