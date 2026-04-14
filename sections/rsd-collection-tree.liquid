@@ -1,0 +1,324 @@
+{{ 'rsd-collection-tree.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'rsd-collection-tree.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign add_margins          = section.settings.add_margins
+  assign margin_top           = section.settings.margin_top
+  assign margin_bottom        = section.settings.margin_bottom
+  assign tab_margin_top       = section.settings.tab_margin_top
+  assign tab_margin_bottom    = section.settings.tab_margin_bottom
+  assign mobile_margin_top    = section.settings.mobile_margin_top
+  assign mobile_margin_bottom = section.settings.mobile_margin_bottom
+
+  assign collection_title = collection.title | escape
+  assign collection_is_for_fitments = false
+  assign collection_title_underscore_split = collection_title | split: '_'
+  if collection_title_underscore_split.size > 1
+    assign collection_title_maybe_year = collection_title_underscore_split[0] | plus: 0 | append: ''
+    if collection_title_underscore_split[0] == collection_title_maybe_year
+      assign collection_is_for_fitments = true
+    endif
+  endif
+-%}
+
+{%- if add_margins -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ mobile_margin_top }}px;
+      margin-bottom: {{ mobile_margin_bottom }}px;
+    }
+    @media screen and (min-width: 750px) {
+      #shopify-section-{{ section.id }} {
+        margin-top: {{ tab_margin_top }}px;
+        margin-bottom: {{ tab_margin_bottom }}px;
+      }
+    }
+    @media screen and (min-width: 992px) {
+      #shopify-section-{{ section.id }} {
+        margin-top: {{ margin_top }}px;
+        margin-bottom: {{ margin_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
+{%- comment -%} ── Parts menu (Shop By Part Type) ── {%- endcomment -%}
+{%- if section.settings.menu != blank -%}
+  {%- assign col_show_parts = collection.metafields.custom.show_shop_by_part_type -%}
+  {%- if col_show_parts != blank and col_show_parts == true -%}
+    {%- assign parts_ll = linklists[section.settings.menu] -%}
+    {%- if parts_ll != blank -%}
+      <div class="rsd-collection-tree">
+        <div class="rsd-collection-tree__container page-width">
+          <div class="rsd-col-tree__parts">
+            {%- for item in parts_ll.links -%}
+              <a href="{{ item.url }}" class="rsd-col-tree__part-item{% if item.active %} rsd-col-tree__part-item--active{% endif %}">
+                {%- assign part_col = item.object -%}
+                {%- if part_col != blank and part_col.metafields.custom.icon != blank -%}
+                  <span class="rsd-col-tree__part-icon" aria-hidden="true">
+                    {{-
+                      part_col.metafields.custom.icon.value
+                      | image_url: width: 32
+                      | image_tag:
+                        class: 'rsd-col-tree__part-icon-img',
+                        loading: 'lazy',
+                        width: 32,
+                        height: 32
+                    -}}
+                  </span>
+                {%- endif -%}
+                <span class="rsd-col-tree__part-name">{{ item.title }}</span>
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- unless collection_is_for_fitments -%}
+
+  {%- comment -%} ── Branch 1: collection_tree_v2 metafield ── {%- endcomment -%}
+  {%- assign collection_tree_value = shop.metafields.custom.collection_tree_v1.value -%}
+  {%- assign nodes = collection_tree_value.nodes -%}
+  {%- assign collection_id = collection.id | append: '' -%}
+  {%- assign subcollections_ids = collection_tree_value.parentChildren[collection_id] -%}
+
+  {%- if subcollections_ids != blank -%}
+    <div class="rsd-collection-tree">
+      <div class="rsd-collection-tree__container page-width">
+        <div class="rsd-collection-tree__grid">
+          {%- for id in subcollections_ids -%}
+            {%- assign subcollection_id = id | append: '' -%}
+            {%- assign subcollection = nodes[subcollection_id] -%}
+            {%- assign has_children = collection_tree_value.parentChildren[subcollection_id] -%}
+
+            <div class="rsd-col-tree__item">
+              {%- if has_children -%}
+                <button class="rsd-col-tree__trigger" type="button" aria-expanded="false" data-rsd-tree-trigger>
+                  <span class="rsd-col-tree__name">{{ subcollection.t }}</span>
+                  <span class="rsd-col-tree__chevron" aria-hidden="true">
+                    {%- render 'icons', type: 'icon-rsd-select-down' -%}
+                  </span>
+                </button>
+                <div class="rsd-col-tree__dropdown" aria-hidden="true">
+                  {%- for child_id in has_children limit: 5 -%}
+                    {%- assign child = nodes[child_id] -%}
+                    <a href="{{ child.u | default: child.url }}" class="rsd-col-tree__link">
+                      {{- child.t -}}
+                    </a>
+                  {%- endfor -%}
+                  <a href="{{ subcollection.u | default: subcollection.url }}" class="rsd-col-tree__link rsd-col-tree__link--all">
+                    Shop All
+                  </a>
+                </div>
+              {%- else -%}
+                <a href="{{ subcollection.u | default: subcollection.url }}" class="rsd-col-tree__trigger rsd-col-tree__trigger--link">
+                  <span class="rsd-col-tree__name">{{ subcollection.t }}</span>
+                </a>
+              {%- endif -%}
+            </div>
+
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+{%- else -%}
+
+  {%- comment -%} ── Branch 2: fitments — subcollections metafield ── {%- endcomment -%}
+  {%- assign subcollections = collection.metafields.custom.subcollections.value -%}
+
+  {%- if subcollections != blank -%}
+    <div class="rsd-collection-tree">
+      <div class="rsd-collection-tree__container rsd-container">
+        <div class="rsd-collection-tree__grid">
+          {%- for subcollection in subcollections -%}
+            {%- if subcollection.all_products_count > 0 -%}
+
+              {%- comment -%} Format title: split by _ and handle camelCase {%- endcomment -%}
+              {%- assign sub_raw = subcollection.title | escape -%}
+              {%- assign sub_parts = sub_raw | split: '_' -%}
+              {%- if sub_parts.size > 1 -%}
+                {%- assign sub_raw = sub_parts | slice: -1, 1 | join: ' ' -%}
+                {%- assign spaced = '' -%}
+                {%- assign chars = sub_raw | split: '' -%}
+                {%- for char in chars -%}
+                  {%- assign char_up = char | upcase -%}
+                  {%- if char == char_up and forloop.index0 > 0 -%}
+                    {%- assign spaced = spaced | append: ' ' -%}
+                  {%- endif -%}
+                  {%- assign spaced = spaced | append: char -%}
+                {%- endfor -%}
+                {%- assign words = spaced | split: ' ' -%}
+                {%- assign sub_title = '' -%}
+                {%- for word in words -%}
+                  {%- if word != blank -%}
+                    {%- assign fc = word | slice: 0, 1 | upcase -%}
+                    {%- if word.size > 1 -%}
+                      {%- assign rest = word | slice: 1, word.size | minus: 1 -%}
+                      {%- assign cword = fc | append: rest -%}
+                    {%- else -%}
+                      {%- assign cword = fc -%}
+                    {%- endif -%}
+                    {%- if forloop.first -%}
+                      {%- assign sub_title = cword -%}
+                    {%- else -%}
+                      {%- assign sub_title = sub_title | append: ' ' | append: cword -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- else -%}
+                {%- assign sub_title = subcollection.title | escape -%}
+              {%- endif -%}
+
+              {%- assign sub_children = subcollection.metafields.custom.subcollections.value -%}
+
+              <div class="rsd-col-tree__item">
+                {%- if sub_children != blank -%}
+                  <button class="rsd-col-tree__trigger" type="button" aria-expanded="false" data-rsd-tree-trigger>
+                    <span class="rsd-col-tree__name">{{ sub_title }}</span>
+                    <span class="rsd-col-tree__chevron" aria-hidden="true">
+                      {%- render 'icons', type: 'icon-rsd-select-down' -%}
+                    </span>
+                  </button>
+                  <div class="rsd-col-tree__dropdown" aria-hidden="true">
+                    {%- assign count = 0 -%}
+                    {%- for child in sub_children -%}
+                      {%- if child.all_products_count > 0 and count < 5 -%}
+                        <a href="{{ child.url }}" class="rsd-col-tree__link">
+                          {{- child.title | escape -}}
+                        </a>
+                        {%- assign count = count | plus: 1 -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    <a href="{{ subcollection.url }}" class="rsd-col-tree__link rsd-col-tree__link--all">
+                      Shop All
+                    </a>
+                  </div>
+                {%- else -%}
+                  <a href="{{ subcollection.url }}" class="rsd-col-tree__trigger rsd-col-tree__trigger--link">
+                    <span class="rsd-col-tree__name">{{ sub_title }}</span>
+                  </a>
+                {%- endif -%}
+              </div>
+
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+{%- endunless -%}
+
+
+
+{% schema %}
+{
+  "name": "t:sections.rsd_collection_tree.name",
+  "tag": "section",
+  "class": "rsd-section-collection-tree",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.rsd_collection_tree.settings.menu.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_margins",
+      "label": "t:sections.rsd_collection_tree.settings.add_margins.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rsd_collection_tree.settings.header_desk_margin.content",
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_collection_tree.settings.margin_top.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_collection_tree.settings.margin_bottom.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rsd_collection_tree.settings.header_tab_margin.content",
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "tab_margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_collection_tree.settings.tab_margin_top.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "tab_margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_collection_tree.settings.tab_margin_bottom.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rsd_collection_tree.settings.header_mob_margin.content",
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_collection_tree.settings.mobile_margin_top.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_collection_tree.settings.mobile_margin_bottom.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.rsd_collection_tree.name"
+    }
+  ]
+}
+{% endschema %}
