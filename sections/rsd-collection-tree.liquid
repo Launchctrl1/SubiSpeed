@@ -23,18 +23,18 @@
 
 {%- if add_margins -%}
   {%- style -%}
-    #shopify-section-{{ section.id }} {
+    #shopify-section-{{ section.id }} .rsd-collection-tree {
       margin-top: {{ mobile_margin_top }}px;
       margin-bottom: {{ mobile_margin_bottom }}px;
     }
     @media screen and (min-width: 750px) {
-      #shopify-section-{{ section.id }} {
+      #shopify-section-{{ section.id }} .rsd-collection-tree {
         margin-top: {{ tab_margin_top }}px;
         margin-bottom: {{ tab_margin_bottom }}px;
       }
     }
     @media screen and (min-width: 992px) {
-      #shopify-section-{{ section.id }} {
+      #shopify-section-{{ section.id }} .rsd-collection-tree {
         margin-top: {{ margin_top }}px;
         margin-bottom: {{ margin_bottom }}px;
       }
