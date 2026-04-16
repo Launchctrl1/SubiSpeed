@@ -1,13 +1,7 @@
 /*  */
-<<<<<<< HEAD
 /* #MainContent {
     margin-top: 180px;
 } */
-=======
-#MainContent {
-    margin-top: 80px;
-}
->>>>>>> cbe8c8a (updated header)
 .template-index #MainContent {
     margin-top: 0px;
 }
