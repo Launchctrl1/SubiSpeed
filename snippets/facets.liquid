@@ -75,9 +75,16 @@
                 {%- for filter in results.filters -%}
                   {%- for value in filter.active_values -%}
                     <facet-remove>
-                      <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                      <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light"
+                        data-rsd-mask
+                        data-rsd-mask-cut="10"
+                        data-rsd-mask-r="1.5"
+                        data-rsd-mask-rb="4"
+                        data-rsd-mask-corner="br"
+                      >
                         <span class="active-facets__button-inner button button--tertiary">
-                          {{ filter.label | escape }}: {{ value.label | escape }}
+                          {% comment %} {{ filter.label | escape }}: {{ value.label | escape }} {% endcomment %}
+                          {{ value.label | escape }}
                           <span class="svg-wrapper">
                             {{- 'icon-close-small.svg' | inline_asset_content -}}
                           </span>
@@ -91,7 +98,13 @@
                     {% assign max = filter.max_value.value %}
                     {%- if min != null or max != null -%}
                       <facet-remove>
-                        <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                        <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light"
+                          data-rsd-mask
+                          data-rsd-mask-cut="10"
+                          data-rsd-mask-r="1.5"
+                          data-rsd-mask-rb="4"
+                          data-rsd-mask-corner="br"
+                        >
                           <span class="active-facets__button-inner button button--tertiary">
                             {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
                             <span class="svg-wrapper">
@@ -151,7 +164,7 @@
                             {{ 'products.facets.filter_and_operator_subtitle' | t }}
                           </span>
                         {%- endif -%}
-                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                        <span class="facets__summary-icon">{% render 'icons', type: 'icon-rsd-select-down' %}</span>
                       </div>
                     </summary>
                     <div
@@ -263,10 +276,13 @@
                                       {%- endif -%}
                                     </div>
                                   {%- else -%}
-                                    {{- 'square.svg' | inline_asset_content -}}
+                                    {% comment %} {{- 'square.svg' | inline_asset_content -}}
 
                                     <div class="svg-wrapper">
                                       {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                                    </div> {% endcomment %}
+                                    <div class='facet-checkbox-icon'>
+                                      <span class='facet-checkbox-icon__checkmark'>{% render 'icons', type: 'icon-rsd-checkmark' %}</span>
                                     </div>
                                   {%- endif -%}
 
@@ -280,15 +296,15 @@
                       {%- if filter.values.size > show_more_number and filter_type == 'vertical' -%}
                         <show-more-button>
                           <button
-                            class="button-show-more link underlined-link"
+                            class="button-show-more link"
                             id="Show-More-{{ forloop.index }}-{{ section.id }}"
                             type="button"
                           >
                             <span class="label-show-more label-text"
-                              ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t -}}
+                              ><span>{{ 'products.facets.show_more' | t -}}</span><span aria-hidden="true">{% render 'icons', type: 'explore-arrow-right' %}</span>
                             </span>
                             <span class="label-show-less label-text hidden"
-                              ><span aria-hidden="true">- </span>{{ 'products.facets.show_less' | t -}}
+                              ><span style=" transform: rotate(180deg);" aria-hidden="true">{% render 'icons', type: 'explore-arrow-right' %}</span><span>{{ 'products.facets.show_less' | t -}}</span>
                             </span>
                           </button>
                         </show-more-button>
@@ -307,7 +323,7 @@
                     <summary class="facets__summary caption-large focus-offset">
                       <div>
                         <span>{{ filter.label | escape }}</span>
-                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                         <span class="facets__summary-icon">{% render 'icons', type: 'icon-rsd-select-down' %}</span>
                       </div>
                     </summary>
                     <div
@@ -341,9 +357,16 @@
               {%- for filter in results.filters -%}
                 {%- for value in filter.active_values -%}
                   <facet-remove>
-                    <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                    <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light"
+                      data-rsd-mask
+                      data-rsd-mask-cut="10"
+                      data-rsd-mask-r="1.5"
+                      data-rsd-mask-rb="4"
+                      data-rsd-mask-corner="br"
+                    >
                       <span class="active-facets__button-inner button button--tertiary">
-                        {{ filter.label | escape }}: {{ value.label | escape }}
+                        {% comment %} {{ filter.label | escape }}: {{ value.label | escape }} {% endcomment %}
+                        {{ value.label | escape }}
                         <span class="svg-wrapper">
                           {{- 'icon-close-small.svg' | inline_asset_content -}}
                         </span>
@@ -357,7 +380,13 @@
                   {% assign max = filter.max_value.value %}
                   {%- if min != null or max != null -%}
                     <facet-remove>
-                      <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                      <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light"
+                        data-rsd-mask
+                        data-rsd-mask-cut="10"
+                        data-rsd-mask-r="1.5"
+                        data-rsd-mask-rb="4"
+                        data-rsd-mask-corner="br"
+                      >
                         <span class="active-facets__button-inner button button--tertiary">
                           {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
                           <span class="svg-wrapper">
@@ -445,7 +474,13 @@
   >
     <details class="mobile-facets__disclosure disclosure-has-popup">
       <summary class="mobile-facets__open-wrapper focus-offset">
-        <span class="mobile-facets__open{% if filter_type == 'drawer' and enable_filtering == false %} medium-hide large-up-hide{% endif %}">
+        <span class="mobile-facets__open{% if filter_type == 'drawer' and enable_filtering == false %} medium-hide large-up-hide{% endif %}"
+          data-rsd-mask
+          data-rsd-mask-cut="20"
+          data-rsd-mask-r="4"
+          data-rsd-mask-rb="10"
+          data-rsd-mask-corner="br"
+        >
           <span class="svg-wrapper">
             {{- 'icon-filter.svg' | inline_asset_content -}}
           </span>
@@ -466,7 +501,7 @@
         </span>
         <span tabindex="0" class="mobile-facets__close">
           <span class="svg-wrapper">
-            {{- 'icon-close.svg' | inline_asset_content -}}
+            {% render 'icons', type: 'icon-rsd-megamenu-close' %}
           </span>
         </span>
       </summary>
@@ -529,7 +564,7 @@
                           <div>
                             <span>{{ filter.label | escape }}</span>
                             <span class="mobile-facets__arrow">
-                              {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              {% render 'icons', type: 'icon-rsd-select-down' %}
                             </span>
                           </div>
                         </summary>
@@ -588,7 +623,7 @@
                                 </span>
                               {%- endcapture -%}
 
-                              <li class="mobile-facets__item list-menu__item">
+                              <li class="mobile-facets__item list-menu__item {% if forloop.index > show_more_number %} show-more-item hidden{% endif %}">
                                 {% if presentation == 'swatch' %}
                                   <div class="{{ label_class }}">
                                     <div class="swatch-input-wrapper">
@@ -633,9 +668,12 @@
                                         {%- endif -%}
                                       </div>
                                     {%- else -%}
-                                      <span class="mobile-facets__highlight"></span>
+                                      {% comment %} <span class="mobile-facets__highlight"></span>
                                       {{- 'square.svg' | inline_asset_content -}}
-                                      {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                                      {{- 'icon-checkmark.svg' | inline_asset_content -}} {% endcomment %}
+                                      <div class='facet-checkbox-icon'>
+                                        <span class='facet-checkbox-icon__checkmark'>{% render 'icons', type: 'icon-rsd-checkmark' %}</span>
+                                      </div>
                                     {%- endif %}
 
                                     {{ text_value }}
@@ -645,7 +683,18 @@
                             {%- endfor -%}
                           </ul>
 
-                          <div class="mobile-facets__footer gradient">
+                        {%- if filter.values.size > show_more_number -%}
+                          <div class="mobile-button-show-more">
+                            <span class="label-show-more label-text"
+                              ><span>{{ 'products.facets.show_more' | t -}}</span><span aria-hidden="true">{% render 'icons', type: 'explore-arrow-right' %}</span>
+                            </span>
+                            <span class="label-show-less label-text"
+                              ><span style=" transform: rotate(180deg);" aria-hidden="true">{% render 'icons', type: 'explore-arrow-right' %}</span><span>{{ 'products.facets.show_less' | t -}}</span>
+                            </span>
+                          </div>
+                        {%- endif %}
+
+                          {% comment %} <div class="mobile-facets__footer gradient">
                             <facet-remove class="mobile-facets__clear-wrapper">
                               <a href="{{ filter.url_to_remove }}" class="mobile-facets__clear underlined-link">
                                 {{- 'products.facets.clear' | t -}}
@@ -658,7 +707,7 @@
                             >
                               {{ 'products.facets.apply' | t }}
                             </button>
-                          </div>
+                          </div> {% endcomment %}
                         </div>
                       </details>
                     {% when 'price_range' %}
@@ -671,7 +720,7 @@
                           <div>
                             <span>{{ filter.label | escape }}</span>
                             <span class="mobile-facets__arrow">
-                              {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              {% render 'icons', type: 'icon-rsd-select-down' %}
                             </span>
                           </div>
                         </summary>
@@ -696,7 +745,7 @@
                           <price-range class="facets__price">
                             {% render 'price-facet', filter: filter, id_prefix: 'Mobile-Filter-' %}
                           </price-range>
-                          <div class="mobile-facets__footer">
+                          {% comment %} <div class="mobile-facets__footer">
                             <facet-remove class="mobile-facets__clear-wrapper">
                               <a href="{{ filter.url_to_remove }}" class="mobile-facets__clear underlined-link">
                                 {{- 'products.facets.clear' | t -}}
@@ -709,7 +758,7 @@
                             >
                               {{ 'products.facets.apply' | t }}
                             </button>
-                          </div>
+                          </div> {% endcomment %}
                         </div>
                       </details>
                   {% endcase %}
@@ -762,6 +811,11 @@
                   type="button"
                   class="button button--primary"
                   onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
+                  data-rsd-mask
+                  data-rsd-mask-cut="20"
+                  data-rsd-mask-r="4"
+                  data-rsd-mask-rb="10"
+                  data-rsd-mask-corner="br"
                 >
                   {{ 'products.facets.apply' | t }}
                 </button>
@@ -786,9 +840,16 @@
     {%- for filter in results.filters -%}
       {%- for value in filter.active_values -%}
         <facet-remove>
-          <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+          <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light"
+            data-rsd-mask
+            data-rsd-mask-cut="10"
+            data-rsd-mask-r="1.5"
+            data-rsd-mask-rb="4"
+            data-rsd-mask-corner="br"
+          >
             <span class="active-facets__button-inner button button--tertiary">
-              {{ filter.label | escape }}: {{ value.label | escape }}
+              {% comment %} {{ filter.label | escape }}: {{ value.label | escape }} {% endcomment %}
+              {{ value.label | escape }}
               <span class="svg-wrapper">
                 {{- 'icon-close-small.svg' | inline_asset_content -}}
               </span>
@@ -803,7 +864,13 @@
         {% assign max = filter.max_value.value %}
         {%- if min != null or max != null -%}
           <facet-remove>
-            <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
+            <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light"
+              data-rsd-mask
+              data-rsd-mask-cut="10"
+              data-rsd-mask-r="1.5"
+              data-rsd-mask-rb="4"
+              data-rsd-mask-corner="br"
+            >
               <span class="active-facets__button-inner button button--tertiary">
                 {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
                 <span class="svg-wrapper">
@@ -895,9 +962,16 @@
           {%- for filter in results.filters -%}
             {%- for value in filter.active_values -%}
               <facet-remove>
-                <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light"
+                  data-rsd-mask
+                  data-rsd-mask-cut="10"
+                  data-rsd-mask-r="1.5"
+                  data-rsd-mask-rb="4"
+                  data-rsd-mask-corner="br"
+                >
                   <span class="active-facets__button-inner button button--tertiary">
-                    {{ filter.label | escape }}: {{ value.label | escape }}
+                    {% comment %} {{ filter.label | escape }}: {{ value.label | escape }} {% endcomment %}
+                    {{ value.label | escape }}
                     <span class="svg-wrapper">
                       {{- 'icon-close-small.svg' | inline_asset_content -}}
                     </span>
@@ -912,7 +986,13 @@
               {% assign max = filter.max_value.value %}
               {%- if min != null or max != null -%}
                 <facet-remove>
-                  <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light">
+                  <a href="{{ filter.url_to_remove }}" class="active-facets__button active-facets__button--light"
+                    data-rsd-mask
+                    data-rsd-mask-cut="10"
+                    data-rsd-mask-r="1.5"
+                    data-rsd-mask-rb="4"
+                    data-rsd-mask-corner="br"
+                  >
                     <span class="active-facets__button-inner button button--tertiary">
                       {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
                       <span class="svg-wrapper">

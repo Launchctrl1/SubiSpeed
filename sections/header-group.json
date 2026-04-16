@@ -17,9 +17,9 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "<p><strong>Check Out Our Holiday Stocking Stuffers </strong>| <strong>Free Shipping on Orders Over $199</strong></p><p></p>",
-            "text_mobile": "<p><strong>Check Out Our Holiday Stocking Stuffers!</strong></p>",
-            "link": "shopify://collections/2025-holiday-promo-gift-items-100"
+            "text": "<p><strong>Welcome Sale 5% OFF*. Use Code: SSSAVE5 </strong>*Some Restrictions May Apply | <strong>Free Shipping On Orders Over $199</strong></p><p></p>",
+            "text_mobile": "<p><strong>5% OFF*. Use Code: SSSAVE5 </strong>*Some Restrictions May Apply</p>",
+            "link": ""
           }
         }
       },
@@ -31,129 +31,122 @@
         "change_slides_speed": 5,
         "color_scheme": "scheme-3",
         "show_line_separator": true,
-        "show_social": false,
-        "enable_country_selector": false,
-        "enable_language_selector": false
-      }
-    },
-    "header": {
-      "type": "header",
-      "settings": {
-        "logo_position": "middle-left",
-        "mobile_logo_position": "center",
-        "show_search_bar": true,
-        "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
-        "sticky_header_type": "always",
-        "show_line_separator": true,
-        "color_scheme": "scheme-4",
-        "menu_color_scheme": "",
-        "enable_country_selector": false,
-        "enable_language_selector": false,
-        "enable_customer_avatar": true,
-        "margin_bottom": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "phone_number": "+1-888-885-2002",
+        "menu": "announcement-bar-menu"
       }
     },
     "fitments-header": {
       "type": "fitments-header",
       "blocks": {
-        "link_list_rUCCCa": {
-          "type": "link_list",
-          "settings": {
-            "image": "shopify://shop_images/dev-nav-subaru-sti.jpg",
-            "heading": "Quick links",
-            "menu": "subaru-sti",
-            "sidebar_image": "shopify://shop_images/dev-nav-subaru-sti_ec53dd62-1ffc-415b-b9ef-8d8706d57b46.jpg"
-          }
-        },
         "link_list_aregDk": {
           "type": "link_list",
           "settings": {
-            "image": "shopify://shop_images/dev-nav-subaru-wrx.png",
+            "image": "shopify://shop_images/Subaru_WRX.webp",
             "heading": "Quick links",
-            "menu": "subaru-wrx",
-            "sidebar_image": "shopify://shop_images/dev-nav-subaru-wrx_980dfd3a-f00d-41b0-9567-d70cfaf16013.png"
+            "menu": "new-wrx",
+            "sidebar_image": "shopify://shop_images/Subaru_WRX.webp"
+          }
+        },
+        "link_list_rUCCCa": {
+          "type": "link_list",
+          "settings": {
+            "image": "shopify://shop_images/Subaru_STI.webp",
+            "heading": "Quick links",
+            "menu": "new-sti",
+            "sidebar_image": "shopify://shop_images/Subaru_STI.webp"
           }
         },
         "link_list_gKwb8W": {
           "type": "link_list",
           "settings": {
-            "image": "shopify://shop_images/dev-nav-subaru-brz.png",
+            "image": "shopify://shop_images/Subaru_BRZ.webp",
             "heading": "Quick links",
-            "menu": "subaru-brz",
-            "sidebar_image": "shopify://shop_images/dev-nav-subaru-brz_76c8a776-804e-495f-a3ba-836483a549d0.png"
+            "menu": "new-brz",
+            "sidebar_image": "shopify://shop_images/Subaru_BRZ.webp"
           }
         },
-        "link_list_iCBcqf": {
+        "link_list_fktiBe": {
           "type": "link_list",
           "settings": {
-            "image": "shopify://shop_images/dev-nav-scion-frs.png",
+            "image": "shopify://shop_images/Subaru_Forester.webp",
             "heading": "Quick links",
-            "menu": "scion-frs",
-            "sidebar_image": "shopify://shop_images/dev-nav-scion-frs_d4af5424-4060-447b-ab45-880e8c1855be.png"
-          }
-        },
-        "link_list_8aXtHF": {
-          "type": "link_list",
-          "settings": {
-            "image": "shopify://shop_images/dev-nav-toyota-86.png",
-            "heading": "Quick links",
-            "menu": "toyota-86",
-            "sidebar_image": "shopify://shop_images/dev-nav-toyota-86_a1647838-ac85-44df-8db7-17ce5bc203d5.png"
-          }
-        },
-        "link_list_eHrPAk": {
-          "type": "link_list",
-          "settings": {
-            "image": "shopify://shop_images/dev-nav-toyota-gr86.png",
-            "heading": "Quick links",
-            "menu": "toyota-gr86",
-            "sidebar_image": "shopify://shop_images/dev-nav-toyota-gr86_8515aa5a-6292-4e4e-ad88-c5041e34a266.png"
+            "menu": "new-forester",
+            "sidebar_image": "shopify://shop_images/Subaru_Forester.webp"
           }
         },
         "link_list_e3eRYt": {
           "type": "link_list",
           "settings": {
-            "image": "shopify://shop_images/honda_civic_type_r.png",
+            "image": "shopify://shop_images/Subaru_Outback.webp",
             "heading": "Quick links",
-            "menu": "honda-civic",
-            "sidebar_image": "shopify://shop_images/honda_civic_type_r_b1078434-d2b8-466e-8f17-251d5be964ac.png"
+            "menu": "new-outback",
+            "sidebar_image": "shopify://shop_images/Subaru_Outback.webp"
+          }
+        },
+        "link_list_iCBcqf": {
+          "type": "link_list",
+          "settings": {
+            "image": "shopify://shop_images/Subaru_Crosstrek.webp",
+            "heading": "Quick links",
+            "menu": "new-crosstrek",
+            "sidebar_image": "shopify://shop_images/Subaru_Crosstrek.webp"
+          }
+        },
+        "link_list_8aXtHF": {
+          "type": "link_list",
+          "settings": {
+            "image": "shopify://shop_images/Subaru_Legacy.webp",
+            "heading": "Quick links",
+            "menu": "new-legacy",
+            "sidebar_image": "shopify://shop_images/Subaru_Legacy.webp"
+          }
+        },
+        "link_list_eHrPAk": {
+          "type": "link_list",
+          "settings": {
+            "image": "shopify://shop_images/Subaru_Ascent.webp",
+            "heading": "Quick links",
+            "menu": "new-ascent",
+            "sidebar_image": "shopify://shop_images/Subaru_Ascent.webp"
           }
         }
       },
       "block_order": [
-        "link_list_rUCCCa",
         "link_list_aregDk",
+        "link_list_rUCCCa",
         "link_list_gKwb8W",
+        "link_list_fktiBe",
+        "link_list_e3eRYt",
         "link_list_iCBcqf",
         "link_list_8aXtHF",
-        "link_list_eHrPAk",
-        "link_list_e3eRYt"
+        "link_list_eHrPAk"
       ],
       "settings": {
         "use_apps_prefix": false,
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
-        "show_search_bar": false,
-        "menu": "main-menu",
+        "show_search_bar": true,
+        "menu": "",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "always",
         "show_line_separator": true,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "menu_color_scheme": "",
-        "third_image_1": "shopify://shop_images/apivskc2d__78153.1633558767.1280.jpg",
-        "third_image_2": "shopify://shop_images/category-navigation-menu-images_041f6410-7813-466b-aa0e-a87d4ed8d175.png",
-        "third_image_3": "shopify://shop_images/category-navigation-menu-images_1.png",
-        "third_image_4": "shopify://shop_images/drivetrain-rsd-shop-by-category.png",
-        "third_image_5": "shopify://shop_images/interior-rallysport-shop-by-cate.png",
-        "third_image_6": "shopify://shop_images/exterior-rsd-shop-by-category-im.png",
-        "third_image_7": "shopify://shop_images/lifestyle-rallysport-shop-by-cat.png",
-        "third_image_8": "shopify://shop_images/eeb214214bdd44e0ee3ce327798f3931.jpg",
-        "third_image_9": "shopify://shop_images/OLMB.47017.1-Clear2_800x530_a375.png",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "third_level_menu": "new-shop-by-part-type",
+        "categories_image": "shopify://shop_images/Engine.jpg",
+        "third_image_1": "shopify://shop_images/Intake.jpg",
+        "third_image_2": "shopify://shop_images/Exhaust.jpg",
+        "third_image_3": "shopify://shop_images/Engine.jpg",
+        "third_image_4": "shopify://shop_images/Turbo_Boost.jpg",
+        "third_image_5": "shopify://shop_images/drivetrain-rsd-shop-by-category.png",
+        "third_image_6": "shopify://shop_images/category-navigation-menu-images_041f6410-7813-466b-aa0e-a87d4ed8d175.png",
+        "third_image_7": "shopify://shop_images/category-navigation-menu-images_1.png",
+        "third_image_8": "shopify://shop_images/exterior-rsd-shop-by-category-im.png",
+        "third_image_9": "shopify://shop_images/Lighting.png",
+        "third_image_10": "shopify://shop_images/interior-rallysport-shop-by-cate.png",
+        "third_image_11": "shopify://shop_images/eeb214214bdd44e0ee3ce327798f3931.jpg",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
         "enable_customer_avatar": true,
         "margin_bottom": 0,
         "padding_top": 12,
@@ -163,7 +156,6 @@
   },
   "order": [
     "announcement-bar",
-    "header",
     "fitments-header"
   ]
 }

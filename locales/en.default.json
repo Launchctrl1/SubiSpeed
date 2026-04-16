@@ -45,7 +45,8 @@
       "previous": "Previous page"
     },
     "search": {
-      "search": "Try searching a Brand, Part Number, or even “2021 WRX Intercooler”",
+      "search": "Search Brand, Part Number, or “2021 WRX Intercooler”",
+      "rsd_search": "Search",
       "reset": "Clear search term"
     },
     "cart": {

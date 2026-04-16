@@ -9,9 +9,53 @@
  */
 {
   "sections": {
+    "1776324085413c32dc": {
+      "type": "apps",
+      "blocks": {
+        "partfinder_year_make_model_vehicle_search_bar_9Th7e8": {
+          "type": "shopify://apps/partfinder-year-make-model/blocks/vehicle_search_bar/2892d2e7-0551-451a-8d78-8a0f565a5174",
+          "settings": {
+            "gv-enable-submodel": false,
+            "gv-disable-full-width-class": true,
+            "gv-disable-styles": false,
+            "gv-search-bar": "#121212",
+            "gv-search-color": "#0273af",
+            "gv-search-text-color": "#ffffff",
+            "gv-clear-color": "#000000",
+            "gv-clear-text-color": "#ffffff",
+            "gv-enable-custom-font-settings": false,
+            "gv-font-family": "sans_serif_n4",
+            "gv-font-size": 15,
+            "gv-font-weight": "600",
+            "gv-search-label": "Search",
+            "gv-clear-label": "Clear",
+            "gv-show-title-label": false,
+            "gv-title-label": "SELECT YOUR VEHICLE",
+            "gv-title-bg": "#000000",
+            "gv-title-text": "#ffffff",
+            "gv-show-toggle-button": true,
+            "gv-toggle-button-label": "FIND YOUR VEHICLE",
+            "gv-toggle-button-bg": "#000000",
+            "gv-toggle-button-text": "#ffffff",
+            "gv-margin-top": 0,
+            "gv-margin-bottom": 0,
+            "gv-margin-left": 0,
+            "gv-margin-right": 0
+          }
+        }
+      },
+      "block_order": [
+        "partfinder_year_make_model_vehicle_search_bar_9Th7e8"
+      ],
+      "custom_css": [
+        ".page-width {max-width: 100%; padding: 0;}"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "banner": {
       "type": "main-collection-banner",
-      "disabled": true,
       "settings": {
         "show_collection_description": true,
         "show_collection_image": false,
@@ -75,6 +119,7 @@
         "featured_collection_EPyERc",
         "featured_collection_9VDExK"
       ],
+      "disabled": true,
       "name": "t:sections.collection-list.presets.name",
       "settings": {
         "title": "Collections",
@@ -89,10 +134,24 @@
         "padding_bottom": 36
       }
     },
+    "rsd_collection_tree_AEyabF": {
+      "type": "rsd-collection-tree",
+      "name": "t:sections.rsd_collection_tree.name",
+      "settings": {
+        "menu": "new-shop-by-part-type",
+        "add_margins": true,
+        "margin_top": 80,
+        "margin_bottom": 40,
+        "tab_margin_top": 80,
+        "tab_margin_bottom": 40,
+        "mobile_margin_top": 60,
+        "mobile_margin_bottom": 0
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "products_per_page": 16,
+        "products_per_page": 20,
         "columns_desktop": 5,
         "columns_mobile": "2",
         "color_scheme": "",
@@ -101,9 +160,9 @@
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "none",
+        "quick_add": "standard",
         "enable_filtering": true,
-        "filter_type": "horizontal",
+        "filter_type": "vertical",
         "enable_sorting": true,
         "padding_top": 36,
         "padding_bottom": 36
@@ -111,9 +170,11 @@
     }
   },
   "order": [
+    "1776324085413c32dc",
     "banner",
     "collection-tree",
     "collection_list_ncAr7b",
+    "rsd_collection_tree_AEyabF",
     "product-grid"
   ]
 }

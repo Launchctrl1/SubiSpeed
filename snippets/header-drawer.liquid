@@ -167,9 +167,173 @@
                   {%- endif -%}
                 </li>
               {%- endfor -%}
+
+              {%- comment -%} Бренды из блоков fitments-header (только если секция их содержит) {%- endcomment -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'link_list' -%}
+                  {%- assign brand_menu = block.settings.menu -%}
+                  {%- if brand_menu != blank -%}
+                    {%- assign block_idx = forloop.index -%}
+                    <li>
+                      <details id="Details-menu-drawer-brand-{{ block_idx }}">
+                        <summary
+                          class="menu-drawer__menu-item list-menu__item link link--text focus-inset"
+                        >
+                          {%- if block.settings.image != blank -%}
+                            <span class="menu-drawer__item-icon">
+                              <img
+                                src="{{ block.settings.image | image_url: width: 200 }}"
+                                alt="{{ brand_menu.title | escape }}"
+                                style="object-fit: contain; width: 100px; height: 100px; vertical-align: top;"
+                                loading="lazy"
+                                width="200"
+                                height="200"
+                              >
+                            </span>
+                          {%- else -%}
+                            <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                          {%- endif -%}
+                          {{ brand_menu.title | escape }}
+                          <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                          <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+                        </summary>
+                        <div
+                          id="brand-drawer-{{ block_idx }}"
+                          class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                          tabindex="-1"
+                        >
+                          <div class="menu-drawer__inner-submenu">
+                            <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                              <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                              {{ brand_menu.title | escape }}
+                            </button>
+                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                              {%- for childlink in brand_menu.links -%}
+                                {%- assign childlink_idx = forloop.index -%}
+                                {%- assign url_parts = childlink.url | split: '?' -%}
+                                {%- assign filter_string = '' -%}
+                                {%- if url_parts.size > 1 -%}
+                                  {%- assign filter_string = url_parts[1] -%}
+                                {%- endif -%}
+                                <li>
+                                  {%- if section.settings.third_level_menu != blank -%}
+                                    <details id="Details-menu-drawer-brand-{{ block_idx }}-{{ childlink_idx }}">
+                                      <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                        {{ childlink.title | escape }}
+                                        <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                                        <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+                                      </summary>
+                                      <div
+                                        id="childlink-brand-{{ block_idx }}-{{ childlink_idx }}"
+                                        class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                                      >
+                                        <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                          <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                                          {{ childlink.title | escape }}
+                                        </button>
+                                        <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                          {%- for menulink in section.settings.third_level_menu.links -%}
+                                            {%- if filter_string != blank -%}
+                                              {%- if menulink.url contains '?' -%}
+                                                {%- assign final_url = menulink.url | append: '&' | append: filter_string -%}
+                                              {%- else -%}
+                                                {%- assign final_url = menulink.url | append: '?' | append: filter_string -%}
+                                              {%- endif -%}
+                                            {%- else -%}
+                                              {%- assign final_url = menulink.url -%}
+                                            {%- endif -%}
+                                            <li>
+                                              <a
+                                                href="{{ final_url }}"
+                                                class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                                              >
+                                                {{ menulink.title | escape }}
+                                              </a>
+                                            </li>
+                                          {%- endfor -%}
+                                          <li>
+                                            <a
+                                              href="{{ childlink.url }}"
+                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                                            >
+                                              Shop {{ childlink.title | escape }} {{ brand_menu.title | escape }} Products
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </details>
+                                  {%- else -%}
+                                    <a
+                                      href="{{ childlink.url }}"
+                                      class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                                    >
+                                      {{ childlink.title | escape }}
+                                    </a>
+                                  {%- endif -%}
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </div>
+                        </div>
+                      </details>
+                    </li>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- comment -%} Categories menu (section.settings.third_level_menu) {%- endcomment -%}
+              {%- if section.settings.third_level_menu != blank -%}
+                <li>
+                  <details id="Details-menu-drawer-categories">
+                    <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                      {%- if section.settings.categories_image != blank -%}
+                        <span class="menu-drawer__item-icon">
+                          <img
+                            src="{{ section.settings.categories_image | image_url: width: 200 }}"
+                            alt="{{ section.settings.third_level_menu.title | escape }}"
+                            style="object-fit: contain; width: 100px; height: 100px; vertical-align: top;"
+                            loading="lazy"
+                            width="200"
+                            height="200"
+                          >
+                        </span>
+                      {%- else -%}
+                        <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                      {%- endif -%}
+                      {{ section.settings.third_level_menu.title | escape }}
+                      <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                      <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+                    </summary>
+                    <div
+                      id="categories-drawer"
+                      class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                      tabindex="-1"
+                    >
+                      <div class="menu-drawer__inner-submenu">
+                        <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                          <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                          {{ section.settings.third_level_menu.title | escape }}
+                        </button>
+                        <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                          {%- for menulink in section.settings.third_level_menu.links -%}
+                            <li>
+                              <a
+                                href="{{ menulink.url }}"
+                                class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                              >
+                                {{ menulink.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      </div>
+                    </div>
+                  </details>
+                </li>
+              {%- endif -%}
             </ul>
           </nav>
-          <div class="menu-drawer__utility-links">
+          {% comment %} <div class="menu-drawer__utility-links">
             {%- if shop.customer_accounts_enabled -%}
               <a
                 href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
@@ -321,7 +485,7 @@
                 </li>
               {%- endif -%}
             </ul>
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
     </div>

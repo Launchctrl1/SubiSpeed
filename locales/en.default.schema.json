@@ -1883,6 +1883,61 @@
         }
       }
     },
+    "rsd_collection_tree": {
+      "name": "RSD Collection Tree",
+      "presets": { "name": "RSD Collection Tree" },
+      "settings": {
+        "menu": { "label": "Shop by Part Type menu" },
+        "add_margins": { "label": "Add margins" },
+        "header_desk_margin": { "content": "Desktop margins" },
+        "margin_top": { "label": "Top margin" },
+        "margin_bottom": { "label": "Bottom margin" },
+        "header_tab_margin": { "content": "Tablet margins" },
+        "tab_margin_top": { "label": "Top margin" },
+        "tab_margin_bottom": { "label": "Bottom margin" },
+        "header_mob_margin": { "content": "Mobile margins" },
+        "mobile_margin_top": { "label": "Top margin" },
+        "mobile_margin_bottom": { "label": "Bottom margin" }
+      }
+    },
+    "rsd_header": {
+      "name": "RSD Header",
+      "settings": {
+        "header_logo": { "content": "Logo" },
+        "logo": { "label": "Logo image", "info": "Leave empty to use the theme logo" },
+        "header_nav": { "content": "Navigation" },
+        "menu": { "label": "Navigation menu" },
+        "sticky": { "label": "Sticky header" }
+      }
+    },
+    "rsd_megamenu": {
+      "name": "RSD Mega Menu",
+      "settings": {
+        "menu": { "label": "Main menu" },
+        "car_image_pattern": { "label": "Car image pattern overlay" },
+        "header_mobile": { "content": "Mobile" },
+        "mobile_tab_label": { "label": "Mobile button label" },
+        "mob_car_make_label": { "label": "Car select: model label" },
+        "mob_car_model_label": { "label": "Car select: year label" }
+      },
+      "blocks": {
+        "car_image": {
+          "name": "Car model image",
+          "settings": {
+            "model_title": {
+              "label": "Model title",
+              "info": "Must match exactly the second-level link title (e.g. WRX)"
+            },
+            "image": { "label": "Model image" }
+          }
+        }
+      },
+      "model_year": "Model Year",
+      "all_brands": "All Brands",
+      "presets": {
+        "name": "RSD Mega Menu"
+      }
+    },
     "main-collection-product-grid": {
       "name": "Product grid",
       "settings": {

@@ -9,9 +9,107 @@
  */
 {
   "sections": {
+    "image_banner_wfby4P": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_xq6a78": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Contact Us</strong>",
+            "heading_size": "h0"
+          }
+        }
+      },
+      "block_order": [
+        "heading_xq6a78"
+      ],
+      "custom_css": [
+        "@media screen and (min-width: 750px) {.banner--medium:not(.banner--adapt) {min-height: 45rem; }}",
+        "@media screen and (max-width: 749px) {.banner--medium.banner--mobile-bottom:not(.banner--adapt) .banner__media {position: absolute; height: 100%; }}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/ftspeed-hero-current-promotions-1440x450.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "color_scheme": "scheme-be6fe67b-b70a-4a3f-ba5e-4c1f3eeab952",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_gGx9jm": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_cfPxKG": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>FAQs</strong>",
+            "text": "<p>Frequently asked questions you can get quick answers for.</p>",
+            "link_label": "Go To FAQs",
+            "link": "shopify://pages/frequently-asked-questions"
+          }
+        },
+        "column_rDKimH": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>Call Sales</strong>",
+            "text": "<p>Mon - Fri 8am - 5pm CST<br/>Sat Closed | Sun Closed (email only)<br/>Phone #: 888-885-2002</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_XX8zeE": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>Call Customer Service</strong>",
+            "text": "<p>Mon - Fri 8am - 5pm CST<br/>Sat Closed | Sun Closed<br/>Phone # 888-885-2002</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_hjDthV": {
+          "type": "column",
+          "settings": {
+            "title": "<strong>Visit Us</strong>",
+            "text": "<p>JB Autosports<br/>2101 Hull Ave<br/>Des Moines, IA 50317<br/>USA</p>",
+            "link_label": "Get Directions",
+            "link": "https://www.google.com/maps/place/2101+Hull+Ave,+Des+Moines,+IA+50317,+USA/@41.6221209,-93.5830606,17z/data=!4m6!3m5!1s0x87ee97558f18a509:0xaf4464851b43a564!8m2!3d41.6221209!4d-93.5808719!16s%2Fg%2F11ssrv7mq6?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D"
+          }
+        }
+      },
+      "block_order": [
+        "column_cfPxKG",
+        "column_rDKimH",
+        "column_XX8zeE",
+        "column_hjDthV"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -28,7 +126,9 @@
     }
   },
   "order": [
+    "image_banner_wfby4P",
     "main",
+    "multicolumn_gGx9jm",
     "form"
   ]
 }

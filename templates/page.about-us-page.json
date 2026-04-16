@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "custom_css": [],
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
@@ -21,6 +22,7 @@
       "blocks": {
         "heading_tmfRbR": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "If you are looking for gearheads that are as passionate about your car as you are, you have come to the right place.",
             "heading_size": "h1"
@@ -28,12 +30,14 @@
         },
         "text_g3DAVK": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p><strong>RallySportDirect.com</strong> was established in 2003 as a small operation that quickly grew into an established, global business with a dedicated sales staff and rapidly-growing inventory selection. We have come a long way in the past several years, but our goals are as clear now as they were from day one. </p><p>We at RallySportDirect.com strive to provide the best performance products, the most bang for your hard-earned buck, and the most positive consumer experience in the industry. Whether you are looking for something as simple as a replacement air filter or planning to create a full-scale Time Attack Team, we have the products and resources to get you out of the shop and onto the track.</p>"
           }
         },
         "heading_PPqkPB": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "<strong>We’re here to help you find the right parts</strong>",
             "heading_size": "h1"
@@ -41,8 +45,22 @@
         },
         "text_nJexQp": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p>With our knowledgeable sales staff, vast product selection, and large inventory of in-stock, hard-to-find products, we aim to be the best online retailer in the Sport Compact Performance Market. We know how much you depend on the parts we sell, and we use them on a daily basis in order to provide you with accurate product details and real-time feedback gathered on and off the race track.</p>"
+          }
+        },
+        "heading_Ug8UQ8": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Why are we doing this?</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_7KtCPL": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We love autosports is why! The staff has a background in what you love, autosports. We are actively involved in SCCA Auto-X, NASA, 24hrs of Lemons, Chumpcar, Drag Racing, and other HPDE clubs.<br/><br/>Among the staff, we have over 50 years of experience in autosports and modifying vehicles, with hundreds of hours behind the wheel competitively. We also have over 30 years of experience in sales and distribution so we are confident that we WILL keep our customers happy - by recommending parts that are proven to work with your vehicle for your specific purpose, and providing competitive pricing and reliable delivery.<br/><br/>We're not here to just sell parts, but also advise you on the best options for your specific use. A daily driver that needs to keep noise down and comply with CARB laws, or something that can autocross and be competitive yet still make the commute to work comfortably. Need an HPDE set up, or questions on tires or brakes? We got that covered as well. We have done it all so we know what works and what doesn't. So if you need to make your vehicle faster, sharper, or handle better we're the one place to make it happen.<br/><br/>With two facilities located in Des Moines, Iowa we have over 20,000 SQFT of space to stock the parts for the markets we serve. A staff of just over 20 people are employed here and strive to bring you the most complete automotive experience in the car communities we serve. If you need anything at all head over to the contact page and submit a request. This will create a support ticket and someone will get back to you as soon as possible.</p>"
           }
         }
       },
@@ -50,12 +68,14 @@
         "heading_tmfRbR",
         "text_g3DAVK",
         "heading_PPqkPB",
-        "text_nJexQp"
+        "text_nJexQp",
+        "heading_Ug8UQ8",
+        "text_7KtCPL"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
-        "content_alignment": "left",
+        "content_alignment": "center",
         "color_scheme": "",
         "full_width": true,
         "padding_top": 40,
@@ -100,6 +120,7 @@
         "statistic_mdnpLV",
         "statistic_KdmTeh"
       ],
+      "disabled": true,
       "name": "Statistics",
       "settings": {
         "color_scheme": "",
@@ -109,16 +130,125 @@
     },
     "video_tmm3BG": {
       "type": "video",
+      "disabled": true,
       "name": "t:sections.video.presets.name",
       "settings": {
         "heading": "",
         "heading_size": "h1",
         "enable_video_looping": false,
         "video_url": "https://www.youtube.com/watch?v=GOCqWW3HYzY",
-        "cover_image": "shopify://shop_images/sddefault.jpg",
         "description": "",
         "full_width": false,
         "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collections_4yBaJJ": {
+      "type": "featured-collections",
+      "blocks": {
+        "showcase_item_acyymq": {
+          "type": "showcase_item",
+          "settings": {
+            "collection": "",
+            "custom_url": "",
+            "custom_image": "shopify://shop_images/aboutus2016-4_jpg.jpg",
+            "title": "",
+            "subtitle": "",
+            "button_text": ""
+          }
+        },
+        "showcase_item_LkUcdR": {
+          "type": "showcase_item",
+          "settings": {
+            "collection": "",
+            "custom_url": "",
+            "custom_image": "shopify://shop_images/aboutus2016-3_jpg.jpg",
+            "title": "",
+            "subtitle": "",
+            "button_text": ""
+          }
+        },
+        "showcase_item_mfxRma": {
+          "type": "showcase_item",
+          "settings": {
+            "collection": "",
+            "custom_url": "",
+            "custom_image": "shopify://shop_images/40a8468.jpg2.jpg",
+            "title": "",
+            "subtitle": "",
+            "button_text": ""
+          }
+        },
+        "showcase_item_kwtimP": {
+          "type": "showcase_item",
+          "settings": {
+            "collection": "",
+            "custom_url": "",
+            "custom_image": "shopify://shop_images/aboutus2016-2_jpg.jpg",
+            "title": "",
+            "subtitle": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "showcase_item_acyymq",
+        "showcase_item_LkUcdR",
+        "showcase_item_mfxRma",
+        "showcase_item_kwtimP"
+      ],
+      "name": "Collection Showcase",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "color_scheme": ""
+      }
+    },
+    "image_with_text_rrj4Ca": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_R46arf": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Have a question? Our team is happy to assist you</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_7TREjp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Have a question about a product, fitment or SubiSpeed? Our highly trained customer service team are waiting for you.</p><p>Contact us or call 888-885-2002</p>",
+            "text_style": "body"
+          }
+        },
+        "button_M68NiK": {
+          "type": "button",
+          "settings": {
+            "button_label": "Contact Us",
+            "button_link": "shopify://pages/contact",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_R46arf",
+        "text_7TREjp",
+        "button_M68NiK"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/two-up_content_warehouse_worker.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -128,6 +258,8 @@
     "main",
     "rich_text_RAFg3N",
     "statistics_dWgAi9",
-    "video_tmm3BG"
+    "video_tmm3BG",
+    "featured_collections_4yBaJJ",
+    "image_with_text_rrj4Ca"
   ]
 }

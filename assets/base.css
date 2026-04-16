@@ -119,7 +119,7 @@
   right: 0;
   z-index: 50;
   width: 100%;
-  height: 32px;
+  height: 42px;
 }
 
 .sku-tag {
@@ -200,8 +200,8 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 }
 
 .announcement-bar-section {
-  height: 32px;
-  background-image: url("background-texture-2.png");
+  height: 42px;
+  /* background-image: url("background-texture-2.png"); */
 }
 
 .page-width.drawer-menu {
@@ -1026,7 +1026,7 @@ summary::-webkit-details-marker {
 
 @media screen and (min-width: 750px) {
   .grid {
-    gap: 0px !important;
+    /* gap: 0px !important; */
     /* column-gap: var(--grid-desktop-horizontal-spacing);
     row-gap: var(--grid-desktop-vertical-spacing); */
   }
@@ -2269,7 +2269,7 @@ input[type='checkbox'] {
 
 @media screen and (min-width: 990px) {
   .utility-bar__grid--3-col {
-    grid-template-columns: 3fr 4fr 3fr;
+    grid-template-columns: 1fr 4fr 1fr;
     grid-template-areas: 'social-icons announcements language-currency';
   }
 
@@ -2289,12 +2289,13 @@ input[type='checkbox'] {
 .announcement-bar__announcement {
   color: rgb(var(--color-foreground));
   width: 100%;
-  height: 32px;
+  height: 42px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-content: center;
   grid-area: announcements;
+  text-align: center;
 }
 
 .announcement-bar .slider--everywhere {
@@ -2898,7 +2899,7 @@ details[open] > .header__icon--menu .icon-hamburger {
 details[open] > .header__submenu {
   animation: animateMenuOpen var(--duration-default) ease;
   animation-fill-mode: forwards;
-  z-index: 1;
+  z-index: 5;
 }
 
 @media (prefers-reduced-motion) {
@@ -2954,6 +2955,7 @@ details[open] > .header__submenu {
 
 .header__menu-item span {
   transition: text-decoration var(--duration-short) ease;
+  width: max-content;
 }
 
 .header__menu-item:hover span {
@@ -3753,11 +3755,11 @@ body .transition-cover {
   }
 }
 
-@media screen and (max-width: 989px) {
+/* @media screen and (max-width: 989px) {
   .section-fitments-header .header-wrapper {
     display: none;
   }
-}
+} */
 
 predictive-search .spinner {
   width: 1.5rem;

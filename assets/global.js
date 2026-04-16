@@ -72,7 +72,7 @@ document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
   summary.setAttribute('role', 'button');
   summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'));
 
-  if (summary.nextElementSibling.getAttribute('id')) {
+  if (summary.nextElementSibling && summary.nextElementSibling.getAttribute('id')) {
     summary.setAttribute('aria-controls', summary.nextElementSibling.id);
   }
 
@@ -561,7 +561,7 @@ class HeaderDrawer extends MenuDrawer {
   }
 
   openMenuDrawer(summaryElement) {
-    this.header = this.header || document.querySelector('.section-header');
+    this.header = this.header || document.querySelector('.section-header, .section-fitments-header');
     this.borderOffset =
       this.borderOffset || this.closest('.header-wrapper').classList.contains('header-wrapper--border-bottom') ? 1 : 0;
     document.documentElement.style.setProperty(
@@ -1330,3 +1330,19 @@ class CartPerformance {
     );
   }
 }
+
+
+/* --- Header group placeholder height --- */
+(function () {
+  const wrapper     = document.querySelector('.rsd-header-group__wrapper');
+  const placeholder = document.querySelector('.rsd-header-group');
+
+  if (!wrapper || !placeholder) return;
+
+  function syncHeight() {
+    placeholder.style.height = wrapper.offsetHeight + 'px';
+  }
+
+  syncHeight();
+  window.addEventListener('resize', syncHeight);
+})();

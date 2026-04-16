@@ -147,13 +147,30 @@
       </div>
       <div class="card__content">
         <div class="card__information">
-          {%- if card_product.selected_or_first_available_variant.inventory_quantity == 0 -%}
+          {% comment %} {%- if card_product.selected_or_first_available_variant.inventory_quantity == 0 -%}
             <div class="custom-carousel-stock out-of-stock">Out of Stock</div>
           {% else %}
             <div class="custom-carousel-stock">
               {{ card_product.selected_or_first_available_variant.inventory_quantity }} in stock
             </div>
-          {% endif %}
+          {% endif %} {% endcomment %}
+           {%- assign variant = card_product.selected_or_first_available_variant -%}
+
+          {%- if variant.inventory_quantity > 0 -%}
+            <div class="custom-carousel-stock">
+              {{ variant.inventory_quantity }} in stock
+            </div>
+
+          {%- elsif variant.inventory_policy == 'continue' -%}
+            <div class="custom-carousel-stock restocking">
+              Restocking soon
+            </div>
+
+          {%- else -%}
+            <div class="custom-carousel-stock out-of-stock">
+              Out of stock
+            </div>
+          {%- endif -%}
           <h3
             class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
             {% if card_product.featured_media or settings.card_style == 'card' %}
@@ -226,7 +243,7 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+           
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                 {% liquid
@@ -310,6 +327,9 @@
             {%- endif -%}
           </div>
         </div>
+
+        <div class='card__bottom'>
+           {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
         {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
         {% if quick_add == 'standard' %}
           <div class="quick-add no-js-hidden">
@@ -330,7 +350,8 @@
                   aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                   data-product-url="{{ card_product.url }}"
                 >
-                  {{ 'products.product.choose_options' | t }}
+                  {% comment %} {{ 'products.product.choose_options' | t }} {% endcomment %}
+                   <span class='quick-add__submit-icon'>{% render 'icons', type: 'icon-rsd-cart' %}</span>
                   {%- if horizontal_quick_add -%}
                     <span class="icon-wrap">
                       {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -389,13 +410,14 @@
                       disabled
                     {% endif %}
                   >
-                    <span>
+                    {% comment %} <span>
                       {%- if card_product.selected_or_first_available_variant.available -%}
                         {{ 'products.product.add_to_cart' | t }}
                       {%- else -%}
                         {{ 'products.product.sold_out' | t }}
                       {%- endif -%}
-                    </span>
+                    </span> {% endcomment %}
+                    <span class='quick-add__submit-icon'>{% render 'icons', type: 'icon-rsd-cart' %}</span>
                     <span class="sold-out-message hidden">
                       {{ 'products.product.sold_out' | t }}
                     </span>
@@ -570,6 +592,8 @@
             </div>
           {% endif %}
         {% endif %}
+
+        </div>
         <div class="card__badge {{ settings.badge_position }}">
           {%- if card_product.available == false -%}
             <span

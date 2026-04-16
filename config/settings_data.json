@@ -16,7 +16,7 @@
     "heading_scale": 100,
     "type_body_font": "lato_n4",
     "body_scale": 100,
-    "page_width": 1200,
+    "page_width": 1600,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 8,
     "spacing_grid_vertical": 8,
@@ -108,11 +108,11 @@
     "sold_out_badge_color_scheme": "scheme-3",
     "brand_headline": "",
     "brand_description": "",
-    "social_facebook_link": "https://www.facebook.com/Rallysportdirect/",
-    "social_instagram_link": "https://www.instagram.com/rallysportdirect/?hl=en",
-    "social_youtube_link": "https://www.youtube.com/channel/UCHNPxTbGXNDDxsNjjSSwg5A",
+    "social_facebook_link": "https://www.facebook.com/SubiSpeed/?locale=en_GB",
+    "social_instagram_link": "https://www.instagram.com/subispeed/?hl=en",
+    "social_youtube_link": "https://www.youtube.com/user/SubiSpeed?themeRefresh=1",
     "social_tiktok_link": "",
-    "social_twitter_link": "https://x.com/rallysporttweet?lang=en",
+    "social_twitter_link": "https://twitter.com/subispeeddotcom?lang=en",
     "social_snapchat_link": "",
     "social_pinterest_link": "",
     "social_tumblr_link": "",
@@ -159,22 +159,6 @@
         "disabled": false,
         "settings": {
           "product": ""
-        }
-      },
-      "5059203847231188605": {
-        "type": "shopify://apps/smart-product-filter-search/blocks/app-embed/5cc1944c-3014-4a2a-af40-7d65abc0ef73",
-        "disabled": false,
-        "settings": {
-          "productGridSelector": "",
-          "useCustomQuickviewTemplate": false,
-          "customJs": "",
-          "customCss": "",
-          "customProductTemplateLoader": "{%- capture productTemplate -%}{% render 'globo.filter.product', themeTranslation: shop.metafields.globoFilter.themeTranslation.value[request.locale.iso_code] %}{%- endcapture -%}{%- unless productTemplate contains 'Liquid error' -%}<script id=\"gspfProduct\" type=\"template/html\">{{- productTemplate | replace: \"script>\", \"scripttag>\" -}}</script>{%- endunless -%}",
-          "customTreeTemplateLoader": "{%- capture treeTemplate -%}{% render 'globo.filter.tree' %}{%- endcapture -%}{%- unless treeTemplate contains 'Liquid error' -%}<script id=\"gspfFilterTree\" type=\"template/html\">{{- treeTemplate | replace: \"script>\", \"scripttag>\" -}}</script>{%- endunless -%}",
-          "customSortTemplateLoader": "",
-          "customSearchTemplateLoader": "",
-          "customPaginationTemplateLoader": "",
-          "customYMMTemplateLoader": ""
         }
       }
     },

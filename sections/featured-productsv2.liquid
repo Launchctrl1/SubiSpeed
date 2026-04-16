@@ -203,32 +203,33 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const carousel = document.querySelector('.custom-carousel');
-    const trackWrapper = carousel.querySelector('.custom-carousel-track-wrapper');
-    const prevBtn = carousel.querySelector('.custom-carousel-btn.prev');
-    const nextBtn = carousel.querySelector('.custom-carousel-btn.next');
+    document.querySelectorAll('.custom-carousel').forEach(function (carousel) {
+      const trackWrapper = carousel.querySelector('.custom-carousel-track-wrapper');
+      const prevBtn = carousel.querySelector('.custom-carousel-btn.prev');
+      const nextBtn = carousel.querySelector('.custom-carousel-btn.next');
 
-    function updateButtons() {
-      const scrollLeft = trackWrapper.scrollLeft;
-      const maxScrollLeft = trackWrapper.scrollWidth - trackWrapper.clientWidth;
+      function updateButtons() {
+        const scrollLeft = trackWrapper.scrollLeft;
+        const maxScrollLeft = trackWrapper.scrollWidth - trackWrapper.clientWidth;
 
-      prevBtn.disabled = scrollLeft <= 0;
-      nextBtn.disabled = scrollLeft >= maxScrollLeft - 5;
-    }
+        prevBtn.disabled = scrollLeft <= 0;
+        nextBtn.disabled = scrollLeft >= maxScrollLeft - 5;
+      }
 
-    prevBtn.addEventListener('click', () => {
-      trackWrapper.scrollBy({ left: -300, behavior: 'smooth' });
-      setTimeout(updateButtons, 300);
+      prevBtn.addEventListener('click', () => {
+        trackWrapper.scrollBy({ left: -300, behavior: 'smooth' });
+        setTimeout(updateButtons, 300);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        trackWrapper.scrollBy({ left: 300, behavior: 'smooth' });
+        setTimeout(updateButtons, 300);
+      });
+
+      trackWrapper.addEventListener('scroll', updateButtons);
+      window.addEventListener('resize', updateButtons);
+      setTimeout(updateButtons, 100);
     });
-
-    nextBtn.addEventListener('click', () => {
-      trackWrapper.scrollBy({ left: 300, behavior: 'smooth' });
-      setTimeout(updateButtons, 300);
-    });
-
-    trackWrapper.addEventListener('scroll', updateButtons);
-    window.addEventListener('resize', updateButtons);
-    setTimeout(updateButtons, 100);
   });
 </script>
 

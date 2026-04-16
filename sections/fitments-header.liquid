@@ -53,6 +53,13 @@
     display: flex;
   }
 
+  .header__inline-menu header-menu {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+  }
+
   .list-menu {
     list-style: none;
     padding: 0;
@@ -66,6 +73,13 @@
 
   summary.list-menu__item {
     padding-right: 2.7rem;
+  }
+
+  summary.list-menu__item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    object-fit: contain;
   }
 
   .list-menu__item {
@@ -88,12 +102,20 @@
     }
   }
 
+  @media screen and (min-width: 1200px) {
+      summary.list-menu__item img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
   /* Header inline menu */
   .header__inline-menu {
-    position: fixed !important;
+    {% comment %} position: fixed !important;
     top: 102px;
     left: 0;
-    width: 100vw !important;
+    width: 100vw !important; {% endcomment %}
+    width: 100vw;
     box-sizing: border-box;
     overflow-x: auto !important;
     overflow-y: hidden !important;
@@ -108,10 +130,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    align-items: center;
     margin: 0 auto;
     padding-left: var(--first-menu-item-offset, 0);
     width: 100%;
     max-width: 1200px;
+    gap: 5px;
   }
 
   @media screen and (max-width: 749px) {
@@ -126,6 +150,12 @@
   }
   @media screen and (min-width: 990px) {
     .header__inline-menu > ul {
+      max-width: 1200px;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .header__inline-menu > ul {
+      justify-content: center;
       max-width: 1200px;
     }
   }
@@ -186,13 +216,18 @@
   /* Tercer nivel - subsección fija */
   .header__third-submenu {
     position: fixed;
-    top: 200px; /* debajo del segundo nivel */
+    top: 195px; /* debajo del segundo nivel */
     left: 0;
     width: 100vw;
     background: #ffffff;
     display: none;
     padding: 10px;
-    z-index: 997;
+    z-index: 1;
+  }
+  @media screen and (min-width: 1200px) {
+    .header__third-submenu {
+      top: 210px;
+    }
   }
 
   .header__third-submenu .third-submenu-wrapper {
@@ -205,13 +240,18 @@
     flex: 0 0 15%;
     padding: 20px 20px 20px 0;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .header__third-submenu .third-submenu-sidebar img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 200px;
     object-fit: contain;
     border-radius: 4px;
+    flex-shrink: 0;
   }
 
   .header__third-submenu .third-submenu-main {
@@ -268,21 +308,89 @@
   .header__third-submenu .third-submenu-content li a:hover {
     color: #000;
   }
+
+  .third-submenu-sidebar-link {
+    display: none;
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #333;
+    text-decoration: underline;
+    text-align: center;
+  }
+
+  .third-submenu-sidebar-link:hover {
+    color: #000;
+  }
+
+  /* Categories panel (2nd level for section third_level_menu) */
+  .header__categories-panel {
+    position: fixed;
+    top: 154px;
+    left: 0;
+    width: 100vw;
+    background: #ffffff;
+    display: none;
+    padding: 10px;
+    z-index: 997;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .categories-panel-wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  .categories-panel-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+  }
+
+  .categories-panel-content li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+  }
+
+  .categories-panel-content li img {
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .categories-panel-content li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .categories-panel-content li a:hover {
+    color: #000;
+    text-decoration: underline;
+  }
 </style>
 
 {%- style -%}
-  /* header.header.header--middle-left.header--mobile-center.page-width.header--has-menu.header--has-social.header--has-account {
-    padding: 0px;
-  } */
   .header {
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
-  .section-header {
+  .section-fitments-header {
     position: sticky;
-    /* margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px; */
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
   }
   @media screen and (min-width: 750px) {
-    /* .section-header { margin-bottom: {{ section.settings.margin_bottom }}px; } */
+    .section-fitments-header {
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
   }
   @media screen and (min-width: 990px) {
     .header {
@@ -316,156 +424,349 @@
   {% endif %}
   class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
 >
-  <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}{% if section.settings.show_search_bar %} header--has-search-bar{% endif %}">
+  <div class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}{% if section.settings.show_search_bar %} header--has-search-bar{% endif %}">
     {%- liquid
-      if section.settings.menu != blank
-        render 'header-drawer'
-      endif
-
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
-      endif
+      render 'header-drawer'
     -%}
 
-    <nav class="header__inline-menu">
-      <ul class="list-menu list-menu--inline" role="list">
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-            {%- when 'link_list' -%}
-              {%- assign link = block.settings.menu -%}
-              <header-menu>
-                <details id="Details-HeaderMenu-{{ forloop.index }}">
-                  <summary
-                    id="HeaderMenu-{{ link.handle }}"
-                    class="header__menu-item list-menu__item link focus-inset"
-                  >
+    {%- if section.settings.logo_position != 'middle-center' -%}
+      {%- if request.page_type == 'index' -%}
+        <div class="header__heading">
+      {%- endif -%}
+      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+        {%- if settings.logo != blank -%}
+          <div class="header__heading-logo-wrapper">
+            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+            {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+            {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+            {{
+              settings.logo
+              | image_url: width: 600
+              | image_tag:
+                class: 'header__heading-logo motion-reduce',
+                widths: widths,
+                height: logo_height,
+                width: settings.logo_width,
+                alt: logo_alt,
+                sizes: sizes,
+                preload: true
+            }}
+          </div>
+        {%- else -%}
+          <span class="h2">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      {%- if request.page_type == 'index' -%}
+      </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if section.settings.show_search_bar -%}
+      <div class="header__search-bar">
+        {%- render 'header-search-modal-content', show_close_button: false -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.logo_position == 'middle-center' -%}
+      {%- if request.page_type == 'index' -%}
+        <h1 class="header__heading">
+      {%- endif -%}
+      <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+        {%- if settings.logo != blank -%}
+          <div class="header__heading-logo-wrapper">
+            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+            {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+            {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
+            {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+            {{
+              settings.logo
+              | image_url: width: 600
+              | image_tag:
+                class: 'header__heading-logo',
+                widths: widths,
+                height: logo_height,
+                width: settings.logo_width,
+                alt: logo_alt,
+                sizes: sizes,
+                preload: true
+            }}
+          </div>
+        {%- else -%}
+          <span class="h2">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+      <div class="desktop-localization-wrapper">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {% endif %}
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+      </div>
+
+      {%- unless section.settings.show_search_bar -%}
+        {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {%- endunless -%}
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a
+          href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
+          rel="nofollow"
+        >
+          {%- if section.settings.enable_customer_avatar -%}
+            <account-icon>
+              {%- if customer and customer.has_avatar? -%}
+                {{ customer | avatar }}
+              {%- else -%}
+                <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+              {%- endif -%}
+            </account-icon>
+          {%- else -%}
+            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+          {%- endif -%}
+          <span class="visually-hidden">
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </span>
+        </a>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+        {%- endcase -%}
+      {%- endfor -%}
+
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+        {% if cart == empty %}
+          <span class="">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+        {% else %}
+          <span class="">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+        {% endif %}
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        {%- if cart != empty -%}
+          <div class="cart-count-bubble">
+            {%- if cart.item_count < 100 -%}
+              <span aria-hidden="true">{{ cart.item_count }}</span>
+            {%- endif -%}
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+        {%- endif -%}
+      </a>
+    </div>
+  </div>
+</{{ header_tag }}>
+
+ <nav class="header__inline-menu">
+    <ul class="list-menu list-menu--inline" role="list">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'link_list' -%}
+            {%- assign link = block.settings.menu -%}
+            <header-menu>
+              <details id="Details-HeaderMenu-{{ forloop.index }}">
+                <summary
+                  id="HeaderMenu-{{ link.handle }}"
+                  class="header__menu-item list-menu__item link focus-inset"
+                >
+                  {%- if block.settings.image != blank -%}
                     <img
-                      src="{{ block.settings.image | image_url: width: 50, height: 50, crop: 'center' }}"
+                      src="{{ block.settings.image | image_url: width: 100 }}"
                       alt="{{ block.settings.heading }}"
-                      style="max-width: 50px; max-height: 50px; margin-right: 10px;"
                       width="50"
                       height="50"
                     >
-                    <span
-                      {%- if link.child_active %}
-                        class="header__active-menu-item"
-                      {% endif %}
-                    >
-                      {{- link.title | escape -}}
-                    </span>
-                    {{- 'icon-caret.svg' | inline_asset_content -}}
-                  </summary>
-                  <ul
-                    id="HeaderMenu-MenuList-{{ forloop.index }}"
-                    class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
-                    role="list"
-                    tabindex="-1"
+                  {%- endif -%}
+                  <span
+                    {%- if link.child_active %}
+                      class="header__active-menu-item"
+                    {% endif %}
                   >
-                    <div
-                      class="header__submenu__content"
-                      {% if forloop.index >= 3 %}
-                        style="margin: 0 auto;"
-                      {% endif %}
-                    >
-                      {%- for childlink in link.links -%}
-                        <li>
-                          {%- if childlink.links == blank -%}
-                            <a
-                              id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                              href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ childlink.url }}"
-                              class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"
-                              {% if childlink.current %}
-                                aria-current="page"
-                              {% endif %}
-                            >
-                              {{ childlink.title | escape }}
-                            </a>
-                          {%- else -%}
-                            <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
-                              <summary
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                                class="header__menu-item link link--text list-menu__item focus-inset caption-large childlink-trigger"
-                                data-handle="{{ childlink.handle }}"
-                                role="button"
-                              >
-                                <span>{{ childlink.title | escape }}</span>
-                                {{- 'icon-caret.svg' | inline_asset_content -}}
-                              </summary>
-                              <ul
-                                id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}"
-                                class="header__submenu list-menu motion-reduce"
-                              >
-                                {%- for grandchildlink in childlink.links -%}
-                                  <li>
-                                    <a
-                                      id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                      href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ grandchildlink.url }}"
-                                      class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"
-                                      {% if grandchildlink.current %}
-                                        aria-current="page"
-                                      {% endif %}
-                                    >
-                                      {{ grandchildlink.title | escape }}
-                                    </a>
-                                  </li>
-                                {%- endfor -%}
-                              </ul>
-                            </details>
-                          {%- endif -%}
-                        </li>
-                      {%- endfor -%}
-                    </div>
-                  </ul>
-                </details>
-              </header-menu>
-
-              {%- comment -%} Nueva subsección dinámica para tercer nivel (por cada menú de bloque) {%- endcomment -%}
-              <div class="header__third-submenu" data-block-index="{{ forloop.index }}">
-                <div class="third-submenu-wrapper page-width">
-                  <div class="third-submenu-sidebar">
-                    {%- if block.settings.sidebar_image -%}
-                      <img
-                        src="{{ block.settings.sidebar_image | image_url: width: 300, height: 400, crop: 'center' }}"
-                        alt="{{ block.settings.heading | escape }} sidebar"
-                        loading="lazy"
-                      >
-                    {%- endif -%}
-                  </div>
-                  <div class="third-submenu-main">
+                    {{- link.title | escape -}}
+                  </span>
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </summary>
+                <ul
+                  id="HeaderMenu-MenuList-{{ forloop.index }}"
+                  class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
+                  role="list"
+                  tabindex="-1"
+                >
+                  <div
+                    class="header__submenu__content"
+                    {% if forloop.index >= 3 %}
+                      style="margin: 0 auto;"
+                    {% endif %}
+                  >
                     {%- for childlink in link.links -%}
-                      {%- if childlink.links != blank -%}
-                        <ul class="third-submenu-content" data-parent="{{ childlink.handle }}">
-                          {%- for grandchildlink in childlink.links -%}
-                            {%- assign image_key = 'third_image_' | append: forloop.index -%}
-                            <li>
-                              <img
-                                src="{{ section.settings[image_key] | image_url: width: 54, height: 54, crop: 'center' }}"
-                                alt="{{ grandchildlink.title | escape }}"
-                                loading="lazy"
-                              >
-                              <a
-                                href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ grandchildlink.url }}"
-                                class="header__menu-item list-menu__item link focus-inset caption-large"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      {%- endif -%}
+                      <li>
+                        <button
+                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                          class="header__menu-item list-menu__item link link--text focus-inset caption-large childlink-trigger{% if childlink.current %} list-menu__item--active{% endif %}"
+                          data-handle="{{ childlink.handle }}"
+                          type="button"
+                          {% if childlink.current %}aria-current="page"{% endif %}
+                        >
+                          {{ childlink.title | escape }}
+                        </button>
+                      </li>
                     {%- endfor -%}
                   </div>
+                </ul>
+              </details>
+            </header-menu>
+
+            {%- comment -%} Третий уровень: меню из настройки блока, URL с фильтром из второго уровня {%- endcomment -%}
+            <div class="header__third-submenu" data-block-index="{{ forloop.index }}">
+              <div class="third-submenu-wrapper page-width">
+                <div class="third-submenu-sidebar">
+                  {%- if block.settings.sidebar_image -%}
+                    <img
+                      src="{{ block.settings.sidebar_image | image_url: width: 300 }}"
+                      alt="{{ block.settings.heading | escape }} sidebar"
+                      loading="lazy"
+                      width="300"
+                    >
+                  {%- endif -%}
+                  {%- for childlink in link.links -%}
+                    {%- if childlink.links != blank or section.settings.third_level_menu != blank -%}
+                      <a
+                        href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ childlink.url }}"
+                        class="third-submenu-sidebar-link"
+                        data-parent="{{ childlink.handle }}"
+                      >
+                        Shop {{ childlink.title | escape }} {{ link.title | escape }} Products
+                      </a>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+                <div class="third-submenu-main">
+                  {%- assign third_menu = section.settings.third_level_menu -%}
+                  {%- if third_menu != blank -%}
+                    {%- for childlink in link.links -%}
+                      {%- assign url_parts = childlink.url | split: '?' -%}
+                      {%- assign filter_string = '' -%}
+                      {%- if url_parts.size > 1 -%}
+                        {%- assign filter_string = url_parts[1] -%}
+                      {%- endif -%}
+                      <ul class="third-submenu-content" data-parent="{{ childlink.handle }}">
+                        {%- for menulink in third_menu.links -%}
+                          {%- assign image_key = 'third_image_' | append: forloop.index -%}
+                          {%- if filter_string != blank -%}
+                            {%- if menulink.url contains '?' -%}
+                              {%- assign final_url = menulink.url | append: '&' | append: filter_string -%}
+                            {%- else -%}
+                              {%- assign final_url = menulink.url | append: '?' | append: filter_string -%}
+                            {%- endif -%}
+                          {%- else -%}
+                            {%- assign final_url = menulink.url -%}
+                          {%- endif -%}
+                          <li>
+                            {%- if section.settings[image_key] != blank -%}
+                              <img
+                                src="{{ section.settings[image_key] | image_url: width: 54, height: 54, crop: 'center' }}"
+                                alt="{{ menulink.title | escape }}"
+                                loading="lazy"
+                                width="54"
+                                height="54"
+                              >
+                            {%- endif -%}
+                            <a
+                              href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ final_url }}"
+                              class="header__menu-item list-menu__item link focus-inset caption-large"
+                            >
+                              {{ menulink.title | escape }}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- endfor -%}
+                  {%- endif -%}
                 </div>
               </div>
-          {%- endcase -%}
-        {%- endfor -%}
-      </ul>
-    </nav>
-  </header>
-</{{ header_tag }}>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+
+      {%- if section.settings.third_level_menu != blank -%}
+        <header-menu>
+          <details id="Details-HeaderMenu-categories">
+            <summary
+              class="header__menu-item list-menu__item link focus-inset categories-level1-trigger"
+            >
+              {%- if section.settings.categories_image != blank -%}
+                <img
+                  src="{{ section.settings.categories_image | image_url: width: 100 }}"
+                  alt="{{ section.settings.third_level_menu.title | escape }}"
+                  width="50"
+                  height="50"
+                >
+              {%- endif -%}
+              <span>{{ section.settings.third_level_menu.title | escape }}</span>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </summary>
+          </details>
+        </header-menu>
+      {%- endif -%}
+    </ul>
+
+    {%- if section.settings.third_level_menu != blank -%}
+      <div class="header__categories-panel">
+        <div class="categories-panel-wrapper page-width">
+          <ul class="categories-panel-content">
+            {%- for menulink in section.settings.third_level_menu.links -%}
+              {%- assign image_key = 'third_image_' | append: forloop.index -%}
+              <li>
+                {%- if section.settings[image_key] != blank -%}
+                  <img
+                    src="{{ section.settings[image_key] | image_url: width: 100 }}"
+                    alt="{{ menulink.title | escape }}"
+                    loading="lazy"
+                    width="100"
+                    height="100"
+                  >
+                {%- endif -%}
+                <a
+                  href="{%- if section.settings.use_apps_prefix -%}/apps{%- endif -%}{{ menulink.url }}"
+                  class="header__menu-item list-menu__item link focus-inset caption-large"
+                >
+                  {{ menulink.title | escape }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    {%- endif -%}
+  </nav>
 
 {%- if settings.cart_type == 'notification' -%}
   {%- render 'cart-notification',
@@ -599,110 +900,102 @@
         container.style.display = 'none';
         const groups = container.querySelectorAll('.third-submenu-content');
         groups.forEach((g) => g.classList.remove('active'));
+        const sidebarLinks = container.querySelectorAll('.third-submenu-sidebar-link');
+        sidebarLinks.forEach((l) => (l.style.display = 'none'));
       });
+      // Hide categories panel
+      const categoriesPanel = document.querySelector('.header__categories-panel');
+      if (categoriesPanel) categoriesPanel.style.display = 'none';
       // Remove active class from all triggers
       triggers.forEach((t) => t.classList.remove('active'));
+      document.querySelectorAll('.categories-level1-trigger').forEach((t) => t.classList.remove('active'));
+    }
+
+    // Shared: find third-submenu container for a given trigger button
+    function getThirdContainer(trigger) {
+      // button → li → div.header__submenu__content → ul.header__submenu → details#Details-HeaderMenu-N
+      const submenuList = trigger.closest('ul.header__submenu');
+      if (!submenuList) return document.querySelector('.header__third-submenu');
+
+      const details = submenuList.parentElement;
+      if (details && details.id) {
+        const match = details.id.match(/Details-HeaderMenu-(\d+)/);
+        if (match) {
+          return document.querySelector(`.header__third-submenu[data-block-index="${match[1]}"]`);
+        }
+      }
+
+      return document.querySelector('.header__third-submenu');
+    }
+
+    // Shared: show third level for a given trigger
+    function showThirdLevel(trigger) {
+      const handle = trigger.getAttribute('data-handle');
+      const thirdContainer = getThirdContainer(trigger);
+      if (!thirdContainer) return;
+
+      hideAllThird();
+
+      thirdContainer.style.display = 'block';
+
+      thirdContainer.querySelectorAll('.third-submenu-content').forEach((group) => {
+        group.classList.toggle('active', group.getAttribute('data-parent') === handle);
+      });
+
+      thirdContainer.querySelectorAll('.third-submenu-sidebar-link').forEach((l) => {
+        l.style.display = l.getAttribute('data-parent') === handle ? 'block' : 'none';
+      });
+
+      trigger.classList.add('active');
     }
 
     triggers.forEach((trigger) => {
-      trigger.addEventListener('mouseenter', () => {
-        const handle = trigger.getAttribute('data-handle');
-
-        // Traverse up to the top-level details to get the block index from its ID
-        let topLevelDetails = trigger.closest('ul.header__submenu').parentElement;
-        let blockIndex = null;
-        if (topLevelDetails && topLevelDetails.id && topLevelDetails.id.startsWith('Details-HeaderMenu-')) {
-          const match = topLevelDetails.id.match(/Details-HeaderMenu-(\d+)/);
-          if (match) {
-            blockIndex = match[1];
-          }
-        }
-
-        // Query the matching third-submenu by data-block-index
-        let thirdContainer = null;
-        if (blockIndex) {
-          thirdContainer = document.querySelector(`.header__third-submenu[data-block-index="${blockIndex}"]`);
-        }
-
-        // Fallback only if still null (edge case for single-block or malformed IDs)
-        if (!thirdContainer) {
-          thirdContainer = document.querySelector('.header__third-submenu');
-        }
-
-        if (!thirdContainer) return;
-
-        // Ocultamos los otros contenedores
-        hideAllThird();
-
-        thirdContainer.style.display = 'block';
-        const groups = thirdContainer.querySelectorAll('.third-submenu-content');
-        groups.forEach((group) => {
-          group.classList.toggle('active', group.getAttribute('data-parent') === handle);
-        });
-        // Highlight the current trigger
-        trigger.classList.add('active');
-      });
-
-      trigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        const handle = trigger.getAttribute('data-handle');
-
-        // Same traversal logic as above (duplicate for click handler)
-        let topLevelDetails = trigger.closest('ul.header__submenu').parentElement;
-        let blockIndex = null;
-        if (topLevelDetails && topLevelDetails.id && topLevelDetails.id.startsWith('Details-HeaderMenu-')) {
-          const match = topLevelDetails.id.match(/Details-HeaderMenu-(\d+)/);
-          if (match) {
-            blockIndex = match[1];
-          }
-        }
-
-        let thirdContainer = null;
-        if (blockIndex) {
-          thirdContainer = document.querySelector(`.header__third-submenu[data-block-index="${blockIndex}"]`);
-        }
-        if (!thirdContainer) {
-          thirdContainer = document.querySelector('.header__third-submenu');
-        }
-        if (!thirdContainer) return;
-
-        hideAllThird();
-        thirdContainer.style.display = 'block';
-        const groups = thirdContainer.querySelectorAll('.third-submenu-content');
-        groups.forEach((group) => {
-          group.classList.toggle('active', group.getAttribute('data-parent') === handle);
-        });
-        // Highlight the current trigger
-        trigger.classList.add('active');
-      });
+      trigger.addEventListener('mouseenter', () => showThirdLevel(trigger));
+      trigger.addEventListener('click', () => showThirdLevel(trigger));
     });
 
-    // Ocultar subsección al salir del área (por bloque)
+    // Скрыть третий уровень при уходе мыши
     thirdSubmenus.forEach((container) => {
-      container.addEventListener('mouseleave', () => {
-        container.style.display = 'none';
-        const groups = container.querySelectorAll('.third-submenu-content');
-        groups.forEach((g) => g.classList.remove('active'));
-        // Remove active from triggers (though hideAllThird would handle globally, but per-container for precision)
-        triggers.forEach((t) => t.classList.remove('active'));
-      });
+      container.addEventListener('mouseleave', () => hideAllThird());
     });
 
-    // Si el usuario hace mouseleave del submenu (segundo nivel) y no está sobre third-submenu, ocultar
-    const submenus = document.querySelectorAll('.header__submenu');
-    submenus.forEach((sub) => {
-      sub.addEventListener('mouseleave', (e) => {
-        // wait a short moment to allow mouseenter on third-submenu if user moved there
+    // При уходе с submenu второго уровня — скрыть, если курсор не над third-submenu
+    document.querySelectorAll('.header__submenu').forEach((sub) => {
+      sub.addEventListener('mouseleave', () => {
         setTimeout(() => {
-          // si ningún third-submenu tiene :hover, ocultamos todos
-          let anyHover = false;
-          thirdSubmenus.forEach((c) => {
-            if (c.matches(':hover')) anyHover = true;
-          });
+          const anyHover = [...thirdSubmenus].some((c) => c.matches(':hover'));
           if (!anyHover) hideAllThird();
         }, 150);
       });
     });
+
+    // Categories panel (2-level, section.settings.third_level_menu)
+    const categoriesTrigger = document.querySelector('.categories-level1-trigger');
+    const categoriesPanel = document.querySelector('.header__categories-panel');
+
+    if (categoriesTrigger && categoriesPanel) {
+      categoriesTrigger.addEventListener('click', () => {
+        const isOpen = categoriesPanel.style.display === 'block';
+        hideAllThird();
+        if (!isOpen) {
+          categoriesPanel.style.display = 'block';
+          categoriesTrigger.classList.add('active');
+        }
+      });
+
+      categoriesPanel.addEventListener('mouseleave', () => {
+        categoriesPanel.style.display = 'none';
+        categoriesTrigger.classList.remove('active');
+      });
+
+      // Закрыть при клике вне панели и тригера
+      document.addEventListener('click', (e) => {
+        if (!categoriesTrigger.contains(e.target) && !categoriesPanel.contains(e.target)) {
+          categoriesPanel.style.display = 'none';
+          categoriesTrigger.classList.remove('active');
+        }
+      });
+    }
   });
 {% endjavascript %}
 
@@ -908,6 +1201,16 @@
       "default": "scheme-1"
     },
     {
+      "type": "link_list",
+      "id": "third_level_menu",
+      "label": "Categories menu (shown after brands)"
+    },
+    {
+      "type": "image_picker",
+      "id": "categories_image",
+      "label": "Categories trigger image"
+    },
+    {
       "type": "header",
       "content": "Third level images"
     },
@@ -955,6 +1258,16 @@
       "type": "image_picker",
       "id": "third_image_9",
       "label": "Third level image 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_10",
+      "label": "Third level image 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "third_image_11",
+      "label": "Third level image 11"
     },
     {
       "type": "header",

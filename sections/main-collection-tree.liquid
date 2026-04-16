@@ -10,7 +10,7 @@
 {%- endstyle -%}
 
 <div class="page-width">
-  {%- assign collection_tree_value = shop.metafields.collection_tree.collection_tree.value -%}
+  {%- assign collection_tree_value = shop.metafields.custom.collection_tree_v1.value -%}
   {%- assign nodes = collection_tree_value.nodes -%}
   {%- assign collection_id = collection.id | append: '' -%}
 
