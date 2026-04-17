@@ -213,7 +213,16 @@
                                 {%- assign url_parts = childlink.url | split: '?' -%}
                                 {%- assign filter_string = '' -%}
                                 {%- if url_parts.size > 1 -%}
-                                  {%- assign filter_string = url_parts[1] -%}
+                                  {%- assign all_params = url_parts[1] | split: '&' -%}
+                                  {%- for param in all_params -%}
+                                    {%- if param contains 'filter.p.' -%}
+                                      {%- if filter_string == '' -%}
+                                        {%- assign filter_string = param -%}
+                                      {%- else -%}
+                                        {%- assign filter_string = filter_string | append: '&' | append: param -%}
+                                      {%- endif -%}
+                                    {%- endif -%}
+                                  {%- endfor -%}
                                 {%- endif -%}
                                 <li>
                                   {%- if section.settings.third_level_menu != blank -%}
@@ -232,6 +241,14 @@
                                           {{ childlink.title | escape }}
                                         </button>
                                         <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                                          <li>
+                                            <a
+                                              href="{{ childlink.url }}"
+                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                                            >
+                                              Shop {{ childlink.title | escape }} {{ brand_menu.title | escape }} Products
+                                            </a>
+                                          </li>
                                           {%- for menulink in section.settings.third_level_menu.links -%}
                                             {%- if filter_string != blank -%}
                                               {%- if menulink.url contains '?' -%}
@@ -251,14 +268,6 @@
                                               </a>
                                             </li>
                                           {%- endfor -%}
-                                          <li>
-                                            <a
-                                              href="{{ childlink.url }}"
-                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
-                                            >
-                                              Shop {{ childlink.title | escape }} {{ brand_menu.title | escape }} Products
-                                            </a>
-                                          </li>
                                         </ul>
                                       </div>
                                     </details>
