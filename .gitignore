@@ -1,0 +1,13 @@
+# Ignore AI Agent folders and configuration
+.agents/
+.agents/*
+SKILLS_USAGE_EXAMPLES.md
+
+# Ignore Claude Code configuration
+CLAUDE.md
+.claude/
+.claude/*
+
+.env
+design/
+design/*
