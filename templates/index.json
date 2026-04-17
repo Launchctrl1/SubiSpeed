@@ -511,7 +511,7 @@
         "showcase_item_ELCFF7": {
           "type": "showcase_item",
           "settings": {
-            "collection": "coilovers",
+            "collection": "factionfab",
             "custom_url": "",
             "custom_image": "shopify://shop_images/factionfab-coilovers-ftspeed-614x306_8f27113e-9917-415c-8caa-432624f9b638.jpg",
             "title": "FactionFab Coilovers",
@@ -522,7 +522,7 @@
         "showcase_item_zj4bFR": {
           "type": "showcase_item",
           "settings": {
-            "collection": "engine",
+            "collection": "perrin",
             "custom_url": "",
             "custom_image": "shopify://shop_images/thumbnail_perrin-sale-subispeed-614x306.jpg",
             "title": "Perrin",
@@ -533,7 +533,7 @@
         "showcase_item_QxL8qV": {
           "type": "showcase_item",
           "settings": {
-            "collection": "",
+            "collection": "openflash-performance",
             "custom_url": "/products/openflash-tuning-tablet-oft-3-0-version-3-2013-2016-scion-frs-2013-2020-subaru-brz-2017-2019-toyota-86",
             "custom_image": "shopify://shop_images/resizecom_oft3-pic-scaled_63c60518-80d4-42a0-b929-c590db3f79df.jpg",
             "title": "Openflash Tuning",
@@ -752,7 +752,7 @@
         "showcase_item_apTj3X": {
           "type": "showcase_item",
           "settings": {
-            "collection": "",
+            "collection": "bilstein",
             "custom_url": "",
             "custom_image": "shopify://shop_images/bilstein-2024-co-op-subispeed-may-614x306-1_4c5bb069-0faf-429c-97b2-243aeb1c61f4.jpg",
             "title": "Feel the Performance.",

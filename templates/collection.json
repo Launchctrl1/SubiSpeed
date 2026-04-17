@@ -64,16 +64,6 @@
         "color_scheme": "scheme-1"
       }
     },
-    "collection-tree": {
-      "type": "main-collection-tree",
-      "disabled": true,
-      "custom_css": [
-        ".page-width {margin-top: 80px;}"
-      ],
-      "settings": {
-        "link_primary_color": "#000000"
-      }
-    },
     "rsd_collection_tree_9cbfcH": {
       "type": "rsd-collection-tree",
       "name": "t:sections.rsd_collection_tree.name",
@@ -86,6 +76,16 @@
         "tab_margin_bottom": 40,
         "mobile_margin_top": 60,
         "mobile_margin_bottom": 0
+      }
+    },
+    "collection-tree": {
+      "type": "main-collection-tree",
+      "disabled": true,
+      "custom_css": [
+        ".page-width {margin-top: 80px;}"
+      ],
+      "settings": {
+        "link_primary_color": "#000000"
       }
     },
     "product-grid": {
@@ -112,8 +112,8 @@
   "order": [
     "177621935428b1481b",
     "banner",
-    "collection-tree",
     "rsd_collection_tree_9cbfcH",
+    "collection-tree",
     "product-grid"
   ]
 }
