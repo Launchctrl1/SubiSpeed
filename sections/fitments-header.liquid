@@ -632,6 +632,7 @@
                           id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
                           class="header__menu-item list-menu__item link link--text focus-inset caption-large childlink-trigger{% if childlink.current %} list-menu__item--active{% endif %}"
                           data-handle="{{ childlink.handle }}"
+                          data-url="{{ childlink.url | escape }}"
                           type="button"
                           {% if childlink.current %}aria-current="page"{% endif %}
                         >
@@ -675,7 +676,16 @@
                       {%- assign url_parts = childlink.url | split: '?' -%}
                       {%- assign filter_string = '' -%}
                       {%- if url_parts.size > 1 -%}
-                        {%- assign filter_string = url_parts[1] -%}
+                        {%- assign all_params = url_parts[1] | split: '&' -%}
+                        {%- for param in all_params -%}
+                          {%- if param contains 'filter.p.' -%}
+                            {%- if filter_string == '' -%}
+                              {%- assign filter_string = param -%}
+                            {%- else -%}
+                              {%- assign filter_string = filter_string | append: '&' | append: param -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                        {%- endfor -%}
                       {%- endif -%}
                       <ul class="third-submenu-content" data-parent="{{ childlink.handle }}">
                         {%- for menulink in third_menu.links -%}
@@ -927,6 +937,32 @@
 
       return document.querySelector('.header__third-submenu');
     }
+
+    /* Variant 2 (JS): inject filter.p.* params into third-level links once on page load
+    triggers.forEach((trigger) => {
+      const triggerUrl = trigger.getAttribute('data-url') || '';
+      const filterParams = triggerUrl.includes('?')
+        ? triggerUrl
+            .split('?')[1]
+            .split('&')
+            .filter((p) => p.startsWith('filter.p.'))
+            .join('&')
+        : '';
+
+      if (!filterParams) return;
+
+      const handle = trigger.getAttribute('data-handle');
+      const thirdContainer = getThirdContainer(trigger);
+      if (!thirdContainer) return;
+
+      const group = thirdContainer.querySelector(`.third-submenu-content[data-parent="${handle}"]`);
+      if (!group) return;
+
+      group.querySelectorAll('a[href]').forEach((a) => {
+        const baseHref = a.getAttribute('href');
+        a.href = baseHref + (baseHref.includes('?') ? '&' : '?') + filterParams;
+      });
+    }); */
 
     // Shared: show third level for a given trigger
     function showThirdLevel(trigger) {
