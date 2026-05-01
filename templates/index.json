@@ -15,11 +15,11 @@
         "ai_gen_block_f00818c_RfaTdL": {
           "type": "ai_gen_block_f00818c",
           "settings": {
-            "slide_1_image": "shopify://shop_images/Banner_1.png",
-            "slide_1_mobile_image": "shopify://shop_images/Banner_-_Mobile_2.png",
+            "slide_1_image": "shopify://shop_images/RSD_-_1400x450_-_Template_7_3.png",
+            "slide_1_mobile_image": "shopify://shop_images/RSD_-_1080x1350_-_Template_6_1.png",
             "slide_1_show_button": true,
-            "slide_1_button_text": "Shop Cobb Accessports",
-            "slide_1_button_link": "shopify://collections/cobb-accessport",
+            "slide_1_button_text": "Shop Our Cusco Sale",
+            "slide_1_button_link": "shopify://collections/cusco",
             "slide_2_image": "shopify://shop_images/olm-x-subispeed-sokudo.png",
             "slide_2_mobile_image": "shopify://shop_images/olm-x-subispeed-sokudo-mob-crop-2.png",
             "slide_2_show_button": true,
@@ -34,7 +34,7 @@
             "slide_5_show_button": false,
             "slide_5_button_text": "Shop now",
             "slide_5_button_link": "",
-            "button_position": "bottom_left",
+            "button_position": "bottom_center",
             "button_color": "#0637f9",
             "button_text_color": "#ffffff",
             "button_hover_color": "#334fb4",
@@ -43,7 +43,7 @@
             "arrow_icon_color": "#121212",
             "arrow_hover_color": "#f3f3f3",
             "dot_color": "#ffffff",
-            "show_dots": false
+            "show_dots": true
           },
           "blocks": {}
         }
