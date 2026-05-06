@@ -23,6 +23,12 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://cdn-widgetsrepository.yotpo.com" crossorigin>
+    <link rel="preconnect" href="https://car.govedia.com">
+    <link rel="dns-prefetch" href="https://bat.bing.com">
+    <link rel="dns-prefetch" href="https://cdn-scripts.signifyd.com">
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -265,25 +271,32 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'abz-custom.css' | asset_url | stylesheet_tag }}
+    {{ 'component-price.css' | asset_url | stylesheet_tag }}
+    {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+    {{ 'component-card.css' | asset_url | stylesheet_tag }}
+    {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
       {{ 'component-cart.css' | asset_url | stylesheet_tag }}
       {{ 'component-totals.css' | asset_url | stylesheet_tag }}
-      {{ 'component-price.css' | asset_url | stylesheet_tag }}
       {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
 
     {%- unless settings.type_body_font.system? -%}
+      {%- assign body_font_url = settings.type_body_font | font_url -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+      <link rel="preload" as="font" href="{{ body_font_url }}" type="font/woff2" crossorigin>
       {% comment %}theme-check-enable AssetPreload{% endcomment %}
     {%- endunless -%}
     {%- unless settings.type_header_font.system? -%}
-      {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
-      {% comment %}theme-check-enable AssetPreload{% endcomment %}
+      {%- assign header_font_url = settings.type_header_font | font_url -%}
+      {%- if header_font_url != body_font_url -%}
+        {% comment %}theme-check-disable AssetPreload{% endcomment %}
+        <link rel="preload" as="font" href="{{ header_font_url }}" type="font/woff2" crossorigin>
+        {% comment %}theme-check-enable AssetPreload{% endcomment %}
+      {%- endif -%}
     {%- endunless -%}
 
     {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}

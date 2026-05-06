@@ -239,7 +239,7 @@
             >
               {{
                 featured_media.preview_image
-                | image_url: width: 416
+                | image_url: width: 416, format: 'webp'
                 | image_tag:
                   loading: 'lazy',
                   sizes: sizes,
@@ -301,7 +301,7 @@
               >
                 {{
                   media.preview_image
-                  | image_url: width: 416
+                  | image_url: width: 416, format: 'webp'
                   | image_tag:
                     loading: 'lazy',
                     sizes: sizes,
