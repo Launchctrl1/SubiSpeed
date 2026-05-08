@@ -170,6 +170,13 @@
   }
 }
 
+/* ── Hidden state (gv-mmy-bar tag filter: no products) ── */
+.rsd-col-tree__trigger--hidden,
+.rsd-col-tree__link--hidden,
+.rsd-col-tree__item--hidden {
+  display: none;
+}
+
 /* ── Parts menu (Shop By Part Type) ── */
 .rsd-col-tree__parts {
   display: grid;
