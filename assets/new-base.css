@@ -1581,3 +1581,45 @@ body {
     color: var(--rsd-color-text);
   }
 }
+
+
+@media screen and (min-width: 750px) {
+  .product-media-container .product__media.media {
+    aspect-ratio: 1/1;
+  }
+  .product-media-container .product__media.media>img {
+    object-fit: contain;
+  }
+}
+
+
+.shopify-app-block.auto-part-search-bar .gv-mmy-bar {
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.shopify-app-block.auto-part-search-bar #gv-mmy .mmy-tab select {
+  font-family: var(--rsd-font-primary);
+  font-size: var(--rsd-fs-14);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--rsd-color-text);
+  cursor: pointer;
+  background: #fff;
+}
+
+.shopify-app-block.auto-part-search-bar #gv-mmy .mmy-tab select:focus-visible {
+  outline: none;
+  box-shadow: none;
+  outline-offset: none;
+}
+
+.shopify-app-block.auto-part-search-bar .gv-mmy-bar #gv-mmy .mmy-tab .gv-btn-clear,
+.shopify-app-block.auto-part-search-bar .gv-mmy-bar #gv-mmy .mmy-tab .gv-btn-search {
+  font-family: var(--rsd-font-primary);
+  font-size: var(--rsd-fs-14);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  cursor: pointer;
+}
