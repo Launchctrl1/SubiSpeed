@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link
@@ -8,9 +7,6 @@
   onload="this.media='all'"
 >
 
-{%- if settings.predictive_search_enabled -%}
-  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- endif -%}
 
 {%- if section.settings.menu_type_desktop == 'mega' -%}
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -338,7 +334,7 @@
 
       window.matchMedia('(max-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
 
-      if (this.headerIsAlwaysSticky) {
+      if (this.headerIsAlwaysSticky && this.header) {
         this.header.classList.add('shopify-section-header-sticky');
       }
 
@@ -356,7 +352,9 @@
     }
 
     setHeaderHeight() {
-      document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
+      if(this.header) {
+        document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
+      }
     }
 
     disconnectedCallback() {
@@ -369,8 +367,9 @@
         this.headerBounds = entries[0].intersectionRect;
         observer.disconnect();
       });
-
-      observer.observe(this.header);
+      if(this.header) {
+        observer.observe(this.header);
+      }
     }
 
     onScroll() {
