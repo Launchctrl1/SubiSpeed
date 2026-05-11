@@ -802,7 +802,7 @@
 
       window.matchMedia('(max-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
 
-      if (this.headerIsAlwaysSticky) {
+      if (this.headerIsAlwaysSticky && this.header) {
         this.header.classList.add('shopify-section-header-sticky');
       }
 
@@ -820,7 +820,9 @@
     }
 
     setHeaderHeight() {
-      document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
+      if(this.header) {
+        document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
+      }
     }
 
     disconnectedCallback() {
@@ -834,7 +836,9 @@
         observer.disconnect();
       });
 
-      observer.observe(this.header);
+      if(this.header) {
+        observer.observe(this.header);
+      }
     }
 
     onScroll() {
