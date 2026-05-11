@@ -555,6 +555,21 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+                {%- if product.selected_or_first_available_variant.price >= 100000 -%}
+                  <div class="parts-advisor-banner">
+                    <div class="parts-advisor-banner__left">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="parts-advisor-banner__icon" aria-hidden="true" width="28" height="28">
+                        <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                      </svg>
+                      <div class="parts-advisor-banner__text">
+                        <span class="parts-advisor-banner__heading">Have any technical questions?</span>
+                        <span class="parts-advisor-banner__subtext">Call or text: +1 (925) 433-6318</span>
+                      </div>
+                    </div>
+                    <a href="tel:+19254336318" class="parts-advisor-banner__cta">Call now</a>
+                  </div>
+                {%- endif -%}
                 <div>
                   <div class="mb-8 grid grid-cols-2 gap-x-2 gap-y-2.5 features-grid">
                     <div class="flex items-center gap-2.5">

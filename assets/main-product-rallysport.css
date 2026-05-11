@@ -1,3 +1,85 @@
+.parts-advisor-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: #dbeafe;
+  border: 1.5px solid #93c5fd;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.parts-advisor-banner__left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.parts-advisor-banner__icon {
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.parts-advisor-banner__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.parts-advisor-banner__heading {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e3a5f;
+  line-height: 1.35;
+  display: block;
+}
+
+.parts-advisor-banner__subtext {
+  font-size: 13px;
+  font-weight: 400;
+  color: #1e3a5f;
+  line-height: 1.3;
+  display: block;
+}
+
+.parts-advisor-banner__cta {
+  display: inline-flex;
+  align-items: center;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.parts-advisor-banner__cta:hover {
+  background-color: #f1f5f9;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .parts-advisor-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .parts-advisor-banner__cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 h1, .h1  .product__title {
   font-size: 20px;
   font-weight: 600;
