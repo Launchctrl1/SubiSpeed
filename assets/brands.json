@@ -43,25 +43,13 @@
 		"image": "https://vendorlogos.rallysportdirect.com/Alpha%20Rex%20USA.PNG",
 		"link": "/collections/alpha-rex-usa"
 	},
-	"Alta": {
-		"image": "https://vendorlogos.rallysportdirect.com/alta.png",
-		"link": "/collections/alta"
-	},
 	"AMS": {
 		"image": "https://vendorlogos.rallysportdirect.com/ams.png",
 		"link": "/collections/ams"
 	},
-	"Anderson Composites": {
-		"image": "https://vendorlogos.rallysportdirect.com/Anderson%20Composites.PNG",
-		"link": "/collections/anderson-composites"
-	},
 	"AP Racing": {
 		"image": "https://vendorlogos.rallysportdirect.com/ap-racing.png",
 		"link": "/collections/ap-racing"
-	},
-	"APEX": {
-		"image": "https://vendorlogos.rallysportdirect.com/apex-race-parts.png",
-		"link": "/collections/apex"
 	},
 	"Apexi": {
 		"image": "https://vendorlogos.rallysportdirect.com/apexi.png",
@@ -75,17 +63,9 @@
 		"image": "https://vendorlogos.rallysportdirect.com/arp.png",
 		"link": "/collections/arp"
 	},
-	"ATI": {
-		"image": "https://vendorlogos.rallysportdirect.com/ati.png",
-		"link": "/collections/ati"
-	},
 	"Autometer": {
 		"image": "https://vendorlogos.rallysportdirect.com/autometer.png",
 		"link": "/collections/autometer"
-	},
-	"Autotech": {
-		"image": "https://vendorlogos.rallysportdirect.com/autotech.png",
-		"link": "/collections/autotech"
 	},
 	"AWE Tuning": {
 		"image": "https://vendorlogos.rallysportdirect.com/AWE%20Tuning.PNG",
@@ -119,10 +99,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/blouch.png",
 		"link": "/collections/blouch"
 	},
-	"BLOX": {
-		"image": "https://vendorlogos.rallysportdirect.com/blox.png",
-		"link": "/collections/blox"
-	},
 	"Boomba Racing": {
 		"image": "https://vendorlogos.rallysportdirect.com/Boomba.PNG",
 		"link": "/collections/boomba-racing"
@@ -130,10 +106,6 @@
 	"Borla": {
 		"image": "https://vendorlogos.rallysportdirect.com/borla.png",
 		"link": "/collections/borla"
-	},
-	"Bosch": {
-		"image": "https://vendorlogos.rallysportdirect.com/bosch.png",
-		"link": "/collections/bosch"
 	},
 	"Brembo": {
 		"image": "https://vendorlogos.rallysportdirect.com/brembo.png",
@@ -151,17 +123,9 @@
 		"image": "https://vendorlogos.rallysportdirect.com/buddy-club.png",
 		"link": "/collections/buddy-club"
 	},
-	"Carbing": {
-		"image": "https://vendorlogos.rallysportdirect.com/carbing.png",
-		"link": "/collections/carbing"
-	},
 	"Chargespeed": {
 		"image": "https://vendorlogos.rallysportdirect.com/chargespeed.png",
 		"link": "/collections/chargespeed"
-	},
-	"Clevite": {
-		"image": "https://vendorlogos.rallysportdirect.com/Clevite.PNG",
-		"link": "/collections/clevite"
 	},
 	"COBB Tuning": {
 		"image": "https://vendorlogos.rallysportdirect.com/cobb.png",
@@ -183,10 +147,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/compressive.png",
 		"link": "/collections/compressive-tuning"
 	},
-	"Corbeau": {
-		"image": "https://vendorlogos.rallysportdirect.com/corbeau.png",
-		"link": "/collections/corbeau"
-	},
 	"Corsa": {
 		"image": "https://vendorlogos.rallysportdirect.com/corsa.png",
 		"link": "/collections/corsa"
@@ -195,10 +155,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/cpe.png",
 		"link": "/collections/cp"
 	},
-	"Crawford": {
-		"image": "https://vendorlogos.rallysportdirect.com/Crawford.PNG",
-		"link": "/collections/crawford"
-	},
 	"CSF": {
 		"image": "https://vendorlogos.rallysportdirect.com/csf.png",
 		"link": "/collections/csf"
@@ -206,10 +162,6 @@
 	"Cusco": {
 		"image": "https://vendorlogos.rallysportdirect.com/cusco.png",
 		"link": "/collections/cusco"
-	},
-	"DAMD": {
-		"image": "https://vendorlogos.rallysportdirect.com/DAMD.PNG",
-		"link": "/collections/damd"
 	},
 	"Darton": {
 		"image": "https://vendorlogos.rallysportdirect.com/darton.png",
@@ -239,17 +191,9 @@
 		"image": "https://vendorlogos.rallysportdirect.com/EBC.PNG",
 		"link": "/collections/ebc-brakes"
 	},
-	"Edelbrock": {
-		"image": "https://vendorlogos.rallysportdirect.com/edelbrock.png",
-		"link": "/collections/edelbrock"
-	},
 	"Eibach": {
 		"image": "https://vendorlogos.rallysportdirect.com/eibach.png",
 		"link": "/collections/eibach"
-	},
-	"Energy Suspension": {
-		"image": "https://vendorlogos.rallysportdirect.com/energy-suspension.png",
-		"link": "/collections/energy-suspension"
 	},
 	"Enkei": {
 		"image": "https://vendorlogos.rallysportdirect.com/enkei.png",
@@ -275,10 +219,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/fifteen52.png",
 		"link": "/collections/fifteen52"
 	},
-	"Flow Designs": {
-		"image": "https://vendorlogos.rallysportdirect.com/flow-designs.png",
-		"link": "/collections/flow-designs"
-	},
 	"Fluidampr": {
 		"image": "https://vendorlogos.rallysportdirect.com/fluidampr.png",
 		"link": "/collections/fluidampr"
@@ -287,10 +227,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/RCE.PNG",
 		"link": "/collections/forced-performance-turbochargers"
 	},
-	"Ford Motorcraft": {
-		"image": "https://vendorlogos.rallysportdirect.com/ford-motorcraft.png",
-		"link": "/collections/ford-motorcraft"
-	},
 	"Fortune Auto": {
 		"image": "https://vendorlogos.rallysportdirect.com/fortune-auto.png",
 		"link": "/collections/fortune-auto"
@@ -298,10 +234,6 @@
 	"Fuel Injector Clinic": {
 		"image": "https://vendorlogos.rallysportdirect.com/Fuel%20Injector%20Clinic.PNG",
 		"link": "/collections/fuel-injector-clinic"
-	},
-	"Fuelab": {
-		"image": "https://vendorlogos.rallysportdirect.com/fuelab.png",
-		"link": "/collections/fuelab"
 	},
 	"Fumoto": {
 		"image": "https://vendorlogos.rallysportdirect.com/Fumoto.PNG",
@@ -318,10 +250,6 @@
 	"Go Fast Bits": {
 		"image": "https://vendorlogos.rallysportdirect.com/Go%20Fast%20Bits.PNG",
 		"link": "/collections/go-fast-bits"
-	},
-	"Gorilla": {
-		"image": "https://vendorlogos.rallysportdirect.com/gorilla.png",
-		"link": "/collections/gorilla"
 	},
 	"Gram Lights": {
 		"image": "https://vendorlogos.rallysportdirect.com/gram-lights.png",
@@ -343,10 +271,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/GSC.PNG",
 		"link": "/collections/gsc-powerdivision"
 	},
-	"Hallman": {
-		"image": "https://vendorlogos.rallysportdirect.com/hallman-hbc.png",
-		"link": "/collections/hallman"
-	},
 	"Hawk": {
 		"image": "https://vendorlogos.rallysportdirect.com/Hawk.PNG",
 		"link": "/collections/hawk"
@@ -358,10 +282,6 @@
 	"HKS": {
 		"image": "https://vendorlogos.rallysportdirect.com/HKS.PNG",
 		"link": "/collections/hks"
-	},
-	"Husky Liners": {
-		"image": "https://vendorlogos.rallysportdirect.com/husky.png",
-		"link": "/collections/husky-liners"
 	},
 	"IAG Performance": {
 		"image": "https://vendorlogos.rallysportdirect.com/IAG.png",
@@ -431,10 +351,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/Leg%20Sport.PNG",
 		"link": "/collections/legsport"
 	},
-	"LP Aventure": {
-		"image": "https://vendorlogos.rallysportdirect.com/LP_Aventure_Logo.png",
-		"link": "/collections/lp-aventure"
-	},
 	"MagnaFlow": {
 		"image": "https://vendorlogos.rallysportdirect.com/magnaflow.png",
 		"link": "/collections/magnaflow"
@@ -447,17 +363,9 @@
 		"image": "https://vendorlogos.rallysportdirect.com/manley.png",
 		"link": "/collections/manley-performance"
 	},
-	"Mazda OEM": {
-		"image": "https://vendorlogos.rallysportdirect.com/mazda.png",
-		"link": "/collections/mazda-oem"
-	},
 	"MBRP": {
 		"image": "https://vendorlogos.rallysportdirect.com/mbrp.png",
 		"link": "/collections/mbrp"
-	},
-	"McGard": {
-		"image": "https://vendorlogos.rallysportdirect.com/mcgard.png",
-		"link": "/collections/mcgard"
 	},
 	"Mele Design Firm": {
 		"image": "https://vendorlogos.rallysportdirect.com/Mele.PNG",
@@ -466,18 +374,6 @@
 	"Method Race Wheels": {
 		"image": "https://vendorlogos.rallysportdirect.com/Method.PNG",
 		"link": "/collections/method-race-wheels"
-	},
-	"Metra Electronics": {
-		"image": "https://vendorlogos.rallysportdirect.com/metra.png",
-		"link": "/collections/metra-electronics"
-	},
-	"Michelin": {
-		"image": "https://vendorlogos.rallysportdirect.com/Michelin.PNG",
-		"link": "/collections/michelin"
-	},
-	"Milltek": {
-		"image": "https://vendorlogos.rallysportdirect.com/Milltek.PNG",
-		"link": "/collections/milltek"
 	},
 	"Mishimoto": {
 		"image": "https://vendorlogos.rallysportdirect.com/mishimoto.png",
@@ -490,10 +386,6 @@
 	"Moroso": {
 		"image": "https://vendorlogos.rallysportdirect.com/moroso.png",
 		"link": "/collections/moroso"
-	},
-	"Motiv Concepts": {
-		"image": "https://vendorlogos.rallysportdirect.com/motiv.png",
-		"link": "/collections/motiv-concepts"
 	},
 	"Motul": {
 		"image": "https://vendorlogos.rallysportdirect.com/motul.png",
@@ -527,10 +419,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/ohlins.png",
 		"link": "/collections/ohlins"
 	},
-	"Okada Projects": {
-		"image": "https://vendorlogos.rallysportdirect.com/apr.png",
-		"link": "/collections/okada-projects"
-	},
 	"OLM": {
 		"image": "https://vendorlogos.rallysportdirect.com/OLM_Logo.png",
 		"link": "/collections/olm"
@@ -547,29 +435,13 @@
 		"image": "https://vendorlogos.rallysportdirect.com/P3%20Gauges.PNG",
 		"link": "/collections/p3-gauges"
 	},
-	"PAC Audio": {
-		"image": "https://vendorlogos.rallysportdirect.com/pac.png",
-		"link": "/collections/pac-audio"
-	},
-	"Password:JDM": {
-		"image": "https://vendorlogos.rallysportdirect.com/JDM.PNG",
-		"link": "/collections/password:jdm"
-	},
 	"Pedders": {
 		"image": "https://vendorlogos.rallysportdirect.com/pedders.png",
 		"link": "/collections/pedders"
 	},
-	"Permaseal MLSR": {
-		"image": "https://vendorlogos.rallysportdirect.com/permaseal.png",
-		"link": "/collections/permaseal-mlsr"
-	},
 	"PERRIN": {
 		"image": "https://vendorlogos.rallysportdirect.com/Perrin.PNG",
 		"link": "/collections/perrin"
-	},
-	"PIAA": {
-		"image": "https://vendorlogos.rallysportdirect.com/piaa.png",
-		"link": "/collections/piaa"
 	},
 	"Planted Technology": {
 		"image": "https://vendorlogos.rallysportdirect.com/Planted%20Technology.PNG",
@@ -579,18 +451,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/powerstop.png",
 		"link": "/collections/power-stop"
 	},
-	"PRL Motorsports": {
-		"image": "https://vendorlogos.rallysportdirect.com/PRL.PNG",
-		"link": "/collections/prl-motorsports"
-	},
-	"Prodrive": {
-		"image": "https://vendorlogos.rallysportdirect.com/prodrive.png",
-		"link": "/collections/prodrive"
-	},
-	"Profile Performance": {
-		"image": "https://vendorlogos.rallysportdirect.com/Profile%20Performance.PNG",
-		"link": "/collections/profile-performance"
-	},
 	"Project Mu": {
 		"image": "https://vendorlogos.rallysportdirect.com/project-mu.png",
 		"link": "/collections/project-mu"
@@ -599,17 +459,9 @@
 		"image": "https://vendorlogos.rallysportdirect.com/prosport.png",
 		"link": "/collections/prosport"
 	},
-	"Proto": {
-		"image": "https://vendorlogos.rallysportdirect.com/proto.png",
-		"link": "/collections/proto"
-	},
 	"PTP Turbo Blankets": {
 		"image": "https://vendorlogos.rallysportdirect.com/ptp.png",
 		"link": "/collections/ptp-turbo-blankets"
-	},
-	"Putco": {
-		"image": "https://vendorlogos.rallysportdirect.com/putco.png",
-		"link": "/collections/putco"
 	},
 	"Radium Engineering": {
 		"image": "https://vendorlogos.rallysportdirect.com/radium.png",
@@ -623,33 +475,17 @@
 		"image": "https://vendorlogos.rallysportdirect.com/ati.png",
 		"link": "/collections/rally-innovations"
 	},
-	"RallySport Kits": {
-		"image": "https://vendorlogos.rallysportdirect.com/rallysport-kit.png",
-		"link": "/collections/rallysport-kits"
-	},
 	"Rays": {
 		"image": "https://vendorlogos.rallysportdirect.com/rays.png",
 		"link": "/collections/rays"
-	},
-	"ReadyLIFT": {
-		"image": "https://vendorlogos.rallysportdirect.com/readylift.png",
-		"link": "/collections/readylift"
 	},
 	"Red Line": {
 		"image": "https://vendorlogos.rallysportdirect.com/redline.png",
 		"link": "/collections/red-line"
 	},
-	"Rek Gen": {
-		"image": "https://vendorlogos.rallysportdirect.com/rek-gen.png",
-		"link": "/collections/rek-gen"
-	},
 	"Remark": {
 		"image": "https://vendorlogos.rallysportdirect.com/Remark.png",
 		"link": "/collections/remark"
-	},
-	"Remflex": {
-		"image": "https://vendorlogos.rallysportdirect.com/remflex.png",
-		"link": "/collections/remflex"
 	},
 	"REVEL VLS": {
 		"image": "https://vendorlogos.rallysportdirect.com/REVEL.PNG",
@@ -658,10 +494,6 @@
 	"Rexpeed": {
 		"image": "https://vendorlogos.rallysportdirect.com/rexpeed.png",
 		"link": "/collections/rexpeed"
-	},
-	"Rhino-Rack": {
-		"image": "https://vendorlogos.rallysportdirect.com/Rhino%20Rack.PNG",
-		"link": "/collections/rhino-rack"
 	},
 	"Rigid": {
 		"image": "https://vendorlogos.rallysportdirect.com/Rigid.PNG",
@@ -674,18 +506,6 @@
 	"Royal Purple": {
 		"image": "https://vendorlogos.rallysportdirect.com/Royal_Purple_Logo.png",
 		"link": "/collections/royal-purple"
-	},
-	"RS-R": {
-		"image": "https://vendorlogos.rallysportdirect.com/rs-r.png",
-		"link": "/collections/rs-r"
-	},
-	"Stance Suspension": {
-		"image": "https://vendorlogos.rallysportdirect.com/Stance.PNG",
-		"link": "/collections/stance-suspension"
-	},
-	"Steeda": {
-		"image": "https://vendorlogos.rallysportdirect.com/Steeda.PNG",
-		"link": "/collections/steeda"
 	},
 	"STI": {
 		"image": "https://vendorlogos.rallysportdirect.com/sti.png",
@@ -723,10 +543,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/tein.png",
 		"link": "/collections/tein"
 	},
-	"Thermo Tec": {
-		"image": "https://vendorlogos.rallysportdirect.com/thermo-tec.png",
-		"link": "/collections/thermo-tec"
-	},
 	"Tial": {
 		"image": "https://vendorlogos.rallysportdirect.com/tial.png",
 		"link": "/collections/tial"
@@ -751,10 +567,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/toyota.png",
 		"link": "/collections/toyota"
 	},
-	"Track Form": {
-		"image": "https://vendorlogos.rallysportdirect.com/track-form.png",
-		"link": "/collections/track-form"
-	},
 	"TRAILS by Grimmspeed": {
 		"image": "https://vendorlogos.rallysportdirect.com/grimmspeed.png",
 		"link": "/collections/trails-by-grimmspeed"
@@ -771,10 +583,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/turboxs.png",
 		"link": "/collections/turboxs"
 	},
-	"Valenti": {
-		"image": "https://vendorlogos.rallysportdirect.com/valenti.png",
-		"link": "/collections/valenti"
-	},
 	"Varis": {
 		"image": "https://vendorlogos.rallysportdirect.com/Varis.PNG",
 		"link": "/collections/varis"
@@ -783,21 +591,9 @@
 		"image": "https://vendorlogos.rallysportdirect.com/verus.png",
 		"link": "/collections/verus-engineering"
 	},
-	"Vibrant": {
-		"image": "https://vendorlogos.rallysportdirect.com/vibrant.png",
-		"link": "/collections/vibrant"
-	},
 	"Volk Racing": {
 		"image": "https://vendorlogos.rallysportdirect.com/volk-racing.png",
 		"link": "/collections/volk-racing"
-	},
-	"Voodoo13": {
-		"image": "https://vendorlogos.rallysportdirect.com/voodoo13.png",
-		"link": "/collections/voodoo13"
-	},
-	"Vortech": {
-		"image": "https://vendorlogos.rallysportdirect.com/vortech.png",
-		"link": "/collections/vortech"
 	},
 	"Weathertech": {
 		"image": "https://vendorlogos.rallysportdirect.com/weathertech.png",
@@ -819,10 +615,6 @@
 		"image": "https://vendorlogos.rallysportdirect.com/wilwood.png",
 		"link": "/collections/wilwood"
 	},
-	"Winmax": {
-		"image": "https://vendorlogos.rallysportdirect.com/winmax.png",
-		"link": "/collections/winmax"
-	},
 	"Work Wheels": {
 		"image": "https://vendorlogos.rallysportdirect.com/Work%20Wheels.PNG",
 		"link": "/collections/work-wheels"
@@ -834,9 +626,5 @@
 	"XClutch": {
 		"image": "https://vendorlogos.rallysportdirect.com/xclutch_logo.png",
 		"link": "/collections/xclutch"
-	},
-	"XXR Wheels": {
-		"image": "https://vendorlogos.rallysportdirect.com/xxr.png",
-		"link": "/collections/xxr-wheels"
 	}
 }
