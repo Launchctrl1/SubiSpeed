@@ -364,7 +364,7 @@
                       </span>
                       <span> and ready to ship!</span>
                     {% else %}
-                      <div class="custom-carousel-stock out-of-stock">Ships From Manufacturer</div>
+                      <div class="custom-carousel-stock out-of-stock">Ships from manufacturer when available</div>
                     {% endif %}
                     {%- liquid
                       assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
