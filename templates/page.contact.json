@@ -96,6 +96,7 @@
         "column_XX8zeE",
         "column_hjDthV"
       ],
+      "disabled": true,
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
         "title": "",
@@ -123,12 +124,36 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "rich_text_r47K94": {
+      "type": "rich-text",
+      "blocks": {
+        "text_CrzLgP": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>Subispeed<br/>San Francisco, CA<br/>Support@subispeed.com<br/>888-885-2002</h3><p><br/>A LaunchCTRL1 Company</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_CrzLgP"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
     "image_banner_wfby4P",
     "main",
     "multicolumn_gGx9jm",
-    "form"
+    "form",
+    "rich_text_r47K94"
   ]
 }
