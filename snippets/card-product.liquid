@@ -154,22 +154,24 @@
               {{ card_product.selected_or_first_available_variant.inventory_quantity }} in stock
             </div>
           {% endif %} {% endcomment %}
-           {%- assign variant = card_product.selected_or_first_available_variant -%}
-
-          {%- if variant.inventory_quantity > 0 -%}
-            <div class="custom-carousel-stock">
-              {{ variant.inventory_quantity }} in stock
-            </div>
-
+          {%- assign variant = card_product.selected_or_first_available_variant -%}
+          {%- if variant.inventory_management == blank or variant.inventory_quantity > 0 -%}
+            <div class="custom-carousel-stock">{{ variant.inventory_quantity }} in stock</div>
           {%- elsif variant.inventory_policy == 'continue' -%}
-            <div class="custom-carousel-stock restocking">
-              Restocking soon
-            </div>
-
+            {%- if card_product.vendor == 'Annex Suspension' or 
+                  card_product.vendor == 'Fortune Auto' or
+                  card_product.vendor == 'Flatout Suspension' or
+                  card_product.vendor == 'Blouch' or
+                  card_product.vendor == 'Forced Performance' or
+                  card_product.vendor == 'HEL Performance USA B2B' or
+                  card_product.vendor == 'RK Titanium'
+            -%}
+              <div class="custom-carousel-stock out-of-stock">Made To Order</div>
+            {%- else -%}
+              <div class="custom-carousel-stock out-of-stock">Ships from manufacturer</div>
+            {%- endif -%}
           {%- else -%}
-            <div class="custom-carousel-stock out-of-stock">
-              Out of stock
-            </div>
+            <div class="custom-carousel-stock out-of-stock">Out of stock</div>
           {%- endif -%}
           <h3
             class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"

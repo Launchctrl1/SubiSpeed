@@ -1623,3 +1623,13 @@ body {
   letter-spacing: .1em;
   cursor: pointer;
 }
+
+.price-per-item__container {
+  display: flex;
+  gap: 10px;
+}
+
+.price-per-item__container .custom-carousel-stock {
+  display: flex;
+  align-items: center;
+}
