@@ -60,7 +60,7 @@
         "text_7KtCPL": {
           "type": "text",
           "settings": {
-            "text": "<p>We love autosports is why! The staff has a background in what you love, autosports. We are actively involved in SCCA Auto-X, NASA, 24hrs of Lemons, Chumpcar, Drag Racing, and other HPDE clubs.<br/><br/>Among the staff, we have over 50 years of experience in autosports and modifying vehicles, with hundreds of hours behind the wheel competitively. We also have over 30 years of experience in sales and distribution so we are confident that we WILL keep our customers happy - by recommending parts that are proven to work with your vehicle for your specific purpose, and providing competitive pricing and reliable delivery.<br/><br/>We're not here to just sell parts, but also advise you on the best options for your specific use. A daily driver that needs to keep noise down and comply with CARB laws, or something that can autocross and be competitive yet still make the commute to work comfortably. Need an HPDE set up, or questions on tires or brakes? We got that covered as well. We have done it all so we know what works and what doesn't. So if you need to make your vehicle faster, sharper, or handle better we're the one place to make it happen.<br/><br/>With two facilities located in Des Moines, Iowa we have over 20,000 SQFT of space to stock the parts for the markets we serve. A staff of just over 20 people are employed here and strive to bring you the most complete automotive experience in the car communities we serve. If you need anything at all head over to the contact page and submit a request. This will create a support ticket and someone will get back to you as soon as possible.</p>"
+            "text": ""
           }
         }
       },
@@ -144,67 +144,6 @@
         "padding_bottom": 36
       }
     },
-    "featured_collections_4yBaJJ": {
-      "type": "featured-collections",
-      "blocks": {
-        "showcase_item_acyymq": {
-          "type": "showcase_item",
-          "settings": {
-            "collection": "",
-            "custom_url": "",
-            "custom_image": "shopify://shop_images/aboutus2016-4_jpg.jpg",
-            "title": "",
-            "subtitle": "",
-            "button_text": ""
-          }
-        },
-        "showcase_item_LkUcdR": {
-          "type": "showcase_item",
-          "settings": {
-            "collection": "",
-            "custom_url": "",
-            "custom_image": "shopify://shop_images/aboutus2016-3_jpg.jpg",
-            "title": "",
-            "subtitle": "",
-            "button_text": ""
-          }
-        },
-        "showcase_item_mfxRma": {
-          "type": "showcase_item",
-          "settings": {
-            "collection": "",
-            "custom_url": "",
-            "custom_image": "shopify://shop_images/40a8468.jpg2.jpg",
-            "title": "",
-            "subtitle": "",
-            "button_text": ""
-          }
-        },
-        "showcase_item_kwtimP": {
-          "type": "showcase_item",
-          "settings": {
-            "collection": "",
-            "custom_url": "",
-            "custom_image": "shopify://shop_images/aboutus2016-2_jpg.jpg",
-            "title": "",
-            "subtitle": "",
-            "button_text": ""
-          }
-        }
-      },
-      "block_order": [
-        "showcase_item_acyymq",
-        "showcase_item_LkUcdR",
-        "showcase_item_mfxRma",
-        "showcase_item_kwtimP"
-      ],
-      "name": "Collection Showcase",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "color_scheme": ""
-      }
-    },
     "image_with_text_rrj4Ca": {
       "type": "image-with-text",
       "blocks": {
@@ -218,7 +157,7 @@
         "text_7TREjp": {
           "type": "text",
           "settings": {
-            "text": "<p>Have a question about a product, fitment or SubiSpeed? Our highly trained customer service team are waiting for you.</p><p>Contact us or call 888-885-2002</p>",
+            "text": "<p>Have a question about a product, fitment or SubiSpeed? Our highly trained customer service team are waiting for you.</p><p>Contact us or call 888-457-2559</p>",
             "text_style": "body"
           }
         },
@@ -259,7 +198,6 @@
     "rich_text_RAFg3N",
     "statistics_dWgAi9",
     "video_tmm3BG",
-    "featured_collections_4yBaJJ",
     "image_with_text_rrj4Ca"
   ]
 }
