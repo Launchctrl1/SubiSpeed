@@ -1582,6 +1582,9 @@ body {
   }
 }
 
+.product-media-container .product__media.media {
+  width: 100%;
+}
 
 @media screen and (min-width: 750px) {
   .product-media-container .product__media.media {
