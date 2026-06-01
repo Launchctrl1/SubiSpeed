@@ -14,6 +14,7 @@
       "blocks": {
         "ai_gen_block_f00818c_RfaTdL": {
           "type": "ai_gen_block_f00818c",
+          "disabled": true,
           "settings": {
             "slide_1_image": "shopify://shop_images/RSD_-_1400x450_-_Template_7_3.png",
             "slide_1_mobile_image": "shopify://shop_images/RSD_-_1080x1350_-_Template_6_1.png",
