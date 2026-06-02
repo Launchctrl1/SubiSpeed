@@ -14,13 +14,12 @@
       "blocks": {
         "ai_gen_block_f00818c_RfaTdL": {
           "type": "ai_gen_block_f00818c",
-          "disabled": true,
           "settings": {
-            "slide_1_image": "shopify://shop_images/RSD_-_1400x450_-_Template_7_3.png",
-            "slide_1_mobile_image": "shopify://shop_images/RSD_-_1080x1350_-_Template_6_1.png",
+            "slide_1_image": "shopify://shop_images/ChatGPT_Image_Jun_2_2026_12_30_43_AM_1.png",
+            "slide_1_mobile_image": "shopify://shop_images/ChatGPT_Image_Jun_2_2026_12_30_43_AM_2.png",
             "slide_1_show_button": true,
-            "slide_1_button_text": "Shop Our Cusco Sale",
-            "slide_1_button_link": "shopify://collections/cusco",
+            "slide_1_button_text": "Shop Perrin Now",
+            "slide_1_button_link": "shopify://collections/perrin",
             "slide_2_image": "shopify://shop_images/olm-x-subispeed-sokudo.png",
             "slide_2_mobile_image": "shopify://shop_images/olm-x-subispeed-sokudo-mob-crop-2.png",
             "slide_2_show_button": true,
