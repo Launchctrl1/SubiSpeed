@@ -213,7 +213,17 @@
                                 {%- assign url_parts = childlink.url | split: '?' -%}
                                 {%- assign filter_string = '' -%}
                                 {%- if url_parts.size > 1 -%}
-                                  {%- assign all_params = url_parts[1] | split: '&' -%}
+                                  {%- assign query_joined = '' -%}
+                                  {%- for part in url_parts -%}
+                                    {%- unless forloop.first -%}
+                                      {%- if query_joined == '' -%}
+                                        {%- assign query_joined = part -%}
+                                      {%- else -%}
+                                        {%- assign query_joined = query_joined | append: '&' | append: part -%}
+                                      {%- endif -%}
+                                    {%- endunless -%}
+                                  {%- endfor -%}
+                                  {%- assign all_params = query_joined | split: '&' -%}
                                   {%- for param in all_params -%}
                                     {%- if param contains 'filter.p.' -%}
                                       {%- if filter_string == '' -%}
