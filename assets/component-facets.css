@@ -473,6 +473,7 @@
 
 :is(.facets-layout-list--swatch, .facets-layout-grid--image) .facets__label.disabled .facet-checkbox__text {
   opacity: 0.4;
+  display: none;
 }
 
 /* End disabled state */
