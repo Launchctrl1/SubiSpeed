@@ -36,6 +36,17 @@
         text-align: left;
     }
 
+    .stock-message {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: 0.75rem;
+    }
+
+    .stock-message__subtext {
+      font-weight: 600;
+    }
+
       .product__title h1 {
         font-size: 20px;
         font-weight: 600;
@@ -55,6 +66,15 @@
           padding-bottom: {{ section.settings.padding_bottom }}px;
         }
       }
+
+    @media screen and (max-width: 749px) {
+      .stock-message {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 0;
+        gap: 0;
+      }
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -359,10 +379,12 @@
                       </button>
                     </quantity-input>
                     {% if product.variants.first.inventory_quantity > 0 %}
-                      <span class="custom-carousel-stock">
-                        {{ product.variants.first.inventory_quantity }} in stock
-                      </span>
-                      <span> and ready to ship!</span>
+                      <div class="stock-message">
+                        <span class="custom-carousel-stock">
+                          {{ product.variants.first.inventory_quantity }} in stock
+                        </span>
+                        <span class="stock-message__subtext"> and ready to ship!</span>
+                      </div>
                     {% else %}
                       <div class="custom-carousel-stock out-of-stock">Ships from manufacturer when available</div>
                     {% endif %}
