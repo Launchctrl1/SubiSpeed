@@ -1,0 +1,357 @@
+{{ 'rsd-small-cards.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading = section.settings.heading
+
+  assign cards_per_row_mobile  = section.settings.cards_per_row_mobile
+  assign cards_per_row_tablet  = section.settings.cards_per_row_tablet
+  assign cards_per_row_desktop = section.settings.cards_per_row_desktop
+
+  assign add_margins          = section.settings.add_margins
+  assign margin_top           = section.settings.margin_top
+  assign margin_bottom        = section.settings.margin_bottom
+  assign tab_margin_top       = section.settings.tab_margin_top
+  assign tab_margin_bottom    = section.settings.tab_margin_bottom
+  assign mobile_margin_top    = section.settings.mobile_margin_top
+  assign mobile_margin_bottom = section.settings.mobile_margin_bottom
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .rsd-small-cards__grid {
+    --rsd-small-cards-cols: {{ cards_per_row_mobile }};
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .rsd-small-cards__grid {
+      --rsd-small-cards-cols: {{ cards_per_row_tablet }};
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    #shopify-section-{{ section.id }} .rsd-small-cards__grid {
+      --rsd-small-cards-cols: {{ cards_per_row_desktop }};
+    }
+  }
+{%- endstyle -%}
+
+{%- if add_margins -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ mobile_margin_top }}px;
+      margin-bottom: {{ mobile_margin_bottom }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      #shopify-section-{{ section.id }} {
+        margin-top: {{ tab_margin_top }}px;
+        margin-bottom: {{ tab_margin_bottom }}px;
+      }
+    }
+
+    @media screen and (min-width: 992px) {
+      #shopify-section-{{ section.id }} {
+        margin-top: {{ margin_top }}px;
+        margin-bottom: {{ margin_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
+<div class="rsd-small-cards">
+  <div class="rsd-small-cards__inner page-width">
+
+    {%- if heading != blank -%}
+      <div class="rsd-small-cards__header">
+        <h2 class="rsd-small-cards__heading h1">{{ heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <ul class="rsd-small-cards__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign bg_image        = block.settings.bg_image
+          assign logo_image      = block.settings.logo_image
+          assign prefix_text     = block.settings.prefix_text
+          assign discount_value  = block.settings.discount_value
+          assign discount_suffix = block.settings.discount_suffix
+          assign subtext         = block.settings.subtext
+          assign button_text     = block.settings.button_text
+          assign button_url      = block.settings.button_url
+
+          assign card_alt = discount_value | append: discount_suffix | append: ' ' | append: subtext
+          assign bg_alt    = bg_image.alt | default: card_alt | escape
+          assign logo_alt  = logo_image.alt | default: button_text | escape
+        -%}
+
+        <li class="rsd-small-cards__item">
+          {%- if button_url != blank -%}
+            <a href="{{ button_url }}" class="rsd-small-cards__card" {{ block.shopify_attributes }}>
+          {%- else -%}
+            <div class="rsd-small-cards__card" {{ block.shopify_attributes }}>
+          {%- endif -%}
+
+            {%- if bg_image != blank -%}
+              <div class="rsd-small-cards__media">
+                {{
+                  bg_image
+                  | image_url: width: 750
+                  | image_tag:
+                    loading: 'lazy',
+                    width: bg_image.width,
+                    height: bg_image.height,
+                    alt: bg_alt,
+                    sizes: '(min-width: 992px) 20vw, (min-width: 750px) 33vw, 50vw',
+                    widths: '275, 375, 550, 750'
+                }}
+              </div>
+            {%- endif -%}
+
+            <div class="rsd-small-cards__content">
+              <div class="rsd-small-cards__content-head">
+                {%- if prefix_text != blank -%}
+                  <p class="rsd-small-cards__prefix h6-rsd">{{ prefix_text }}</p>
+                {%- endif -%}
+
+                {%- if discount_value != blank -%}
+                  <p class="rsd-small-cards__value h1-rsd">{{ discount_value }}</p>
+                {%- endif -%}
+
+                {%- if discount_suffix != blank -%}
+                  <p class="rsd-small-cards__suffix h3-rsd">{{ discount_suffix }}</p>
+                {%- endif -%}
+
+                {%- if subtext != blank -%}
+                  <p class="rsd-small-cards__subtext h6-rsd">{{ subtext }}</p>
+                {%- endif -%}
+              </div>
+
+              {%- if logo_image != blank -%}
+                <div class="rsd-small-cards__logo">
+                  {{
+                    logo_image
+                    | image_url: width: 300
+                    | image_tag: loading: 'lazy', width: logo_image.width, height: logo_image.height, alt: logo_alt
+                  }}
+                </div>
+              {%- endif -%}
+
+              {%- if button_text != blank -%}
+                <span class="rsd-small-cards__cta h5-rsd">{{ button_text }}</span>
+              {%- endif -%}
+            </div>
+
+          {%- if button_url != blank -%}
+            </a>
+          {%- else -%}
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.rsd_small_cards.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.rsd_small_cards.settings.header_content.content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.rsd_small_cards.settings.heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rsd_small_cards.settings.header_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "cards_per_row_mobile",
+      "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.label",
+      "options": [
+        { "value": "1", "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.options.1" },
+        { "value": "2", "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.options.2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "cards_per_row_tablet",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "t:sections.rsd_small_cards.settings.cards_per_row_tablet.label",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "cards_per_row_desktop",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "label": "t:sections.rsd_small_cards.settings.cards_per_row_desktop.label",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "add_margins",
+      "label": "t:sections.rsd_small_cards.settings.add_margins.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rsd_small_cards.settings.header_desk_margin.content",
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_small_cards.settings.margin_top.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_small_cards.settings.margin_bottom.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rsd_small_cards.settings.header_tab_margin.content",
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "tab_margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_small_cards.settings.tab_margin_top.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "tab_margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_small_cards.settings.tab_margin_bottom.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.rsd_small_cards.settings.header_mob_margin.content",
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_small_cards.settings.mobile_margin_top.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.rsd_small_cards.settings.mobile_margin_bottom.label",
+      "default": 0,
+      "visible_if": "{{ section.settings.add_margins == true }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "t:sections.rsd_small_cards.blocks.card.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "t:sections.rsd_small_cards.blocks.card.settings.bg_image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "t:sections.rsd_small_cards.blocks.card.settings.logo_image.label"
+        },
+        {
+          "type": "text",
+          "id": "prefix_text",
+          "label": "t:sections.rsd_small_cards.blocks.card.settings.prefix_text.label",
+          "default": "Up to"
+        },
+        {
+          "type": "text",
+          "id": "discount_value",
+          "label": "t:sections.rsd_small_cards.blocks.card.settings.discount_value.label",
+          "default": "15"
+        },
+        {
+          "type": "text",
+          "id": "discount_suffix",
+          "label": "t:sections.rsd_small_cards.blocks.card.settings.discount_suffix.label",
+          "default": "%OFF"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "t:sections.rsd_small_cards.blocks.card.settings.subtext.label",
+          "default": "Sitewide Sale"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "t:sections.rsd_small_cards.blocks.card.settings.button_text.label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "t:sections.rsd_small_cards.blocks.card.settings.button_url.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.rsd_small_cards.presets.name",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

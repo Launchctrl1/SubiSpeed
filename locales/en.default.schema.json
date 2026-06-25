@@ -1883,6 +1883,51 @@
         }
       }
     },
+    "rsd_small_cards": {
+      "name": "RSD Small Cards",
+      "settings": {
+        "header_content": { "content": "Content" },
+        "heading": { "label": "Heading (optional)" },
+        "header_layout": { "content": "Layout" },
+        "cards_per_row_mobile": {
+          "label": "Cards per row - Mobile",
+          "options": {
+            "1": "1",
+            "2": "2"
+          }
+        },
+        "cards_per_row_tablet": { "label": "Cards per row - Tablet" },
+        "cards_per_row_desktop": { "label": "Cards per row - Desktop" },
+        "add_margins": { "label": "Add margins" },
+        "header_desk_margin": { "content": "Desktop margins" },
+        "margin_top": { "label": "Top margin" },
+        "margin_bottom": { "label": "Bottom margin" },
+        "header_tab_margin": { "content": "Tablet margins" },
+        "tab_margin_top": { "label": "Top margin" },
+        "tab_margin_bottom": { "label": "Bottom margin" },
+        "header_mob_margin": { "content": "Mobile margins" },
+        "mobile_margin_top": { "label": "Top margin" },
+        "mobile_margin_bottom": { "label": "Bottom margin" }
+      },
+      "blocks": {
+        "card": {
+          "name": "Card",
+          "settings": {
+            "bg_image": { "label": "Background image" },
+            "logo_image": { "label": "Brand logo" },
+            "prefix_text": { "label": "Prefix text" },
+            "discount_value": { "label": "Discount value" },
+            "discount_suffix": { "label": "Discount suffix" },
+            "subtext": { "label": "Subtext" },
+            "button_text": { "label": "Button text" },
+            "button_url": { "label": "Button URL" }
+          }
+        }
+      },
+      "presets": {
+        "name": "RSD Small Cards"
+      }
+    },
     "rsd_collection_tree": {
       "name": "RSD Collection Tree",
       "presets": { "name": "RSD Collection Tree" },

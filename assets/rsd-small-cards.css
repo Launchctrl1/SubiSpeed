@@ -1,0 +1,190 @@
+/* ============================================
+   RSD Small Cards Section
+   assets/rsd-small-cards.css
+   ============================================ */
+
+/* --- Wrapper --- */
+.rsd-small-cards {
+  width: 100%;
+}
+
+/* --- Header --- */
+.rsd-small-cards__header {
+  margin-bottom: 24px;
+}
+
+@media screen and (min-width: 992px) {
+  .rsd-small-cards__header {
+    margin-bottom: 40px;
+  }
+}
+
+.rsd-small-cards__heading {
+  color: var(--rsd-color-text);
+  margin: 0;
+}
+
+/* --- Grid ---
+   Flexbox (not CSS grid) so a partial last row centers
+   instead of sticking to the left edge. --rsd-small-cards-cols
+   is set per breakpoint via inline style in the section file. */
+.rsd-small-cards__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  --rsd-small-cards-cols: 2;
+  --rsd-small-cards-gap: 12px;
+  gap: var(--rsd-small-cards-gap);
+}
+
+@media screen and (min-width: 750px) {
+  .rsd-small-cards__grid {
+    --rsd-small-cards-gap: 16px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .rsd-small-cards__grid {
+    --rsd-small-cards-gap: 20px;
+  }
+}
+
+/* --- Card --- */
+.rsd-small-cards__item {
+  position: relative;
+  display: block;
+  flex: 0 0 calc((100% - (var(--rsd-small-cards-cols) - 1) * var(--rsd-small-cards-gap)) / var(--rsd-small-cards-cols));
+  max-width: calc((100% - (var(--rsd-small-cards-cols) - 1) * var(--rsd-small-cards-gap)) / var(--rsd-small-cards-cols));
+  overflow: hidden;
+}
+
+.rsd-small-cards__card {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: var(--rsd-color-mov-border);
+  color: var(--rsd-color-text-white);
+  text-decoration: none;
+}
+
+.rsd-small-cards__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.rsd-small-cards__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(85%) brightness(0.65) blur(3px);
+  transition: filter var(--rsd-transition);
+}
+
+/* Reveal the photo on hover / keyboard focus */
+.rsd-small-cards__card:hover .rsd-small-cards__media img,
+.rsd-small-cards__card:focus-visible .rsd-small-cards__media img {
+  filter: none;
+}
+
+.rsd-small-cards__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 12px;
+}
+
+.rsd-small-cards__content-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
+}
+
+.rsd-small-cards__prefix {
+  font-family: "Times New Roman";
+  color: var(--rsd-color-text-white);
+  font-weight: 700;
+  font-size: var(--rsd-fs-16);
+  line-height: 1.2;
+  margin: 0 0 -10px;
+}
+
+.rsd-small-cards__value {
+  font-family: "Times New Roman";
+  font-size: var(--rsd-fs-80);
+  font-weight: 900;
+  line-height: .9;
+  margin: 0;
+}
+
+.rsd-small-cards__suffix {
+  font-family: "Times New Roman";
+  font-weight: 900;
+  line-height: .9;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.rsd-small-cards__subtext {
+  font-family: "Times New Roman";
+  color: var(--rsd-color-text-white);
+  font-weight: 700;
+  margin: 0;
+}
+
+@media screen and (min-width: 992px) {
+  .rsd-small-cards__value {
+    font-size: var(--rsd-fs-140);
+  }
+  .rsd-small-cards__content {
+    padding: 40px 12px 30px; 
+  }
+  .rsd-small-cards__content-head {
+    margin: 0 0 30px;
+  }
+}
+
+.rsd-small-cards__logo {
+  margin-top: auto;
+  width: 70%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--rsd-color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10%;
+}
+
+.rsd-small-cards__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.rsd-small-cards__cta {
+  font-family: "Times New Roman";
+  color: var(--rsd-color-text-white);
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-top: 12px;
+  transition: color var(--rsd-transition);
+}
+
+.rsd-small-cards__card:hover .rsd-small-cards__cta,
+.rsd-small-cards__card:focus-visible .rsd-small-cards__cta {
+  text-decoration: none;
+}

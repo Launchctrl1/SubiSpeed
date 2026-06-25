@@ -56,6 +56,111 @@
       ],
       "settings": {}
     },
+    "rsd_small_cards_UzMkF8": {
+      "type": "rsd-small-cards",
+      "blocks": {
+        "card_7PDhbt": {
+          "type": "card",
+          "settings": {
+            "bg_image": "shopify://shop_images/a6d1e05637e38aa2ad4a99bf95e27af6L.jpg",
+            "logo_image": "shopify://shop_images/9d610e58d30ade518e7d907725f95cc1L_06f42ba1-b661-47ea-a46b-8333da14d065.jpg",
+            "prefix_text": "Up to",
+            "discount_value": "15",
+            "discount_suffix": "%OFF",
+            "subtext": "Sitewide Sale",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/2002-2007-subaru-wrx-collection"
+          }
+        },
+        "card_cBUeRJ": {
+          "type": "card",
+          "settings": {
+            "bg_image": "shopify://shop_images/4-3_VB_Tails2_578e360f-fc64-42bc-80cd-a9ed9060a3a6.jpg",
+            "logo_image": "shopify://shop_images/6cc675b5a011acd812ac2e57b0cb1646L_49d223dc-78f5-4b79-b7ee-7f1355c9321e.jpg",
+            "prefix_text": "Up to",
+            "discount_value": "10",
+            "discount_suffix": "%OFF",
+            "subtext": "Sitewide Sale",
+            "button_text": "Shop Now",
+            "button_url": "shopify://products/070-ejwt-killer-b-motorsport-oil-pickup-and-baffle-combo"
+          }
+        },
+        "card_WctgWG": {
+          "type": "card",
+          "settings": {
+            "bg_image": "shopify://shop_images/A10260RED-overtake-2022-subaru-wrx-radiator-hose-red-1.jpg",
+            "logo_image": "shopify://shop_images/adcc411a17dda8cfb611fdadfb87e83cL_a5c07945-a702-45b0-9209-1cfdee3963c1.jpg",
+            "prefix_text": "Up to",
+            "discount_value": "20",
+            "discount_suffix": "%OFF",
+            "subtext": "Sitewide Sale",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/2025-holiday-promo-gift-items-100"
+          }
+        },
+        "card_8kTtin": {
+          "type": "card",
+          "settings": {
+            "bg_image": "shopify://shop_images/OLMA.70032.1-SBR-OLM-Evolution-Tail-Lights-_Smoked-Lens_-Black-Base_-Red-Bar_---15_-WRX-STI-10.jpg",
+            "logo_image": "shopify://shop_images/8b8b35a6a481c109fc4bb186bd131e26L_952932e1-6ed7-4d97-8551-e51d66467df4.png",
+            "prefix_text": "Up to",
+            "discount_value": "10",
+            "discount_suffix": "%OFF",
+            "subtext": "Sitewide Sale",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/2022-2026-subaru-wrx-collection"
+          }
+        },
+        "card_RUJKHc": {
+          "type": "card",
+          "settings": {
+            "bg_image": "shopify://shop_images/HKS-Toyota-GR-Supra-drift-car-side__89591.1749586635.jpg",
+            "logo_image": "shopify://shop_images/4dc86bfa035c8e693db437e6bde43939_a9e242a3-2e18-42a1-8aa6-50f978e7a8c2.jpg",
+            "prefix_text": "Up to",
+            "discount_value": "15",
+            "discount_suffix": "%OFF",
+            "subtext": "Sitewide Sale",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/afe-memorial-day-sale"
+          }
+        },
+        "card_LRhzwL": {
+          "type": "card",
+          "settings": {
+            "bg_image": "shopify://shop_images/overtake-subaru-wheel-spacers-installed-5_e8287f53-86de-4137-90f3-e1dd0e1a9e5e.jpg",
+            "logo_image": "shopify://shop_images/9d610e58d30ade518e7d907725f95cc1L_06f42ba1-b661-47ea-a46b-8333da14d065.jpg",
+            "prefix_text": "Up to",
+            "discount_value": "10",
+            "discount_suffix": "%OFF",
+            "subtext": "Sitewide Sale",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/2004-2007-subaru-sti-collection"
+          }
+        }
+      },
+      "block_order": [
+        "card_7PDhbt",
+        "card_cBUeRJ",
+        "card_WctgWG",
+        "card_8kTtin",
+        "card_RUJKHc",
+        "card_LRhzwL"
+      ],
+      "name": "t:sections.rsd_small_cards.presets.name",
+      "settings": {
+        "heading": "Small Cards",
+        "cards_per_row_mobile": "2",
+        "cards_per_row_tablet": 3,
+        "cards_per_row_desktop": 6,
+        "add_margins": true,
+        "margin_top": 80,
+        "margin_bottom": 80,
+        "tab_margin_top": 60,
+        "tab_margin_bottom": 60,
+        "mobile_margin_top": 40,
+        "mobile_margin_bottom": 40
+      }
+    },
     "featured_collections_UwYTiM": {
       "type": "featured-collections",
       "blocks": {
@@ -638,6 +743,7 @@
   },
   "order": [
     "1763627927e48fd713",
+    "rsd_small_cards_UzMkF8",
     "featured_collections_UwYTiM",
     "featured_collections_66ptpi",
     "featured_collections_6M3A4b",
