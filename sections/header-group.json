@@ -18,7 +18,7 @@
           "type": "announcement",
           "settings": {
             "text": "<p><strong>Free Shipping On Orders Over $199</strong></p><p></p>",
-            "text_mobile": "<p><strong>5% OFF*. Use Code: SSSAVE5 </strong>*Some Restrictions May Apply</p>",
+            "text_mobile": "",
             "link": ""
           }
         }
