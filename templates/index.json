@@ -51,6 +51,7 @@
       "block_order": [
         "ai_gen_block_f00818c_RfaTdL"
       ],
+      "disabled": true,
       "custom_css": [
         "img {object-fit: cover;}"
       ],
