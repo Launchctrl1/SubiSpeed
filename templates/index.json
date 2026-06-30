@@ -185,17 +185,6 @@
     "featured_collections_6M3A4b": {
       "type": "featured-collections",
       "blocks": {
-        "showcase_item_QbbYJz": {
-          "type": "showcase_item",
-          "settings": {
-            "collection": "",
-            "custom_url": "/search?q=rear+brake+light&page=1&inventory=in-stock",
-            "custom_image": "shopify://shop_images/olm-rear-brake-lights-homepage-banners-614x306-subispeed_e95aa21d-e842-457a-941e-af654ac04a12.jpg",
-            "title": "OLM 4th Brake Lights",
-            "subtitle": "We Have a TON of Different Options!",
-            "button_text": "Shop"
-          }
-        },
         "showcase_item_atcDzy": {
           "type": "showcase_item",
           "disabled": true,
@@ -231,11 +220,11 @@
         }
       },
       "block_order": [
-        "showcase_item_QbbYJz",
         "showcase_item_atcDzy",
         "showcase_item_yaw8Da",
         "showcase_item_BWgUgn"
       ],
+      "disabled": true,
       "custom_css": [
         ".collection-showcase__grid {grid-template-columns: 1fr;}",
         ".collection-showcase__button {text-align: center;}",
