@@ -1889,6 +1889,13 @@
         "header_content": { "content": "Content" },
         "heading": { "label": "Heading (optional)" },
         "header_layout": { "content": "Layout" },
+        "layout_style": {
+          "label": "Layout style",
+          "options": {
+            "vertical": "Vertical",
+            "horizontal": "Horizontal"
+          }
+        },
         "cards_per_row_mobile": {
           "label": "Cards per row - Mobile",
           "options": {
@@ -1896,8 +1903,14 @@
             "2": "2"
           }
         },
+        "cards_per_row_desktop_horizontal": {
+          "options": {
+            "3": "3"
+          }
+        },
         "cards_per_row_tablet": { "label": "Cards per row - Tablet" },
         "cards_per_row_desktop": { "label": "Cards per row - Desktop" },
+        "horizontal_mobile_note": { "content": "Mobile always shows 1 card per row in horizontal layout." },
         "add_margins": { "label": "Add margins" },
         "header_desk_margin": { "content": "Desktop margins" },
         "margin_top": { "label": "Top margin" },

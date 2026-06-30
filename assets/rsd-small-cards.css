@@ -110,6 +110,13 @@
   margin: 0 0 20px;
 }
 
+.rsd-small-cards__content-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 .rsd-small-cards__prefix {
   font-family: "Times New Roman";
   color: var(--rsd-color-text-white);
@@ -180,11 +187,44 @@
   text-transform: uppercase;
   text-decoration: underline;
   text-underline-offset: 4px;
-  margin-top: 12px;
   transition: color var(--rsd-transition);
 }
 
 .rsd-small-cards__card:hover .rsd-small-cards__cta,
 .rsd-small-cards__card:focus-visible .rsd-small-cards__cta {
   text-decoration: none;
+}
+
+/* --- Horizontal layout ---
+   Content splits into two halves side by side: prefix/value/suffix
+   on the left, subtext/logo/cta on the right. Background + hover
+   reveal behave exactly as in the vertical layout. */
+.rsd-small-cards--horizontal .rsd-small-cards__content {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px 16px;
+}
+
+.rsd-small-cards--horizontal .rsd-small-cards__content-head,
+.rsd-small-cards--horizontal .rsd-small-cards__content-bottom {
+  flex: 1 1 50%;
+  align-items: center;
+  margin: 0;
+}
+
+.rsd-small-cards--horizontal .rsd-small-cards__logo {
+  margin-top: 0;
+}
+
+@media screen and (min-width: 992px) {
+  .rsd-small-cards--horizontal .rsd-small-cards__content {
+    padding: 30px 24px;
+    gap: 24px;
+  }
+
+  .rsd-small-cards--horizontal .rsd-small-cards__content-head {
+    margin: 0;
+  }
 }

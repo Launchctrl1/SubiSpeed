@@ -2,10 +2,17 @@
 
 {%- liquid
   assign heading = section.settings.heading
+  assign layout_style = section.settings.layout_style | default: 'vertical'
 
-  assign cards_per_row_mobile  = section.settings.cards_per_row_mobile
-  assign cards_per_row_tablet  = section.settings.cards_per_row_tablet
-  assign cards_per_row_desktop = section.settings.cards_per_row_desktop
+  if layout_style == 'horizontal'
+    assign cards_per_row_mobile  = 1
+    assign cards_per_row_tablet  = section.settings.cards_per_row_tablet_horizontal
+    assign cards_per_row_desktop = section.settings.cards_per_row_desktop_horizontal
+  else
+    assign cards_per_row_mobile  = section.settings.cards_per_row_mobile
+    assign cards_per_row_tablet  = section.settings.cards_per_row_tablet
+    assign cards_per_row_desktop = section.settings.cards_per_row_desktop
+  endif
 
   assign add_margins          = section.settings.add_margins
   assign margin_top           = section.settings.margin_top
@@ -57,7 +64,7 @@
   {%- endstyle -%}
 {%- endif -%}
 
-<div class="rsd-small-cards">
+<div class="rsd-small-cards{% if layout_style == 'horizontal' %} rsd-small-cards--horizontal{% endif %}">
   <div class="rsd-small-cards__inner page-width">
 
     {%- if heading != blank -%}
@@ -120,24 +127,33 @@
                   <p class="rsd-small-cards__suffix h3-rsd">{{ discount_suffix }}</p>
                 {%- endif -%}
 
-                {%- if subtext != blank -%}
-                  <p class="rsd-small-cards__subtext h6-rsd">{{ subtext }}</p>
+                {% if layout_style != 'horizontal' %}
+                  {%- if subtext != blank -%}
+                    <p class="rsd-small-cards__subtext h6-rsd">{{ subtext }}</p>
+                  {%- endif -%}
                 {%- endif -%}
               </div>
 
-              {%- if logo_image != blank -%}
-                <div class="rsd-small-cards__logo">
-                  {{
-                    logo_image
-                    | image_url: width: 300
-                    | image_tag: loading: 'lazy', width: logo_image.width, height: logo_image.height, alt: logo_alt
-                  }}
-                </div>
-              {%- endif -%}
+              <div class="rsd-small-cards__content-bottom">
+                {% if layout_style == 'horizontal' %}
+                  {%- if subtext != blank -%}
+                    <p class="rsd-small-cards__subtext h6-rsd">{{ subtext }}</p>
+                  {%- endif -%}
+                {%- endif -%}
+                {%- if logo_image != blank -%}
+                  <div class="rsd-small-cards__logo">
+                    {{
+                      logo_image
+                      | image_url: width: 300
+                      | image_tag: loading: 'lazy', width: logo_image.width, height: logo_image.height, alt: logo_alt
+                    }}
+                  </div>
+                {%- endif -%}
 
-              {%- if button_text != blank -%}
-                <span class="rsd-small-cards__cta h5-rsd">{{ button_text }}</span>
-              {%- endif -%}
+                {%- if button_text != blank -%}
+                  <span class="rsd-small-cards__cta h5-rsd">{{ button_text }}</span>
+                {%- endif -%}
+              </div>
             </div>
 
           {%- if button_url != blank -%}
@@ -173,13 +189,24 @@
     },
     {
       "type": "select",
+      "id": "layout_style",
+      "label": "t:sections.rsd_small_cards.settings.layout_style.label",
+      "options": [
+        { "value": "vertical", "label": "t:sections.rsd_small_cards.settings.layout_style.options.vertical" },
+        { "value": "horizontal", "label": "t:sections.rsd_small_cards.settings.layout_style.options.horizontal" }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "select",
       "id": "cards_per_row_mobile",
       "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.label",
       "options": [
         { "value": "1", "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.options.1" },
         { "value": "2", "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.options.2" }
       ],
-      "default": "2"
+      "default": "2",
+      "visible_if": "{{ section.settings.layout_style == 'vertical' }}"
     },
     {
       "type": "range",
@@ -188,7 +215,8 @@
       "max": 4,
       "step": 1,
       "label": "t:sections.rsd_small_cards.settings.cards_per_row_tablet.label",
-      "default": 3
+      "default": 3,
+      "visible_if": "{{ section.settings.layout_style == 'vertical' }}"
     },
     {
       "type": "range",
@@ -197,7 +225,35 @@
       "max": 6,
       "step": 1,
       "label": "t:sections.rsd_small_cards.settings.cards_per_row_desktop.label",
-      "default": 4
+      "default": 4,
+      "visible_if": "{{ section.settings.layout_style == 'vertical' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.rsd_small_cards.settings.horizontal_mobile_note.content",
+      "visible_if": "{{ section.settings.layout_style == 'horizontal' }}"
+    },
+    {
+      "type": "select",
+      "id": "cards_per_row_tablet_horizontal",
+      "label": "t:sections.rsd_small_cards.settings.cards_per_row_tablet.label",
+      "options": [
+        { "value": "1", "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.options.1" },
+        { "value": "2", "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.options.2" }
+      ],
+      "default": "2",
+      "visible_if": "{{ section.settings.layout_style == 'horizontal' }}"
+    },
+    {
+      "type": "select",
+      "id": "cards_per_row_desktop_horizontal",
+      "label": "t:sections.rsd_small_cards.settings.cards_per_row_desktop.label",
+      "options": [
+        { "value": "2", "label": "t:sections.rsd_small_cards.settings.cards_per_row_mobile.options.2" },
+        { "value": "3", "label": "t:sections.rsd_small_cards.settings.cards_per_row_desktop_horizontal.options.3" }
+      ],
+      "default": "3",
+      "visible_if": "{{ section.settings.layout_style == 'horizontal' }}"
     },
     {
       "type": "checkbox",

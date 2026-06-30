@@ -149,9 +149,12 @@
       "name": "t:sections.rsd_small_cards.presets.name",
       "settings": {
         "heading": "Small Cards",
+        "layout_style": "horizontal",
         "cards_per_row_mobile": "2",
         "cards_per_row_tablet": 3,
         "cards_per_row_desktop": 6,
+        "cards_per_row_tablet_horizontal": "2",
+        "cards_per_row_desktop_horizontal": "3",
         "add_margins": true,
         "margin_top": 80,
         "margin_bottom": 80,
