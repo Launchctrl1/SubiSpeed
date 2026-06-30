@@ -15,7 +15,7 @@
         "ai_gen_block_f00818c_RfaTdL": {
           "type": "ai_gen_block_f00818c",
           "settings": {
-            "slide_1_image": "shopify://shop_images/ChatGPT_Image_Jun_29_2026_02_54_36_PM.png",
+            "slide_1_image": "shopify://shop_images/Fifteen52_RSR_Subispeed.png",
             "slide_1_mobile_image": "shopify://shop_images/FTspeed_1080x1350_32c5c762-2cb9-465c-acc7-5975902accf9.png",
             "slide_1_show_button": false,
             "slide_1_button_text": "Shop Now",
@@ -25,9 +25,11 @@
             "slide_2_show_button": true,
             "slide_2_button_text": "Sokudo Headlights Pre-Order",
             "slide_2_button_link": "/products/subispeed-v1-headlights-by-olm-2022-2025-subaru-wrx",
+            "slide_3_image": "shopify://shop_images/olm-x-subispeed-sokudo.png",
+            "slide_3_mobile_image": "shopify://shop_images/olm-x-subispeed-sokudo-mob-crop-2.png",
             "slide_3_show_button": true,
-            "slide_3_button_text": "Shop FactionFab!",
-            "slide_3_button_link": "https://www.rallysportdirect.com/brand/super-pro",
+            "slide_3_button_text": "Sokudo Headlights Pre-Order",
+            "slide_3_button_link": "shopify://products/subispeed-v1-led-headlights-by-olm-w-add-on-harness-2022-2025-wrx-limited-gt-tr",
             "slide_4_show_button": true,
             "slide_4_button_text": "Shop Cobb!",
             "slide_4_button_link": "https://www.rallysportdirect.com/brand/cobb-tuning",
