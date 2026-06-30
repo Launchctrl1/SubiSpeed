@@ -178,7 +178,7 @@
       "name": "Collection Showcase",
       "settings": {
         "padding_top": 36,
-        "padding_bottom": 36,
+        "padding_bottom": 8,
         "color_scheme": ""
       }
     },
@@ -421,7 +421,7 @@
         "color_scheme": "",
         "full_width": true,
         "padding_top": 40,
-        "padding_bottom": 52
+        "padding_bottom": 20
       }
     },
     "featured_collections_XAnypK": {
@@ -487,6 +487,7 @@
     },
     "featured_productsv2_dbFqgz": {
       "type": "featured-productsv2",
+      "disabled": true,
       "name": "New Product Carousel",
       "settings": {
         "h": "Best Sellers",
