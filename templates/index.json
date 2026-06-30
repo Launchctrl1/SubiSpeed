@@ -34,7 +34,7 @@
             "slide_5_show_button": false,
             "slide_5_button_text": "Shop now",
             "slide_5_button_link": "",
-            "button_position": "bottom_center",
+            "button_position": "bottom_right",
             "button_color": "#0637f9",
             "button_text_color": "#ffffff",
             "button_hover_color": "#334fb4",
