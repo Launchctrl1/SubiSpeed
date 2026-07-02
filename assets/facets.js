@@ -1,3 +1,9 @@
+const RSD_PARTFINDER_TAG_PARAM = 'filter.p.tag';
+
+function isRsdPartFinderTag(value) {
+  return typeof value === 'string' && /^[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+-(?:19|20)\d{2}$/.test(value);
+}
+
 class FacetFiltersForm extends HTMLElement {
   constructor() {
     super();
@@ -56,6 +62,7 @@ class FacetFiltersForm extends HTMLElement {
     });
 
     if (updateURLHash) FacetFiltersForm.updateURLHash(searchParams);
+    FacetFiltersForm.renderPartFinderActiveFacets(searchParams);
   }
 
   static renderSectionFromFetch(url, event) {
@@ -185,6 +192,7 @@ class FacetFiltersForm extends HTMLElement {
       document.querySelector(selector).innerHTML = activeFacetsElement.innerHTML;
     });
 
+    FacetFiltersForm.renderPartFinderActiveFacets();
     FacetFiltersForm.toggleActiveFacets(false);
   }
 
@@ -250,6 +258,110 @@ class FacetFiltersForm extends HTMLElement {
     ];
   }
 
+  static getPartFinderTags(searchParams) {
+    const params = new URLSearchParams(searchParams === undefined ? window.location.search : searchParams);
+    return params.getAll(RSD_PARTFINDER_TAG_PARAM).filter(isRsdPartFinderTag);
+  }
+
+  static hasParamValue(params, key, value) {
+    return params.getAll(key).some((paramValue) => paramValue === value);
+  }
+
+  static withPreservedPartFinderTags(searchParams) {
+    const params = new URLSearchParams(searchParams);
+    FacetFiltersForm.getPartFinderTags().forEach((tag) => {
+      if (!FacetFiltersForm.hasParamValue(params, RSD_PARTFINDER_TAG_PARAM, tag)) {
+        params.append(RSD_PARTFINDER_TAG_PARAM, tag);
+      }
+    });
+    return params.toString();
+  }
+
+  static activeFacetButtonLabel(button) {
+    if (!button) return '';
+    const clone = button.cloneNode(true);
+    clone.querySelectorAll('.svg-wrapper, .visually-hidden').forEach((element) => element.remove());
+    return clone.textContent.trim();
+  }
+
+  static shouldPreservePartFinderTags(link) {
+    if (!link) return true;
+    if (link.classList.contains('active-facets__button-remove') || link.classList.contains('mobile-facets__clear')) {
+      return false;
+    }
+
+    return !isRsdPartFinderTag(FacetFiltersForm.activeFacetButtonLabel(link.querySelector('.active-facets__button-inner')));
+  }
+
+  static urlWithoutPartFinderTag(tagToRemove) {
+    const params = new URLSearchParams(window.location.search);
+    const nextParams = new URLSearchParams();
+    let removed = false;
+
+    params.forEach((value, key) => {
+      if (key === RSD_PARTFINDER_TAG_PARAM && value === tagToRemove && !removed) {
+        removed = true;
+        return;
+      }
+
+      nextParams.append(key, value);
+    });
+
+    const query = nextParams.toString();
+    return `${window.location.pathname}${query ? `?${query}` : ''}`;
+  }
+
+  static renderPartFinderActiveFacets(searchParams) {
+    const tags = [...new Set(FacetFiltersForm.getPartFinderTags(searchParams))];
+    document.querySelectorAll('.active-facets-mobile, .active-facets-desktop').forEach((container) => {
+      container.querySelectorAll('[data-rsd-partfinder-active-tag]').forEach((element) => element.remove());
+      if (!tags.length) return;
+
+      const renderedLabels = Array.from(container.querySelectorAll('.active-facets__button-inner'))
+        .map(FacetFiltersForm.activeFacetButtonLabel);
+      const directChildren = Array.from(container.children);
+      const clearAll = directChildren.find((child) => child.classList.contains('active-facets__button-wrapper'));
+
+      tags.forEach((tag) => {
+        if (renderedLabels.includes(tag)) return;
+
+        const wrapper = document.createElement('span');
+        wrapper.dataset.rsdPartfinderActiveTag = tag;
+
+        const link = document.createElement('a');
+        link.href = FacetFiltersForm.urlWithoutPartFinderTag(tag);
+        link.className = 'active-facets__button active-facets__button--light';
+        link.dataset.rsdPartfinderTagRemove = tag;
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          FacetFiltersForm.toggleActiveFacets();
+          const url = link.href.indexOf('?') === -1 ? '' : link.href.slice(link.href.indexOf('?') + 1);
+          FacetFiltersForm.renderPage(url);
+        });
+
+        const inner = document.createElement('span');
+        inner.className = 'active-facets__button-inner button button--tertiary';
+
+        const label = document.createElement('span');
+        label.textContent = tag;
+
+        const icon = document.createElement('span');
+        icon.className = 'svg-wrapper';
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = 'x';
+
+        const hidden = document.createElement('span');
+        hidden.className = 'visually-hidden';
+        hidden.textContent = 'Clear filter';
+
+        inner.append(label, icon, hidden);
+        link.append(inner);
+        wrapper.append(link);
+        container.insertBefore(wrapper, clearAll || null);
+      });
+    });
+  }
+
   createSearchParams(form) {
     const formData = new FormData(form);
     return new URLSearchParams(formData).toString();
@@ -263,7 +375,7 @@ class FacetFiltersForm extends HTMLElement {
     event.preventDefault();
     const sortFilterForms = document.querySelectorAll('facet-filters-form form');
     if (event.srcElement.className == 'mobile-facets__checkbox') {
-      const searchParams = this.createSearchParams(event.target.closest('form'));
+      const searchParams = FacetFiltersForm.withPreservedPartFinderTags(this.createSearchParams(event.target.closest('form')));
       this.onSubmitForm(searchParams, event);
     } else {
       const forms = [];
@@ -278,7 +390,7 @@ class FacetFiltersForm extends HTMLElement {
           forms.push(this.createSearchParams(form));
         }
       });
-      this.onSubmitForm(forms.join('&'), event);
+      this.onSubmitForm(FacetFiltersForm.withPreservedPartFinderTags(forms.join('&')), event);
     }
   }
 
@@ -289,7 +401,11 @@ class FacetFiltersForm extends HTMLElement {
       event.currentTarget.href.indexOf('?') == -1
         ? ''
         : event.currentTarget.href.slice(event.currentTarget.href.indexOf('?') + 1);
-    FacetFiltersForm.renderPage(url);
+    FacetFiltersForm.renderPage(
+      FacetFiltersForm.shouldPreservePartFinderTags(event.currentTarget)
+        ? FacetFiltersForm.withPreservedPartFinderTags(url)
+        : url
+    );
   }
 }
 
@@ -298,6 +414,7 @@ FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
 FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
 customElements.define('facet-filters-form', FacetFiltersForm);
 FacetFiltersForm.setListeners();
+FacetFiltersForm.renderPartFinderActiveFacets();
 
 class PriceRange extends HTMLElement {
   constructor() {
