@@ -9,6 +9,23 @@
  */
 {
   "sections": {
+    "image_banner_JfpdQF": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/RSD_1440x450_1.svg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
     "177621935428b1481b": {
       "type": "apps",
       "blocks": {
@@ -110,6 +127,7 @@
     }
   },
   "order": [
+    "image_banner_JfpdQF",
     "177621935428b1481b",
     "banner",
     "rsd_collection_tree_9cbfcH",
